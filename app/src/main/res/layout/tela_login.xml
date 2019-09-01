@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fff"
+    tools:context=".login.Tela_login">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="#fff"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <ImageView
+            android:id="@+id/iv_login_tema"
+            android:layout_width="240dp"
+            android:layout_height="220dp"
+            android:contentDescription="@string/description_et_login"
+            android:src="@drawable/ic_tema" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_login_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="@string/tv_login_login"
+
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/et_login_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/et_login_login_hint"
+                android:inputType="textEmailAddress"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_login_senha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/tv_login_senha"
+
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/et_login_senha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/et_login_senha_hint"
+                android:inputType="textPassword"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/bt_login_acessar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+
+                android:background="@color/colorSecondaryLight"
+                android:text="@string/bt_login_acessar" />
+
+            <TextView
+                android:id="@+id/tv_login_cadastar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/tv_login_cadastrar"
+
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/bt_login_cadastrar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+
+                android:background="@color/colorSecondaryLight"
+                android:text="@string/bt_login_cadastrar" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

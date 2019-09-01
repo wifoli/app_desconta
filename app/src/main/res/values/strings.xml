@@ -1,0 +1,45 @@
+<resources>
+
+    <!-- Strings para a tela de Login -->
+    <string name="app_name">app-desconta</string>
+    <string name="description_et_login">EditText para do login de usuário</string>
+    <string name="tv_login_login">Login</string>
+    <string name="et_login_login_hint">Digite seu Email</string>
+    <string name="tv_login_senha">Senha</string>
+    <string name="et_login_senha_hint">Digite sua senha</string>
+    <string name="bt_login_acessar">Acessar</string>
+    <string name="tv_login_cadastrar">Ainda não possui uma conta?</string>
+    <string name="bt_login_cadastrar">Cadastre-se</string>
+
+
+    <!-- Strings para a tela de Cadastrar 1 -->
+    <string name="tv_cadastrar_nome">Nome</string>
+    <string name="et_cadastrar_nome">Primeiro nome</string>
+    <string name="tv_cadastrar_sobrenome">Sobrenome</string>
+    <string name="et_cadastrar_sobrenome_hint">Sobrenome</string>
+    <string name="tv_cadastrar_cpf">CPF</string>
+    <string name="tv_cadastrar_dataNasc">Data de nascimento</string>
+    <string name="bt_login_proximo">Próximo</string>
+
+    <!-- Strings para a tela de Cadastrar 2 -->
+    <string name="tv_cadastrar2_estado">Estado</string>
+    <string name="tv_cadastrar2_cidade">Cidade</string>
+    <string name="tv_cadastro2_cep">CEP</string>
+    <string name="et_cadastro2_cep_hint">Insira seu CEP</string>
+    <string name="tv_cadastrar2_bairro">Bairro</string>
+    <string name="et_cadastrar2_bairro">Insira seu bairro</string>
+    <string name="tv_cadastrar2_rua">Rua</string>
+    <string name="et_cadastrar2_rua">Insira sua rua</string>
+    <string name="tv_cadastrar2_complemento">Complementos</string>
+    <string name="et_cadastrar2_complemento">Mais informações</string>
+
+    <!-- Strings para a tela de Cadastrar 3 -->
+    <string name="tv_cadastro3_email">Email</string>
+    <string name="et_cadastro3_email_hint">Insira seu Email</string>
+    <string name="et_cadastro3_senha_hint">Insira sua senha</string>
+    <string name="tv_login_ConfSenha">Confirmar senha</string>
+    <string name="et_cadastro3_ConfSenha_hint">Insira novamente sua senha</string>
+    <string name="tv_login_termos">Concordo com os termos de contrato</string>
+    <string name="bt_login_finalizar">Finalizar cadastro</string>
+
+</resources>

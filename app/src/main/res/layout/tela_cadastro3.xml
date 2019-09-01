@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fff"
+    tools:context=".login.Tela_cadastro2">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/tv_cadastrar3_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_cadastro3_email"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/et_cadastrar3_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/et_cadastro3_email_hint"
+            android:inputType="textEmailAddress"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_cadastrar_senha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/tv_login_senha"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/et_cadastrar_senha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/et_cadastro3_senha_hint"
+            android:inputType="textPassword"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_cadastrar_ConfSenha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/tv_login_ConfSenha"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/et_cadastrar3_ConfSenha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/et_cadastro3_ConfSenha_hint"
+            android:inputType="textPassword"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:background="#fff"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/cb_cadastrar3_termos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_cadastrar3_termos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_login_termos"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/bt_cadastrar3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@color/colorSecondaryLight"
+            android:text="@string/bt_login_finalizar" />
+
+    </LinearLayout>
+
+</ScrollView>

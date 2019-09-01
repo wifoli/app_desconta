@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fff"
+    tools:context=".login.Tela_cadastro2">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/tv_cadastro2_cep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_cadastro2_cep"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/et_cadastro2_cep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/et_cadastro2_cep_hint"
+            android:inputType="number"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="25dp"
+            android:background="#fff"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_cadastro2_estado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_cadastrar2_estado"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/sp_cadastro2_estado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="25dp"
+            android:background="#fff"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_cadastro2_cidade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_cadastrar2_cidade"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/sp_cadastro2_cidade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_cadastrar2_bairro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/tv_cadastrar2_bairro"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/et_cadastrar2_bairro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/et_cadastrar2_bairro"
+            android:inputType="text"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_cadastrar2_rua"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/tv_cadastrar2_rua"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/et_cadastrar2_rua"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/et_cadastrar2_rua"
+            android:inputType="text"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_cadastrar2_complemento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/tv_cadastrar2_complemento"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/et_cadastrar2_complemento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/et_cadastrar2_complemento"
+            android:inputType="text"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/bt_cadastrar2_proximo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@color/colorSecondaryLight"
+            android:text="@string/bt_login_proximo" />
+
+    </LinearLayout>
+</ScrollView>
