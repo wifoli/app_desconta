@@ -42,4 +42,13 @@
     <string name="tv_login_termos">Concordo com os termos de contrato</string>
     <string name="bt_login_finalizar">Finalizar cadastro</string>
 
+
+    <string name="title_activity_tabs">TabsActivity</string>
+    <string name="tab_text_1">Minhas Compras</string>
+    <string name="tab_text_2">Meus Descontos</string>
+    <string name="tab_text_3">Pesquisar Empresas</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
