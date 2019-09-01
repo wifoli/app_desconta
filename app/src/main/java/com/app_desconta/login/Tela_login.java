@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.app_desconta.MainActivity;
 import com.app_desconta.R;
 import com.app_desconta.TabsActivity;
 
@@ -21,7 +22,7 @@ public class Tela_login extends AppCompatActivity {
         bt_acessar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), TabsActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }
         });
