@@ -8,15 +8,17 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Toast;
 
+import androidx.viewpager.widget.ViewPager;
 
+import com.app_desconta.ui.main.SectionsPagerAdapter;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
 
@@ -24,15 +26,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, (Toolbar) findViewById(R.id.toolbar), R.string.open_drawer, R.string.close_drawer);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
         navigationView = (NavigationView) findViewById(R.id.navView);
+
         navigationView.setNavigationItemSelectedListener(this);
+
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+        ViewPager viewPager = findViewById(R.id.view_pager);
+        viewPager.setAdapter(sectionsPagerAdapter);
+        TabLayout tabs = findViewById(R.id.tabs);
+        tabs.setupWithViewPager(viewPager);
     }
 
     @Override
@@ -45,28 +53,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.nav_item_one: {
-                Toast.makeText(this, "Menu 1", Toast.LENGTH_SHORT).show();
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.dn_perfil:
+                Log.d("Teste", "item 1");
                 break;
-            }
-            case R.id.nav_item_two: {
-                Toast.makeText(this, "Menu 2", Toast.LENGTH_SHORT).show();
+            case R.id.dn_duvidas:
+                Log.d("Teste", "item 2");
                 break;
-            }
-            case R.id.nav_item_three: {
-                Toast.makeText(this, "Menu 3", Toast.LENGTH_SHORT).show();
+
+            case R.id.dn_comentarios:
+                Log.d("Teste", "item 3");
                 break;
-            }
-            case R.id.nav_item_four: {
-                Toast.makeText(this, "Menu 4", Toast.LENGTH_SHORT).show();
+
+            case R.id.dn_sair:
+                Log.d("Teste", "item 4");
                 break;
-            }
-            default: {
-                Toast.makeText(this, "Menu Default", Toast.LENGTH_SHORT).show();
+
+            default:
+                Log.d("Teste", "nao entrou em nehum item");
                 break;
-            }
+
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
