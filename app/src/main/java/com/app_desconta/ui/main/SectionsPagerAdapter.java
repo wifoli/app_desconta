@@ -1,6 +1,8 @@
 package com.app_desconta.ui.main;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;

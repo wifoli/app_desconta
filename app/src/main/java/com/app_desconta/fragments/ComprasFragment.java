@@ -56,6 +56,12 @@ public class ComprasFragment extends Fragment {
         return v;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("Test", "onResume");
+    }
+
     public void retrofit(){
         Retrofit client = new Retrofit.Builder()
                 .baseUrl("http://192.168.0.129/public/")

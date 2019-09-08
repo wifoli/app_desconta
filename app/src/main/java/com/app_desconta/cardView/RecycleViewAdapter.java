@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.RecycleViewHolder> {
 
 
-    public  static class RecycleViewHolder extends RecyclerView.ViewHolder{
+    public static class RecycleViewHolder extends RecyclerView.ViewHolder {
 
         public TextView empresa;
         public TextView valor;
@@ -53,6 +53,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         holder.empresa.setText(itemAtual.getNomeFantasia());
         holder.valor.setText(itemAtual.getValorTotal());
         holder.data.setText(itemAtual.getDataVenda());
+
     }
 
     @Override
