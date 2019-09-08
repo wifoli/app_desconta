@@ -36,31 +36,29 @@ public class ComprasFragment extends Fragment {
     private ArrayList<PojoCompra> listaCampras = new ArrayList<>();
 
     public ComprasFragment() {
-        // Required empty public constructor
+       retrofit();
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_compras, container, false);
+        View v = inflater.inflate(R.layout.fragment_compras, container, false);
 
-        buscarCompras();
-
-        rv = (RecyclerView) view.findViewById(R.id.rv);
+        rv = (RecyclerView) v.findViewById(R.id.rv);
         rv.setHasFixedSize(true);
-        layoutManager = new  LinearLayoutManager(view.getContext());
+        layoutManager = new LinearLayoutManager(v.getContext());
         rvAdpt = new RecycleViewAdapter(listaCampras);
 
-        rv.setLayoutManager(layoutManager);
         rv.setAdapter(rvAdpt);
+        rv.setLayoutManager(layoutManager);
 
-        return view;
+
+        return v;
     }
 
-    private void buscarCompras() {
+    public void retrofit(){
         Retrofit client = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.129/")
+                .baseUrl("http://192.168.0.129/public/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -71,22 +69,20 @@ public class ComprasFragment extends Fragment {
         call.enqueue(callback);
     }
 
+
     private Callback<List<PojoCompra>> callback = new Callback<List<PojoCompra>>() {
         @Override
         public void onResponse(Call<List<PojoCompra>> call, Response<List<PojoCompra>> response) {
 
-            for(int i = 0; i < response.body().size(); i++){
+            for (int i = 0; i < response.body().size(); i++) {
                 listaCampras.add(response.body().get(i));
-                Log.d("Teste", listaCampras.get(i).getNomeFantasia());
-                Log.d("Teste", listaCampras.get(i).getDataVenda());
-                Log.d("Teste", listaCampras.get(i).getValorTotal());
             }
 
         }
 
         @Override
         public void onFailure(Call<List<PojoCompra>> call, Throwable t) {
-            Log.e("Retrofit Compras", "Falha no Retrofit: "+ t.toString());
+            Log.e("Retrofit Compras", "Falha no Retrofit: " + t.toString());
         }
     };
 

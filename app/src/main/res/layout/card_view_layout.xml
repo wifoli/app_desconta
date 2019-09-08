@@ -32,7 +32,7 @@
             android:layout_toRightOf="@+id/valor" />
 
         <TextView
-            android:id="@+id/data_compra"
+            android:id="@+id/cv_data_compra"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/cv_nome_empresa"
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:text="@string/tv_card_data_compra"
             android:layout_below="@id/cv_nome_empresa"
-            android:layout_toLeftOf="@+id/data_compra"/>
+            android:layout_toLeftOf="@+id/cv_data_compra"/>
 
 
 

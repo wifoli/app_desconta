@@ -1,6 +1,5 @@
 package com.app_desconta.cardView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import java.util.ArrayList;
 
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.RecycleViewHolder> {
 
-    private ArrayList<PojoCompra> listaCompras;
 
     public  static class RecycleViewHolder extends RecyclerView.ViewHolder{
 
@@ -26,11 +24,14 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
         public RecycleViewHolder(@NonNull View itemView) {
             super(itemView);
+
             empresa = itemView.findViewById(R.id.cv_nome_empresa);
             valor = itemView.findViewById(R.id.valor_compra);
-            data = itemView.findViewById(R.id.data_compra);
+            data = itemView.findViewById(R.id.cv_data_compra);
         }
     }
+
+    private ArrayList<PojoCompra> listaCompras;
 
     public RecycleViewAdapter(ArrayList<PojoCompra> listaCompras) {
         this.listaCompras = listaCompras;
@@ -42,7 +43,6 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     public RecycleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_layout, parent, false);
         RecycleViewHolder recycleViewHolder = new RecycleViewHolder(view);
-        Log.d("onCreateViewHolder", "passei");
         return recycleViewHolder;
     }
 
@@ -53,11 +53,6 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         holder.empresa.setText(itemAtual.getNomeFantasia());
         holder.valor.setText(itemAtual.getValorTotal());
         holder.data.setText(itemAtual.getDataVenda());
-
-        Log.d("Recicler",listaCompras.get(position).getNomeFantasia());
-        Log.d("Recicler",listaCompras.get(position).getValorTotal());
-        Log.d("Recicler",listaCompras.get(position).getDataVenda());
-        Log.d("Recicler","");
     }
 
     @Override
