@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+
+        <TextView
+            android:id="@+id/cv_nome_empresa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:textSize="30sp"/>
+
+        <TextView
+            android:id="@+id/valor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_card_valor"
+            android:layout_below="@id/cv_nome_empresa"/>
+
+        <TextView
+            android:id="@+id/valor_compra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cv_nome_empresa"
+            android:layout_toRightOf="@+id/valor" />
+
+        <TextView
+            android:id="@+id/data_compra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cv_nome_empresa"
+            android:layout_alignParentRight="true"/>
+
+        <TextView
+            android:id="@+id/data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_card_data_compra"
+            android:layout_below="@id/cv_nome_empresa"
+            android:layout_toLeftOf="@+id/data_compra"/>
+
+
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

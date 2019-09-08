@@ -57,5 +57,7 @@
     <string name="dn_duvidas">Duvidas</string>
     <string name="dn_comentarios">Comentários</string>
     <string name="dn_sair">Sair</string>
+    <string name="tv_card_valor">Valor: R$ </string>
+    <string name="tv_card_data_compra">Data da compra:</string>
 
 </resources>
