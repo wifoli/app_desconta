@@ -4,6 +4,8 @@ package com.app_desconta.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.app_desconta.api.ApiInfoCompras;
 import com.app_desconta.api.PojoCompra;
@@ -30,13 +33,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ComprasFragment extends Fragment {
 
     private RecyclerView rv;
-    private RecyclerView.Adapter rvAdpt;
+    private FrameLayout fl;
+    private RecycleViewAdapter rvAdpt;
     private RecyclerView.LayoutManager layoutManager;
 
     private ArrayList<PojoCompra> listaCampras = new ArrayList<>();
 
     public ComprasFragment() {
-       retrofit();
+        retrofit();
     }
 
     @Override
@@ -45,24 +49,40 @@ public class ComprasFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_compras, container, false);
 
         rv = (RecyclerView) v.findViewById(R.id.rv);
+        fl = (FrameLayout) v.findViewById(R.id.frameCompras);
         rv.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(v.getContext());
         rvAdpt = new RecycleViewAdapter(listaCampras);
 
         rv.setAdapter(rvAdpt);
         rv.setLayoutManager(layoutManager);
-
+        rvAdpt.setOnItemClickListenet(new RecycleViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Log.d("String", listaCampras.get(position).getValorTotal());
+                Fragment fr = new DetalhesCompraFragment();
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.frameCompras, fr);
+                fragmentTransaction.commit();
+                interacaoEntreView(true);
+            }
+        });
 
         return v;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.d("Test", "onResume");
+    private void interacaoEntreView(boolean frameDetailsVisible) {
+        if(frameDetailsVisible){
+            rv.setVisibility(View.INVISIBLE);
+            fl.setVisibility(View.VISIBLE);
+        }else{
+            rv.setVisibility(View.VISIBLE);
+            fl.setVisibility(View.INVISIBLE);
+        }
     }
 
-    public void retrofit(){
+    private void retrofit() {
         Retrofit client = new Retrofit.Builder()
                 .baseUrl("http://192.168.0.129/public/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -74,7 +94,6 @@ public class ComprasFragment extends Fragment {
 
         call.enqueue(callback);
     }
-
 
     private Callback<List<PojoCompra>> callback = new Callback<List<PojoCompra>>() {
         @Override

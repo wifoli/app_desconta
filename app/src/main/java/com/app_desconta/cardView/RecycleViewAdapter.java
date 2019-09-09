@@ -15,6 +15,13 @@ import java.util.ArrayList;
 
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.RecycleViewHolder> {
 
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListenet(OnItemClickListener listenet){
+        mlistener = listenet;
+    }
 
     public static class RecycleViewHolder extends RecyclerView.ViewHolder {
 
@@ -22,16 +29,29 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         public TextView valor;
         public TextView data;
 
-        public RecycleViewHolder(@NonNull View itemView) {
+        public RecycleViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
 
             empresa = itemView.findViewById(R.id.cv_nome_empresa);
             valor = itemView.findViewById(R.id.valor_compra);
             data = itemView.findViewById(R.id.cv_data_compra);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(listener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 
     private ArrayList<PojoCompra> listaCompras;
+    private OnItemClickListener mlistener;
 
     public RecycleViewAdapter(ArrayList<PojoCompra> listaCompras) {
         this.listaCompras = listaCompras;
@@ -42,7 +62,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     @Override
     public RecycleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_layout, parent, false);
-        RecycleViewHolder recycleViewHolder = new RecycleViewHolder(view);
+        RecycleViewHolder recycleViewHolder = new RecycleViewHolder(view, mlistener);
         return recycleViewHolder;
     }
 

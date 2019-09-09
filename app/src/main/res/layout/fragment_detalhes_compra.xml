@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.PesquisaFragment"
-    android:background="#489">
+    tools:context=".fragments.DetalhesCompraFragment"
+    android:background="#fff">
+
 
     <TextView
         android:layout_width="match_parent"
