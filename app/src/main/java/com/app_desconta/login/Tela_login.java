@@ -6,12 +6,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.app_desconta.MainActivity;
 import com.app_desconta.R;
-import com.app_desconta.TabsActivity;
 
 public class Tela_login extends AppCompatActivity {
+
+    private EditText editTextEmail;
+    private EditText editTextSenha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,5 +38,12 @@ public class Tela_login extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void loginUsuario(){
+        editTextEmail = findViewById(R.id.et_login_login);
+        editTextSenha = findViewById(R.id.et_login_senha);
+
+
     }
 }

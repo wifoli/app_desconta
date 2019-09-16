@@ -27,6 +27,7 @@
             android:id="@+id/et_cadastrar_nome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/meu_edit_text"
             android:hint="@string/et_cadastrar_nome"
             android:inputType="text"
             android:textSize="16sp" />
@@ -44,6 +45,7 @@
             android:id="@+id/et_cadastrar_sobrenome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/meu_edit_text"
             android:hint="@string/et_cadastrar_sobrenome_hint"
             android:inputType="text"
             android:textSize="16sp" />
@@ -67,6 +69,8 @@
                 android:id="@+id/et_cadastrar_cpf"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:background="@drawable/meu_edit_text"
+                android:maxLength="14"
                 android:layout_weight="1"
                 android:inputType="number"
                 android:textSize="16sp" />
@@ -75,7 +79,7 @@
                 android:id="@+id/iv_cadastrar_validacaoCPF"
                 android:layout_width="45dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_launcher_background" />
+                android:src="@drawable/ic_tema" />
         </LinearLayout>
 
         <TextView
@@ -97,6 +101,7 @@
                 android:id="@+id/et_cadastrar_dataNasc"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:background="@drawable/meu_edit_text"
                 android:layout_weight="1"
                 android:inputType="number"
                 android:textSize="16sp" />
@@ -105,7 +110,7 @@
                 android:id="@+id/iv_cadastrar_validacaoData"
                 android:layout_width="45dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_launcher_background" />
+                android:src="@drawable/ic_tema" />
 
         </LinearLayout>
 

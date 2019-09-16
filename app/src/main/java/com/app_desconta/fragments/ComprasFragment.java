@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.app_desconta.api.ApiInfoCompras;
+import com.app_desconta.api.Api;
 import com.app_desconta.api.PojoCompra;
 import com.app_desconta.R;
 import com.app_desconta.cardView.RecycleViewAdapter;
@@ -88,7 +88,7 @@ public class ComprasFragment extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        ApiInfoCompras httpRequest = client.create(ApiInfoCompras.class);
+        Api httpRequest = client.create(Api.class);
 
         Call<List<PojoCompra>> call = httpRequest.getInfCompra();
 
