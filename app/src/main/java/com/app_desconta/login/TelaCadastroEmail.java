@@ -18,7 +18,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import static com.app_desconta.util.verificaConexao.verificaConexao;
+import static com.app_desconta.util.Util.errosFirebase;
+import static com.app_desconta.util.Util.verificaConexao;
 
 
 public class TelaCadastroEmail extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener {
@@ -122,20 +123,8 @@ public class TelaCadastroEmail extends AppCompatActivity implements View.OnClick
                     Toast.makeText(getBaseContext(), getString(R.string.loginCriadoComSucesso), Toast.LENGTH_LONG).show();
                     startActivity(new Intent(getBaseContext(), MainActivity.class));
                     finish();
-                } else errosFirebase(task.getException().toString());
+                } else errosFirebase(getBaseContext(), task.getException().toString());
             }
         });
-    }
-
-    private void errosFirebase(String excessao) {
-        if (excessao.contains("least 6 characters"))
-            Toast.makeText(getBaseContext(), getString(R.string.senhaComMenosDeSeisDigitos), Toast.LENGTH_LONG).show();
-        else if (excessao.contains("address is badly"))
-            Toast.makeText(getBaseContext(), getString(R.string.emailInvalido), Toast.LENGTH_LONG).show();
-        else if (excessao.contains("address is already"))
-            Toast.makeText(getBaseContext(), getString(R.string.emailJaCadastrado), Toast.LENGTH_LONG).show();
-        else if (excessao.contains("interrupted connection"))
-            Toast.makeText(getBaseContext(), getString(R.string.semConexaoComFirebase), Toast.LENGTH_LONG).show();
-        else Toast.makeText(getBaseContext(), excessao, Toast.LENGTH_LONG).show();
     }
 }

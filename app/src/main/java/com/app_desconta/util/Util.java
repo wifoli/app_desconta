@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import com.app_desconta.R;
 
-public class verificaConexao {
+public class Util {
 
     public static boolean verificaConexao(Context contexto) {
         boolean status = false;
@@ -48,5 +48,25 @@ public class verificaConexao {
         }
         Toast.makeText(contexto, contexto.getString(R.string.semConexaoComInternet), Toast.LENGTH_LONG).show();
         return false;
+    }
+
+    public static void errosFirebase(Context contexto, String excessao) {
+        if (excessao.contains("There is no user"))
+            Toast.makeText(contexto, contexto.getString(R.string.emailNaoCadastrado), Toast.LENGTH_LONG).show();
+        else if (excessao.contains("least 6 characters"))
+            Toast.makeText(contexto, contexto.getString(R.string.senhaComMenosDeSeisDigitos), Toast.LENGTH_LONG).show();
+        else if (excessao.contains("address is already"))
+            Toast.makeText(contexto, contexto.getString(R.string.emailJaCadastrado), Toast.LENGTH_LONG).show();
+        else if (excessao.contains("address is badly"))
+            Toast.makeText(contexto, contexto.getString(R.string.emailInvalido), Toast.LENGTH_LONG).show();
+        else if (excessao.contains("password is invalid"))
+            Toast.makeText(contexto, contexto.getString(R.string.senhaInvalida), Toast.LENGTH_LONG).show();
+        else if (excessao.contains("interrupted connection"))
+            Toast.makeText(contexto, contexto.getString(R.string.semConexaoComFirebase), Toast.LENGTH_LONG).show();
+        else if (excessao.contains("INVALID_EMAIL"))
+            Toast.makeText(contexto, contexto.getString(R.string.emailInvalido), Toast.LENGTH_LONG).show();
+        else if (excessao.contains("EMAIL_NOT_FOUND"))
+            Toast.makeText(contexto, contexto.getString(R.string.emailNaoCadastrado), Toast.LENGTH_LONG).show();
+        else Toast.makeText(contexto, excessao, Toast.LENGTH_LONG).show();
     }
 }
