@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Strings para a tela de Login -->
-    <string name="app_name">app-desconta</string>
+    <string name="app_name" translatable="false">DES-CONTA</string>
     <string name="description_et_login">EditText para do login de usuário</string>
     <string name="tv_login_login">Login</string>
     <string name="et_login_login_hint">Digite seu Email</string>
@@ -40,7 +40,7 @@
     <string name="tv_login_ConfSenha">Confirmar senha</string>
     <string name="et_cadastro3_ConfSenha_hint">Insira novamente sua senha</string>
     <string name="tv_login_termos">Concordo com os termos de contrato</string>
-    <string name="bt_login_finalizar">Finalizar cadastro</string>
+    <string name="bt_login_finalizar">Cadastrar usuário</string>
 
 
     <string name="title_activity_tabs">TabsActivity</string>
@@ -59,7 +59,23 @@
     <string name="dn_sair">Sair</string>
     <string name="tv_card_valor">Valor: R$ </string>
     <string name="tv_card_data_compra">Data da compra:</string>
-    <string name="obrigatorio">é um valor obrigatório</string>
+    <string name="obrigatorio">é  obrigatório</string>
     <string name="invalido">é inválido</string>
+
+    <string name="emailObrigatorio">O campo email é obrigatório</string>
+    <string name="senhaObrigatorio">O campo senha é obrigatório</string>
+    <string name="confirmarSenhaObrigatorio">O campo confirmar senha é obrigatório</string>
+    <string name="termosObrigatorio">Por favor aceite os nossos termos e condições</string>
+    <string name="senhasDiferentes">As senhas digitadas são diferentes</string>
+    <string name="loginCriadoComSucesso">Login criado com sucesso</string>
+    <string name="senhaComMenosDeSeisDigitos">A senha deve ter pelo menos 6 dígitos</string>
+    <string name="emailInvalido">Email inválido</string>
+    <string name="emailJaCadastrado">Este email já está cadastrado</string>
+    <string name="semConexaoComFirebase">Sem conexão com o Firebase</string>
+    <string name="semConexaoComInternet">Sem conexão com a internet</string>
+    <string name="redeInvalida">Rede de internet inválida</string>
+    <string name="loginEfetuadoComSucesso">Login efetuado com sucesso</string>
+    <string name="senhaInvalida">Senha inválida</string>
+    <string name="emailNaoCadastrado">Email não cadastrado</string>
 
 </resources>

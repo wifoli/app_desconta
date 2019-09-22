@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#fff"
-    tools:context=".login.Tela_cadastro2">
+    tools:context=".login.TelaCadastroEmail">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,10 +23,11 @@
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/et_cadastrar3_email"
+            android:id="@+id/et_cadastrar_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/et_cadastro3_email_hint"
+            android:background="@drawable/meu_edit_text"
             android:inputType="textEmailAddress"
             android:textSize="16sp" />
 
@@ -44,6 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/et_cadastro3_senha_hint"
+            android:background="@drawable/meu_edit_text"
             android:inputType="textPassword"
             android:textSize="16sp" />
 
@@ -57,10 +59,11 @@
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/et_cadastrar3_ConfSenha"
+            android:id="@+id/et_cadastrar_ConfSenha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/et_cadastro3_ConfSenha_hint"
+            android:background="@drawable/meu_edit_text"
             android:inputType="textPassword"
             android:textSize="16sp" />
 
@@ -73,7 +76,7 @@
             android:orientation="horizontal">
 
             <CheckBox
-                android:id="@+id/cb_cadastrar3_termos"
+                android:id="@+id/cb_cadastrar_termos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -88,7 +91,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/bt_cadastrar3"
+            android:id="@+id/bt_cadastrar_usuario_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"

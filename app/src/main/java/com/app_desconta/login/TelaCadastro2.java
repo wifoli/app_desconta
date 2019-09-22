@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.app_desconta.R;
 
 
-public class Tela_cadastro2 extends AppCompatActivity {
+public class TelaCadastro2 extends AppCompatActivity {
 
     private String arrey_spinner[];
 
@@ -26,7 +26,7 @@ public class Tela_cadastro2 extends AppCompatActivity {
         bt_proximo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Tela_cadastro3.class);
+                Intent intent = new Intent(getApplicationContext(), TelaCadastroEmail.class);
                 startActivity(intent);
             }
         });

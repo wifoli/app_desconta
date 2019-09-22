@@ -12,11 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".TabsActivity"
-            android:label="@string/title_activity_tabs"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".login.Tela_login">
+        <activity android:name=".AberturaActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,11 +20,16 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".TabsActivity"
+            android:label="@string/title_activity_tabs"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".login.Tela_login"></activity>
+        <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".login.Tela_cadastro1" />
-        <activity android:name=".login.Tela_cadastro2" />
-        <activity android:name=".login.Tela_cadastro3" />
+        <activity android:name=".login.TelaCadastro1" />
+        <activity android:name=".login.TelaCadastro2" />
+        <activity android:name=".login.TelaCadastroEmail" />
     </application>
 
 </manifest>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1050130213395",
+    "firebase_url": "https://appdesconta.firebaseio.com",
+    "project_id": "appdesconta",
+    "storage_bucket": "appdesconta.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1050130213395:android:2adb9545d8cccd7665ede6",
+        "android_client_info": {
+          "package_name": "com.app_desconta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1050130213395-vb433pes61fvv5b4jt8t2k5mr1a1abhr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app_desconta",
+            "certificate_hash": "214ac8084c260706864f04e8395eaf6d9b640fe7"
+          }
+        },
+        {
+          "client_id": "1050130213395-4kbhvv7u3guh1jf91hcdo0l99dc3lrf3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzWeGrK5p0PZn00tauJTaj00IvJMdgBAU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1050130213395-4kbhvv7u3guh1jf91hcdo0l99dc3lrf3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

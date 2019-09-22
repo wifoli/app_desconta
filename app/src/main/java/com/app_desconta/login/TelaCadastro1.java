@@ -17,7 +17,7 @@ import com.app_desconta.R;
 import com.app_desconta.util.ValidaCPF;
 
 
-public class Tela_cadastro1 extends AppCompatActivity {
+public class TelaCadastro1 extends AppCompatActivity {
 
     private EditText editTextNome;
     private EditText editTextSobreNome;
@@ -44,7 +44,7 @@ public class Tela_cadastro1 extends AppCompatActivity {
                 }
 
 
-                //   Intent intent = new Intent(getApplicationContext(), Tela_cadastro2.class);
+                //   Intent intent = new Intent(getApplicationContext(), TelaCadastro2.class);
                 // startActivity(intent);
             }
         });
