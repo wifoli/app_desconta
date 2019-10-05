@@ -30,7 +30,7 @@ public class RedefinirSenhaActivity extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_redefinir_senha);
 
-        redefinir = (Button) findViewById(R.id.bt_redefinir_redefinir);
+        redefinir = (Button) findViewById(R.id.bt_redefinir_enviar);
         editTextEmail = (EditText) findViewById(R.id.et_recuperar_senha_email);
 
         auth = FirebaseAuth.getInstance();

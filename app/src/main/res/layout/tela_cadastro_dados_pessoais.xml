@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#fff"
-    tools:context=".login.TelaCadastro1">
+    tools:context=".login.TelaCadastroDadosPessoais">
 
 
     <LinearLayout
@@ -79,7 +79,7 @@
                 android:id="@+id/iv_cadastrar_validacaoCPF"
                 android:layout_width="45dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_tema" />
+                android:src="@drawable/pessoa" />
         </LinearLayout>
 
         <TextView
@@ -101,6 +101,7 @@
                 android:id="@+id/et_cadastrar_dataNasc"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:maxLength="10"
                 android:background="@drawable/meu_edit_text"
                 android:layout_weight="1"
                 android:inputType="number"
@@ -110,7 +111,7 @@
                 android:id="@+id/iv_cadastrar_validacaoData"
                 android:layout_width="45dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_tema" />
+                android:src="@drawable/calendario" />
 
         </LinearLayout>
 

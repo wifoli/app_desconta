@@ -35,8 +35,8 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".login.TelaCadastro1" />
-        <activity android:name=".login.TelaCadastro2" />
+        <activity android:name=".login.TelaCadastroDadosPessoais" />
+        <activity android:name=".login.TelaCadastroLocalizacao" />
         <activity android:name=".login.TelaCadastroEmail" />
     </application>
 

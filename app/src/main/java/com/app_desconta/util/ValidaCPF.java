@@ -6,6 +6,8 @@ public class ValidaCPF {
 
     public static boolean isCPF(String CPF) {
 
+         CPF = retiraMascara(CPF);
+
         if (CPF.equals("00000000000") ||
                 CPF.equals("11111111111") ||
                 CPF.equals("22222222222") || CPF.equals("33333333333") ||
@@ -62,7 +64,7 @@ public class ValidaCPF {
                 CPF.substring(6, 9) + "-" + CPF.substring(9, 11));
     }
 
-    public static String imprimeCPFSemPontuacoes(String CPF){
+    private static String retiraMascara(String CPF){
         return CPF.toString()
                 .replaceAll("[.]", "")
                 .replaceAll("[-]", "");

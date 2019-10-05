@@ -76,9 +76,9 @@ public class TelaCadastroEmail extends AppCompatActivity implements View.OnClick
     private boolean estaVazio() {
         String erro = "";
         if (email.isEmpty()) erro = getString(R.string.emailObrigatorio);
-        if (!erro.isEmpty()) erro += "\n";
+        if (erro.contains(getString(R.string.emailObrigatorio))) erro += "\n";
         if (senha.isEmpty()) erro += getString(R.string.senhaObrigatorio);
-        if (!erro.isEmpty()) erro += "\n";
+        if (erro.contains(getString(R.string.senhaObrigatorio))) erro += "\n";
         if (confirmarSenha.isEmpty()) erro += getString(R.string.confirmarSenhaObrigatorio);
         if (erro.isEmpty()) return false;
         corrigirCampos(erro);

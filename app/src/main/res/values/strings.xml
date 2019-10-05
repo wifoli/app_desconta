@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Strings para a tela de Login -->
-    <string name="app_name" translatable="false">DES-CONTA</string>
+    <string name="app_name" translatable="false">Des-Conta</string>
     <string name="description_et_login">EditText para do login de usuário</string>
     <string name="tv_login_login">Login</string>
     <string name="et_login_login_hint">Digite seu Email</string>
@@ -80,7 +80,7 @@
     <string name="esqueceu_a_senha">Esqueceu sua senha?</string>
     <string name="digite_o_seu_email_para_redefinir_a_senha">Digite o seu email para redefinir a senha</string>
     <string name="voc_receber_no_email_indicado_um_link_para_redefini_o_da_senha">Você receberá no email indicado um link para redefinição da senha</string>
-    <string name="redefinir">Redefinir</string>
+    <string name="enviar">Enviar</string>
     <string name="mensagem_enviada">Menssagem enviada para o email:</string>
     <string name="fa_a_login_usando_uma_conta">Faça login usando uma conta</string>
 
@@ -90,6 +90,13 @@
     <string name="erroAoAdicionarContaGoogleAoFirebase">Erro ao adicionar conta do Google ao Firebase</string>
     <string name="erroAoLogarComFacebook">Erro ao logar com o Facebook</string>
     <string name="erroAoAdicionarContaFacebookAoFirebase">Erro ao adicionar conta do Facebook ao Firebase</string>
+    <string name="nomeObrigatorio">O campo nome é obrigatório</string>
+    <string name="sobrenomeObrigatorio">O campo sobrenome é obrigatório</string>
+    <string name="cpfObrigatorio">O campo CPF é obrigatório</string>
+    <string name="cpfInvalido">CPF inválido</string>
+    <string name="dataInvalido">Data Inválida</string>
+    <string name="dataNascObrigatorio">O campo Data de nascimento é obrigatório</string>
+    <string name="menorIdade">É necessário que tenha 18 anos</string>
 
 
 </resources>

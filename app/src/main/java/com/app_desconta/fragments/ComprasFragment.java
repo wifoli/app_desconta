@@ -55,7 +55,7 @@ public class ComprasFragment extends Fragment {
 
         rvAdpt = new RecycleViewAdapter(listaCampras);
 
-        rv.addItemDecoration(new DividerItemDecoration(rv.getContext(), DividerItemDecoration.VERTICAL));
+
         rv.setAdapter(rvAdpt);
 
         rvAdpt.setOnItemClickListenet(new RecycleViewAdapter.OnItemClickListener() {

@@ -12,14 +12,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.app_desconta.R;
 
 
-public class TelaCadastro2 extends AppCompatActivity {
+public class TelaCadastroLocalizacao extends AppCompatActivity {
 
     private String arrey_spinner[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tela_cadastro2);
+        setContentView(R.layout.tela_cadastro_localizacao);
         setTitle("Cadastro: Etapa 2 de 3 - Localização");
 
         Button bt_proximo = findViewById(R.id.bt_cadastrar2_proximo);

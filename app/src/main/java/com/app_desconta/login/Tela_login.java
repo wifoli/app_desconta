@@ -2,6 +2,7 @@ package com.app_desconta.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,9 @@ import androidx.cardview.widget.CardView;
 import com.app_desconta.MainActivity;
 import com.app_desconta.R;
 import com.app_desconta.RedefinirSenhaActivity;
+import com.app_desconta.Usuario;
+import com.app_desconta.api.Api;
+import com.app_desconta.api.User;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -36,6 +40,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.util.Arrays;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.app_desconta.util.Util.errosFirebase;
 import static com.app_desconta.util.Util.verificaConexao;
@@ -142,9 +152,17 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    startActivity(new Intent(getBaseContext(), MainActivity.class));
-                    Toast.makeText(getBaseContext(), getString(R.string.loginEfetuadoComSucesso), Toast.LENGTH_LONG).show();
-                    finish();
+                    retrofit_getUsuario(task.getResult().getUser().getUid());
+
+                    //----------METODO PARA RETORNAR O TOKEN--------------
+                   /* Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getIdToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<GetTokenResult> task) {
+                            if (task.isSuccessful()){
+                                abrirApp();
+                            }
+                        }
+                    });  */
                 } else errosFirebase(getBaseContext(), task.getException().toString());
             }
         });
@@ -208,6 +226,7 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
 
             @Override
             public void onError(FacebookException error) {
+                Log.d("Test", error.toString());
                 Toast.makeText(getBaseContext(), getString(R.string.erroAoLogarComFacebook), Toast.LENGTH_LONG).show();
             }
         });
@@ -220,7 +239,7 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful())
-                            startActivity(new Intent(getBaseContext(), MainActivity.class));
+                            retrofit_getUsuario("");
                         else
                             Toast.makeText(getBaseContext(), getString(R.string.erroAoAdicionarContaGoogleAoFirebase), Toast.LENGTH_LONG).show();
                     }
@@ -234,11 +253,46 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            startActivity(new Intent(getBaseContext(), MainActivity.class));
+                            retrofit_getUsuario("");
                         } else {
                             Toast.makeText(getBaseContext(), getString(R.string.erroAoAdicionarContaFacebookAoFirebase), Toast.LENGTH_LONG).show();
                         }
                     }
                 });
     }
+
+    private void registrarUsuarioNoBanco(){
+        startActivity(new Intent(getBaseContext(), TelaCadastroDadosPessoais.class));
+    }
+
+    private void abrirApp(){
+        startActivity(new Intent(getBaseContext(), MainActivity.class));
+    }
+
+    private void retrofit_getUsuario(String uid) {
+        Retrofit client = new Retrofit.Builder()
+                .baseUrl("http://192.168.0.129/public/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Api httpRequest = client.create(Api.class);
+
+        Call<User> call = httpRequest.getUsuario(uid);
+        call.enqueue(callback);
+    }
+
+    private Callback<User> callback = new Callback<User>() {
+        @Override
+        public void onResponse(Call<User> call, Response<User> response) {
+            Usuario.getInsance().setUsuario(response.body());
+            Usuario.getInsance().teste();
+            abrirApp();
+        }
+
+        @Override
+        public void onFailure(Call<User> call, Throwable t) {
+            Log.e("Retrofit get_usuario", "Falha no Retrofit: " + t.toString());
+            if(t.toString().contains("End of input at")) registrarUsuarioNoBanco();
+        }
+    };
 }

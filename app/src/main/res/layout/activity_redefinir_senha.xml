@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:foreground="?attr/selectableItemBackground"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".RedefinirSenhaActivity">
@@ -10,9 +11,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/digite_o_seu_email_para_redefinir_a_senha"
         android:layout_marginBottom="10dp"
-        android:textSize="16sp"/>
+        android:text="@string/digite_o_seu_email_para_redefinir_a_senha"
+        android:textSize="16sp" />
 
     <EditText
         android:id="@+id/et_recuperar_senha_email"
@@ -21,22 +22,23 @@
         android:background="@drawable/meu_edit_text"
         android:hint="@string/et_login_login_hint"
         android:inputType="textEmailAddress"
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
 
     <Button
-        android:id="@+id/bt_redefinir_redefinir"
+        android:id="@+id/bt_redefinir_enviar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="@color/colorSecondaryLight"
-        android:text="@string/redefinir" />
+        android:foreground="?attr/selectableItemBackground"
+        android:background="@drawable/meu_botao"
+        android:text="@string/enviar" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/voc_receber_no_email_indicado_um_link_para_redefini_o_da_senha"
-        android:textSize="5pt"/>
+        android:textSize="5pt" />
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>
