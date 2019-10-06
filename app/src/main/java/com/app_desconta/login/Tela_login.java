@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import com.app_desconta.MainActivity;
 import com.app_desconta.R;
 import com.app_desconta.RedefinirSenhaActivity;
 import com.app_desconta.Usuario;
@@ -152,7 +151,7 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    retrofit_getUsuario(task.getResult().getUser().getUid());
+                    getUsuario(task.getResult().getUser().getUid());
 
                     //----------METODO PARA RETORNAR O TOKEN--------------
                    /* Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getIdToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
@@ -239,7 +238,7 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful())
-                            retrofit_getUsuario("");
+                            getUsuario("");
                         else
                             Toast.makeText(getBaseContext(), getString(R.string.erroAoAdicionarContaGoogleAoFirebase), Toast.LENGTH_LONG).show();
                     }
@@ -253,7 +252,7 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            retrofit_getUsuario("");
+                            getUsuario("");
                         } else {
                             Toast.makeText(getBaseContext(), getString(R.string.erroAoAdicionarContaFacebookAoFirebase), Toast.LENGTH_LONG).show();
                         }
@@ -261,15 +260,13 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
                 });
     }
 
-    private void registrarUsuarioNoBanco(){
-        startActivity(new Intent(getBaseContext(), TelaCadastroDadosPessoais.class));
+    private void verificarSeExisteUsuario() {
+
+        if (Usuario.getInsance().getUsuario().getId().trim().equals(""))
+            startActivity(new Intent(getBaseContext(), TelaVerificarCpf.class));
     }
 
-    private void abrirApp(){
-        startActivity(new Intent(getBaseContext(), MainActivity.class));
-    }
-
-    private void retrofit_getUsuario(String uid) {
+    private void getUsuario(String uid) {
         Retrofit client = new Retrofit.Builder()
                 .baseUrl("http://192.168.0.129/public/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -286,13 +283,12 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
         public void onResponse(Call<User> call, Response<User> response) {
             Usuario.getInsance().setUsuario(response.body());
             Usuario.getInsance().teste();
-            abrirApp();
+            verificarSeExisteUsuario();
         }
 
         @Override
         public void onFailure(Call<User> call, Throwable t) {
             Log.e("Retrofit get_usuario", "Falha no Retrofit: " + t.toString());
-            if(t.toString().contains("End of input at")) registrarUsuarioNoBanco();
         }
     };
 }

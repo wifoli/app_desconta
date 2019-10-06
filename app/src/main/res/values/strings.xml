@@ -97,6 +97,10 @@
     <string name="dataInvalido">Data Inválida</string>
     <string name="dataNascObrigatorio">O campo Data de nascimento é obrigatório</string>
     <string name="menorIdade">É necessário que tenha 18 anos</string>
+    <string name="digiteCPF">Digite seu CPF para verificarmos se há registros de compras em nossa base de dados</string>
+    <string name="digite_o_cpf_aqui">Digite o CPF aqui</string>
+    <string name="bt_verificar">Verificar</string>
+    <string name="CPF_nao_identificado">Não há registro deste CPF em nossa base de dados</string>
 
 
 </resources>

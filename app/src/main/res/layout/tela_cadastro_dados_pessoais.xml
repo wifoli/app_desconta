@@ -79,7 +79,7 @@
                 android:id="@+id/iv_cadastrar_validacaoCPF"
                 android:layout_width="45dp"
                 android:layout_height="40dp"
-                android:src="@drawable/pessoa" />
+                android:src="@drawable/correto" />
         </LinearLayout>
 
         <TextView
@@ -120,7 +120,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:background="@color/colorSecondaryLight"
+            android:background="@drawable/meu_botao"
             android:text="@string/bt_login_proximo" />
 
     </LinearLayout>

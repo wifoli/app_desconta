@@ -14,7 +14,9 @@ public interface Api {
     @GET("compras")
     Call<List<PojoCompra>> getInfCompra();
 
-    @GET("get_usuario/{uid}")
+    @GET("get_usuarioComUid/{uid}")
     Call<User> getUsuario(@Path("uid") String uid);
 
+    @GET("get_usuarioComCpf/{cpf}")
+    Call<User> getUsuarioComCpf(@Path("cpf") String cpf);
 }

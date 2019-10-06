@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".login.TelaVerificarCpf">
+
+    <TextView
+        android:id="@+id/tv_cadastrar_cpf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/digiteCPF"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="15sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_verificar_cadastrar_cpf"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/meu_edit_text"
+            android:hint="@string/digite_o_cpf_aqui"
+            android:inputType="number"
+            android:maxLength="14"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/iv_verificar_cadastrar_validacaoCPF"
+            android:layout_width="45dp"
+            android:layout_height="40dp"
+            android:src="@drawable/pessoa" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_verificar_cadastrar_verificar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/meu_botao"
+        android:text="@string/bt_verificar" />
+
+</LinearLayout>

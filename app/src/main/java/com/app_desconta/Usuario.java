@@ -20,8 +20,8 @@ public class Usuario {
     }
 
 
-    public void getUsuario(){
-
+    public User getUsuario(){
+        return usuario;
     }
 
     public void teste(){

@@ -49,8 +49,8 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
         editTextSobreNome = (EditText) findViewById(R.id.et_cadastrar_sobrenome);
         editTextCpf = (EditText) findViewById(R.id.et_cadastrar_cpf);
         editTextDataNasc = (EditText) findViewById(R.id.et_cadastrar_dataNasc);
-        imagemData= (ImageView) findViewById(R.id.iv_cadastrar_validacaoData);
-        imagemCpf= (ImageView) findViewById(R.id.iv_cadastrar_validacaoCPF);
+        imagemData = (ImageView) findViewById(R.id.iv_cadastrar_validacaoData);
+        imagemCpf = (ImageView) findViewById(R.id.iv_cadastrar_validacaoCPF);
         buttonProximo = (Button) findViewById(R.id.bt_cadastrar_proximo);
 
         buttonProximo.setOnClickListener(this);
@@ -60,6 +60,7 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
         editTextDataNasc.setOnFocusChangeListener(this);
         setarMascaraCPF();
         setarMascaraData();
+        setarCampos();
     }
 
     @Override
@@ -69,7 +70,8 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
         cpf = editTextCpf.getText().toString().trim();
         dataNasc = editTextDataNasc.getText().toString().trim();
 
-        if (!estaVazio() && (isCpf) && (isdata) && (verificaConexao(getBaseContext()))) startActivity(new Intent(getBaseContext(), TelaCadastroLocalizacao.class));
+        if (!estaVazio() && (isCpf) && (isdata) && (verificaConexao(getBaseContext())))
+            startActivity(new Intent(getBaseContext(), TelaCadastroLocalizacao.class));
     }
 
     @Override
@@ -95,7 +97,7 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
         return true;
     }
 
-    private void corrigirCampos (String erro){
+    private void corrigirCampos(String erro) {
         if (erro.contains(getString(R.string.dataNascObrigatorio))) {
             editTextDataNasc.setBackground(getDrawable(R.drawable.meu_edit_text_error));
             editTextDataNasc.requestFocus();
@@ -114,8 +116,8 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
         }
     }
 
-    private void verificaCPF(String cpf){
-        if(ValidaCPF.isCPF(cpf)) {
+    private void verificaCPF(String cpf) {
+        if (ValidaCPF.isCPF(cpf)) {
             imagemCpf.setImageDrawable(getDrawable(R.drawable.correto));
             editTextCpf.setBackground(getDrawable(R.drawable.meu_edit_text));
             isCpf = true;
@@ -124,8 +126,8 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
         setarErro(editTextCpf, imagemCpf);
     }
 
-    private void verificaData(String data){
-        if(ValidaData.isData(getBaseContext() ,data)){
+    private void verificaData(String data) {
+        if (ValidaData.isData(getBaseContext(), data)) {
             imagemData.setImageDrawable(getDrawable(R.drawable.correto));
             editTextDataNasc.setBackground(getDrawable(R.drawable.meu_edit_text));
             isdata = true;
@@ -134,11 +136,22 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
         setarErro(editTextDataNasc, imagemData);
     }
 
-    private void setarErro(EditText editText, ImageView imageView){
+    private void setarErro(EditText editText, ImageView imageView) {
         editText.setBackground(getDrawable(R.drawable.meu_edit_text_error));
         imageView.setImageDrawable(getDrawable(R.drawable.incorreto));
     }
 
+    private void setarCampos() {
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        boolean temRegistro = extras.getBoolean("Tem Registro");
+        if (temRegistro) {
+
+        } else {
+            editTextCpf.setText(extras.getString("CPF"));
+            Toast.makeText(getBaseContext(), getString(R.string.CPF_nao_identificado), Toast.LENGTH_LONG).show();
+        }
+    }
 
     private void setarMascaraCPF() {
         editTextCpf.addTextChangedListener(new TextWatcher() {
@@ -177,7 +190,7 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
                 // é pq está apagando
                 if (after > before) {
 
-                    if(str.length() == 11) verificaCPF(str);
+                    if (str.length() == 11) verificaCPF(str);
 
                     // Se tem mais de 5 caracteres (sem máscara)
                     // coloca o '.' e o '-'
@@ -229,7 +242,7 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
         });
     }
 
-    private void setarMascaraData(){
+    private void setarMascaraData() {
         editTextDataNasc.addTextChangedListener(new TextWatcher() {
             boolean isUpdating;
 
