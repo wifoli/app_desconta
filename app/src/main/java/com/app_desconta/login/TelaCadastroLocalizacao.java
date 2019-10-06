@@ -1,62 +1,192 @@
 package com.app_desconta.login;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.app_desconta.R;
+import com.app_desconta.api.Api;
+import com.app_desconta.api.CEP;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class TelaCadastroLocalizacao extends AppCompatActivity {
+public class TelaCadastroLocalizacao extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener {
 
-    private String arrey_spinner[];
+    private EditText editTextCep;
+    private EditText editTextBairro;
+    private EditText editTextRua;
+    private EditText editTextNumero;
+    private EditText editTextComplemento;
+
+    private Spinner spinnerEstado;
+    private Spinner spinnerCidade;
+
+    private ImageView procurarCep;
+
+    private Button botaoCadastrar;
+
+    private String cep;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tela_cadastro_localizacao);
-        setTitle("Cadastro: Etapa 2 de 3 - Localização");
+        setTitle("Localização");
 
-        Button bt_proximo = findViewById(R.id.bt_cadastrar2_proximo);
-        bt_proximo.setOnClickListener(new View.OnClickListener() {
+        editTextCep = (EditText) findViewById(R.id.et_cadastro2_cep);
+        editTextBairro = (EditText) findViewById(R.id.et_cadastrar2_bairro);
+        editTextRua = (EditText) findViewById(R.id.et_cadastrar2_rua);
+        editTextNumero = (EditText) findViewById(R.id.et_cadastrar2_numero);
+        editTextComplemento = (EditText) findViewById(R.id.et_cadastrar2_complemento);
+        spinnerEstado = (Spinner) findViewById(R.id.sp_cadastro2_estado);
+        spinnerCidade = (Spinner) findViewById(R.id.sp_cadastro2_cidade);
+        procurarCep = (ImageView) findViewById(R.id.iv_cadastrar2_encontrar_cep);
+        botaoCadastrar = (Button) findViewById(R.id.bt_cadastrar2_proximo);
+
+        botaoCadastrar.setOnClickListener(this);
+        procurarCep.setOnClickListener(this);
+        setarMascaraCep();
+        
+    }
+
+    @Override
+    public void onClick(View view) {
+        cep = editTextCep.getText().toString().trim();
+
+        switch (view.getId()) {
+            case R.id.iv_cadastrar2_encontrar_cep:
+                if (verificaCep()) getEndereco(cep
+                        .replaceAll("[.]", "")
+                        .replaceAll("[-]", ""));
+                break;
+            case R.id.bt_cadastrar2_proximo:
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onFocusChange(View view, boolean b) {
+
+    }
+
+    private boolean verificaCep() {
+        if (cep.length() == 10) return true;
+        return false;
+    }
+
+    private void getEndereco(String cep) {
+        Retrofit client = new Retrofit.Builder()
+                .baseUrl("http://ws.matheuscastiglioni.com.br/ws/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Api httpRequest = client.create(Api.class);
+
+        Call<CEP> call = httpRequest.buscarCEP(cep);
+        call.enqueue(callback);
+    }
+
+    private Callback<CEP> callback = new Callback<CEP>() {
+        @Override
+        public void onResponse(Call<CEP> call, Response<CEP> response) {
+            editTextBairro.setText(response.body().getBairro());
+            editTextRua.setText(response.body().getLogradouro());
+            editTextComplemento.setText(response.body().getComplemento());
+        }
+
+        @Override
+        public void onFailure(Call<CEP> call, Throwable t) {
+            Log.e("Retrofit getEndereço", "Falha no Retrofit: " + t.toString());
+        }
+    };
+
+    private void setarMascaraCep() {
+        editTextCep.addTextChangedListener(new TextWatcher() {
+            boolean isUpdating;
+
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), TelaCadastroEmail.class);
-                startActivity(intent);
+            public void beforeTextChanged(
+                    CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(
+                    CharSequence s, int start, int before, int after) {
+
+                // Quando o texto é alterado o onTextChange é chamado
+                // Essa flag evita a chamada infinita desse método
+                if (isUpdating) {
+                    isUpdating = false;
+                    return;
+                }
+
+                // Ao apagar o texto, a máscara é removida,
+                // então o posicionamento do cursor precisa
+                // saber se o texto atual tinha ou não, máscara
+                boolean hasMask =
+                        s.toString().indexOf('/') > -1;
+
+                // Remove o '.' e '-' da String
+                String str = s.toString()
+                        .replaceAll("[.]", "")
+                        .replaceAll("[-]", "");
+
+                // as variáveis before e after dizem o tamanho
+                // anterior e atual da String, se after > before
+                // é pq está apagando
+                if (after > before) {
+
+                    if (str.length() > 5) {
+                        str =
+                                str.substring(0, 2) + '.' +
+                                        str.substring(2, 5) + '-' +
+                                        str.substring(5);
+
+                    } else if (str.length() > 2) {
+                        str =
+                                str.substring(0, 2) + '.' +
+                                        str.substring(2);
+                    }
+                    // Seta a flag pra evitar chamada infinita
+                    isUpdating = true;
+                    // seta o novo texto
+                    editTextCep.setText(str);
+                    // seta a posição do cursor
+                    editTextCep.setSelection(editTextCep.getText().length());
+
+                } else {
+                    isUpdating = true;
+                    editTextCep.setText(str);
+                    // Se estiver apagando posiciona o cursor
+                    // no local correto. Isso trata a deleção dos
+                    // caracteres da máscara.
+                    editTextCep.setSelection(
+                            Math.max(0, Math.min(
+                                    hasMask ? start - before : start,
+                                    str.length())));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
             }
         });
-
-        //adicionando valores para o combobox estado e cidade
-        arrey_spinner = new String[19];
-        arrey_spinner[0] = "Escolha";
-        arrey_spinner[1] = "Item 1";
-        arrey_spinner[2] = "Item 2";
-        arrey_spinner[3] = "Item 3";
-        arrey_spinner[4] = "Item 4";
-        arrey_spinner[5] = "Item 5";
-        arrey_spinner[6] = "Item 6";
-        arrey_spinner[7] = "Item 7";
-        arrey_spinner[8] = "Item 8";
-        arrey_spinner[9] = "Item 9";
-        arrey_spinner[10] = "Item 10";
-        arrey_spinner[11] = "Item 11";
-        arrey_spinner[12] = "Item 12";
-        arrey_spinner[13] = "Item 13";
-        arrey_spinner[14] = "Item 14";
-        arrey_spinner[15] = "Item 15";
-        arrey_spinner[16] = "Item 16";
-        arrey_spinner[17] = "Item 17";
-        arrey_spinner[18] = "Item 18";
-
-        Spinner spinnerEstado = (Spinner) findViewById(R.id.sp_cadastro2_estado);
-        Spinner spinnerCidade = (Spinner) findViewById(R.id.sp_cadastro2_cidade);
-        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, arrey_spinner);
-        spinnerEstado.setAdapter(adapter);
-        spinnerCidade.setAdapter(adapter);
     }
 }
+

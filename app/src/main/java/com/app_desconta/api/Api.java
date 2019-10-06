@@ -11,6 +11,9 @@ import retrofit2.http.Path;
 
 public interface Api {
 
+    @GET("cep/find/{cep}/json")
+    Call<CEP> buscarCEP(@Path("cep") String cep);
+
     @GET("compras")
     Call<List<PojoCompra>> getInfCompra();
 
