@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,8 +24,11 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
 
     private EditText editTextNome;
     private EditText editTextSobreNome;
+    private EditText editTextRg;
     private EditText editTextCpf;
     private EditText editTextDataNasc;
+    private EditText editTextTelefone1;
+    private EditText editTextTelefone2;
 
     private ImageView imagemData;
     private ImageView imagemCpf;
@@ -33,8 +37,11 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
 
     private String nome;
     private String sobrenome;
+    private String rg;
     private String cpf;
     private String dataNasc;
+    private String telefone1;
+    private String telefone2;
 
     private boolean isCpf = false;
     private boolean isdata = false;
@@ -47,8 +54,11 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
 
         editTextNome = (EditText) findViewById(R.id.et_cadastrar_nome);
         editTextSobreNome = (EditText) findViewById(R.id.et_cadastrar_sobrenome);
+        editTextRg = (EditText) findViewById(R.id.et_cadastrar_rg);
         editTextCpf = (EditText) findViewById(R.id.et_cadastrar_cpf);
         editTextDataNasc = (EditText) findViewById(R.id.et_cadastrar_dataNasc);
+        editTextTelefone1 = (EditText) findViewById(R.id.et_cadastrar_telefone1);
+        editTextTelefone2 = (EditText) findViewById(R.id.et_cadastrar_telefone2);
         imagemData = (ImageView) findViewById(R.id.iv_cadastrar_validacaoData);
         imagemCpf = (ImageView) findViewById(R.id.iv_cadastrar_validacaoCPF);
         buttonProximo = (Button) findViewById(R.id.bt_cadastrar_proximo);
@@ -56,10 +66,14 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
         buttonProximo.setOnClickListener(this);
         editTextNome.setOnFocusChangeListener(this);
         editTextSobreNome.setOnFocusChangeListener(this);
+        editTextRg.setOnFocusChangeListener(this);
         editTextCpf.setOnFocusChangeListener(this);
         editTextDataNasc.setOnFocusChangeListener(this);
+        editTextTelefone1.setOnFocusChangeListener(this);
         setarMascaraCPF();
         setarMascaraData();
+        setarMascaraTelefone(editTextTelefone1);
+        setarMascaraTelefone(editTextTelefone2);
         setarCampos();
     }
 
@@ -67,11 +81,26 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
     public void onClick(View view) {
         nome = editTextNome.getText().toString().trim();
         sobrenome = editTextSobreNome.getText().toString().trim();
+        rg = editTextRg.getText().toString().trim();
         cpf = editTextCpf.getText().toString().trim();
         dataNasc = editTextDataNasc.getText().toString().trim();
+        telefone1 = editTextTelefone1.getText().toString().trim();
+        telefone2 = editTextTelefone2.getText().toString().trim();
 
-        if (!estaVazio() && (isCpf) && (isdata) && (verificaConexao(getBaseContext())))
-            startActivity(new Intent(getBaseContext(), TelaCadastroLocalizacao.class));
+        if (!estaVazio() && (isCpf) && (isdata) && (verificaTelefone()) && (verificaConexao(getBaseContext()))) {
+            Intent intent = new Intent(this, TelaCadastroLocalizacao.class);
+            Bundle extras = new Bundle();
+            extras.putString("nome", nome);
+            extras.putString("sobrenome", sobrenome);
+            extras.putString("rg", rg);
+            extras.putString("cpf", cpf);
+            extras.putString("dataNasc", dataNasc);
+            extras.putString("telefone1", telefone1);
+            extras.putString("telefone2", telefone2);
+            intent.putExtras(extras);
+            startActivity(intent);
+        }
+
     }
 
     @Override
@@ -88,9 +117,13 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
         if (erro.contains(getString(R.string.nomeObrigatorio))) erro += "\n";
         if (sobrenome.isEmpty()) erro += getString(R.string.sobrenomeObrigatorio);
         if (erro.contains(getString(R.string.sobrenomeObrigatorio))) erro += "\n";
+        if (rg.isEmpty()) erro += getString(R.string.rgObrigatorio);
+        if (erro.contains(getString(R.string.rgObrigatorio))) erro += "\n";
         if (cpf.isEmpty()) erro += getString(R.string.cpfObrigatorio);
         if (erro.contains(getString(R.string.cpfObrigatorio))) erro += "\n";
         if (dataNasc.isEmpty()) erro += getString(R.string.dataNascObrigatorio);
+        if (erro.contains(getString(R.string.dataNascObrigatorio))) erro += "\n";
+        if (telefone1.isEmpty()) erro += getString(R.string.telefoneObrigatorio);
         if (erro.isEmpty()) return false;
         corrigirCampos(erro);
         Toast.makeText(getBaseContext(), erro, Toast.LENGTH_LONG).show();
@@ -98,6 +131,10 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
     }
 
     private void corrigirCampos(String erro) {
+        if (erro.contains(getString(R.string.telefoneObrigatorio))) {
+            editTextTelefone1.setBackground(getDrawable(R.drawable.meu_edit_text_error));
+            editTextTelefone1.requestFocus();
+        }
         if (erro.contains(getString(R.string.dataNascObrigatorio))) {
             editTextDataNasc.setBackground(getDrawable(R.drawable.meu_edit_text_error));
             editTextDataNasc.requestFocus();
@@ -105,6 +142,10 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
         if (erro.contains(getString(R.string.cpfObrigatorio))) {
             editTextCpf.setBackground(getDrawable(R.drawable.meu_edit_text_error));
             editTextCpf.requestFocus();
+        }
+        if (erro.contains(getString(R.string.rgObrigatorio))) {
+            editTextRg.setBackground(getDrawable(R.drawable.meu_edit_text_error));
+            editTextRg.requestFocus();
         }
         if (erro.contains(getString(R.string.sobrenomeObrigatorio))) {
             editTextSobreNome.setBackground(getDrawable(R.drawable.meu_edit_text_error));
@@ -139,6 +180,16 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
     private void setarErro(EditText editText, ImageView imageView) {
         editText.setBackground(getDrawable(R.drawable.meu_edit_text_error));
         imageView.setImageDrawable(getDrawable(R.drawable.incorreto));
+    }
+
+    private boolean verificaTelefone(){
+        String tel =telefone1.replaceAll("[(]","")
+                .replaceAll("[)]","")
+                .replaceAll("[.]","")
+                .replaceAll("[-]","");
+        if (tel.length() == 11) return true;
+        editTextTelefone1.setBackground(getDrawable(R.drawable.meu_edit_text_error));
+        return false;
     }
 
     private void setarCampos() {
@@ -308,6 +359,93 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
                     // no local correto. Isso trata a deleção dos
                     // caracteres da máscara.
                     editTextDataNasc.setSelection(
+                            Math.max(0, Math.min(
+                                    hasMask ? start - before : start,
+                                    str.length())));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+    }
+
+    private void setarMascaraTelefone(final EditText editText) {
+        editText.addTextChangedListener(new TextWatcher() {
+            boolean isUpdating;
+
+            @Override
+            public void beforeTextChanged(
+                    CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(
+                    CharSequence s, int start, int before, int after) {
+
+                // Quando o texto é alterado o onTextChange é chamado
+                // Essa flag evita a chamada infinita desse método
+                if (isUpdating) {
+                    isUpdating = false;
+                    return;
+                }
+
+                // Ao apagar o texto, a máscara é removida,
+                // então o posicionamento do cursor precisa
+                // saber se o texto atual tinha ou não, máscara
+                boolean hasMask =
+                        s.toString().indexOf('(') > -1 ||
+                                s.toString().indexOf(')') > -1 ||
+                                s.toString().indexOf('-') > -1 ||
+                                s.toString().indexOf('.') > -1;
+
+                // Remove o '.' e '-' da String
+                String str = s.toString()
+                        .replaceAll("[(]", "")
+                        .replaceAll("[)]", "")
+                        .replaceAll("[-]", "")
+                        .replaceAll("[.]", "");
+
+                // as variáveis before e after dizem o tamanho
+                // anterior e atual da String, se after > before
+                // é pq está apagando
+                if (after > before) {
+                    if (str.length() > 7) {
+                        str =
+                                '(' +
+                                        str.substring(0, 2) + ')' +
+                                        str.substring(2, 3) + '.' +
+                                        str.substring(3, 7) + '-' +
+                                        str.substring(7);
+                    } else if (str.length() > 3) {
+                        str =
+                                '(' +
+                                        str.substring(0, 2) + ')' +
+                                        str.substring(2, 3) + '.' +
+                                        str.substring(3);
+                    } else if (str.length() > 2) {
+                        str =
+                                '(' +
+                                        str.substring(0, 2) + ')' +
+                                        str.substring(2);
+                    } else if (str.length() > 0) {
+                        str = '(' + str;
+                    }
+                    // Seta a flag pra evitar chamada infinita
+                    isUpdating = true;
+                    // seta o novo texto
+                    editText.setText(str);
+                    // seta a posição do cursor
+                    editText.setSelection(editText.getText().length());
+
+                } else {
+                    isUpdating = true;
+                    editText.setText(str);
+                    // Se estiver apagando posiciona o cursor
+                    // no local correto. Isso trata a deleção dos
+                    // caracteres da máscara.
+                    editText.setSelection(
                             Math.max(0, Math.min(
                                     hasMask ? start - before : start,
                                     str.length())));

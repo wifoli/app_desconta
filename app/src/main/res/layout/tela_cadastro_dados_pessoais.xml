@@ -51,6 +51,24 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/tv_cadastrar_rg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/tv_cadastrar_rg"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/et_cadastrar_rg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/meu_edit_text"
+            android:hint="@string/et_registroGeral"
+            android:inputType="text"
+            android:textSize="16sp" />
+
+        <TextView
             android:id="@+id/tv_cadastrar_cpf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -69,10 +87,10 @@
                 android:id="@+id/et_cadastrar_cpf"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/meu_edit_text"
-                android:maxLength="14"
                 android:layout_weight="1"
+                android:background="@drawable/meu_edit_text"
                 android:inputType="number"
+                android:maxLength="14"
                 android:textSize="16sp" />
 
             <ImageView
@@ -101,10 +119,10 @@
                 android:id="@+id/et_cadastrar_dataNasc"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:maxLength="10"
-                android:background="@drawable/meu_edit_text"
                 android:layout_weight="1"
+                android:background="@drawable/meu_edit_text"
                 android:inputType="number"
+                android:maxLength="10"
                 android:textSize="16sp" />
 
             <ImageView
@@ -114,6 +132,44 @@
                 android:src="@drawable/calendario" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_cadastrar_telefone1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/tv_cadastrar_telefone1"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/et_cadastrar_telefone1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/meu_edit_text"
+            android:hint="@string/et_cadastrar_telefone_hint"
+            android:inputType="number"
+            android:maxLength="15"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_cadastrar_telefone2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/tv_cadastrar_telefone2"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/et_cadastrar_telefone2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/meu_edit_text"
+            android:hint="@string/et_cadastrar_opcional_hint"
+            android:inputType="number"
+            android:maxLength="15"
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/bt_cadastrar_proximo"

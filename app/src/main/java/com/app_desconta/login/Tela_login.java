@@ -151,7 +151,8 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    getUsuario(task.getResult().getUser().getUid());
+                    Usuario.getInsance().setarUid(task.getResult().getUser().getUid());
+                    getUsuario();
 
                     //----------METODO PARA RETORNAR O TOKEN--------------
                    /* Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getIdToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
@@ -238,7 +239,7 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful())
-                            getUsuario("");
+                            getUsuario();
                         else
                             Toast.makeText(getBaseContext(), getString(R.string.erroAoAdicionarContaGoogleAoFirebase), Toast.LENGTH_LONG).show();
                     }
@@ -252,7 +253,7 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            getUsuario("");
+                            getUsuario();
                         } else {
                             Toast.makeText(getBaseContext(), getString(R.string.erroAoAdicionarContaFacebookAoFirebase), Toast.LENGTH_LONG).show();
                         }
@@ -262,11 +263,12 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
 
     private void verificarSeExisteUsuario() {
 
-        if (Usuario.getInsance().getUsuario().getId().trim().equals(""))
+        if (Usuario.getInsance().getUsuario().getId().trim().equals("")){
             startActivity(new Intent(getBaseContext(), TelaVerificarCpf.class));
+        }
     }
 
-    private void getUsuario(String uid) {
+    private void getUsuario() {
         Retrofit client = new Retrofit.Builder()
                 .baseUrl("http://192.168.0.129/public/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -274,7 +276,7 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
 
         Api httpRequest = client.create(Api.class);
 
-        Call<User> call = httpRequest.getUsuario(uid);
+        Call<User> call = httpRequest.getUsuario(Usuario.getInsance().getUid());
         call.enqueue(callback);
     }
 

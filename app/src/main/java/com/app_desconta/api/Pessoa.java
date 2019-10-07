@@ -48,6 +48,22 @@ public class Pessoa {
     @Expose
     private String cidadeId;
 
+    public Pessoa(String nome, String sobrenome, String cpf, String rg, String dataNasc, String tel1, String tel2, String rua, String bairro, String numero, String cep, String complemento, String cidadeId) {
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.cpf = cpf;
+        this.rg = rg;
+        this.dataNasc = dataNasc;
+        this.tel1 = tel1;
+        this.tel2 = tel2;
+        this.rua = rua;
+        this.bairro = bairro;
+        this.numero = numero;
+        this.cep = cep;
+        this.complemento = complemento;
+        this.cidadeId = cidadeId;
+    }
+
     public String getId() {
         return id;
     }

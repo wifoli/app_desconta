@@ -8,6 +8,7 @@ public class Usuario {
 
     public static Usuario instance;
     private User usuario;
+    private String uid;
 
 
     public static Usuario getInsance() {
@@ -22,6 +23,14 @@ public class Usuario {
 
     public User getUsuario(){
         return usuario;
+    }
+
+    public void setarUid(String uid){
+        this.uid = uid;
+    }
+
+    public String getUid(){
+        return uid;
     }
 
     public void teste(){

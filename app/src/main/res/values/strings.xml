@@ -28,8 +28,8 @@
     <string name="et_cadastro2_cep_hint">Insira seu CEP</string>
     <string name="tv_cadastrar2_bairro">Bairro</string>
     <string name="et_cadastrar2_bairro">Insira seu bairro</string>
-    <string name="tv_cadastrar2_rua">Rua</string>
-    <string name="et_cadastrar2_rua">Insira sua rua</string>
+    <string name="tv_cadastrar2_logradouro">Logradouro</string>
+    <string name="et_cadastrar2_rua">Insira sua rua ou avinada</string>
     <string name="tv_cadastrar2_complemento">Complementos</string>
     <string name="et_cadastrar2_complemento">Mais informações</string>
 
@@ -103,6 +103,51 @@
     <string name="CPF_nao_identificado">Não há registro deste CPF em nossa base de dados</string>
     <string name="tv_cadastrar2_numero">Número</string>
     <string name="et_cadastrar2_numero">Insira o número da sua casa</string>
+    <string name="et_cadastrar_cidade">Insira sua cidade</string>
+    <string name="cep_obrigatorio">O campo CEP é obrigatório</string>
+    <string name="estadoObrigatorio">O campo estado é obrigatório</string>
+    <string name="cidadeObrigatorio">O campo cidade é obrigatório</string>
+    <string name="bairroObrigatorio">O campo bairro é obrigatório</string>
+    <string name="ruaObrigatorio">O campo rua é obrigatório</string>
+    <string name="numeroObrigatorio">O campo número é obrigatório</string>
+    <string name="tv_cadastrar_telefone1">Telefone 1</string>
+    <string name="tv_cadastrar_telefone2">Telefone 2</string>
+    <string name="et_cadastrar_telefone_hint">Telefone de contato</string>
+    <string name="et_cadastrar_opcional_hint">Opicional</string>
+    <string name="tv_cadastrar_rg">RG</string>
+    <string name="et_registroGeral">Registro geral</string>
+    <string name="rgObrigatorio">O campo RG é obrigatório</string>
+    <string name="telefoneObrigatorio">O campo telefone 1 é obrigatório</string>
+    <string name="cepInvalido">CEP inválido</string>
 
-
+    <string-array name="estados">
+        <item>Selecione</item>
+        <item>Acre</item>
+        <item>Alagoas</item>
+        <item>Amapá</item>
+        <item>Amazonas</item>
+        <item>Bahia</item>
+        <item>Ceará</item>
+        <item>Distito Federal</item>
+        <item>Espirito Santos</item>
+        <item>Goiás</item>
+        <item>Maranhão</item>
+        <item>Mato Grosso</item>
+        <item>Mato Grosso do Sul</item>
+        <item>Minas Gerais</item>
+        <item>Pará</item>
+        <item>Paraíba</item>
+        <item>Paraná</item>
+        <item>Pernambuco</item>
+        <item>Piauí</item>
+        <item>Rio de Janeiro</item>
+        <item>Rio Grande do Norte</item>
+        <item>Rio Grande do Sul</item>
+        <item>Rondônia</item>
+        <item>Roraima</item>
+        <item>Santa Catarina</item>
+        <item>São Paulo</item>
+        <item>Sergipe</item>
+        <item>Tocantins</item>
+    </string-array>
 </resources>
