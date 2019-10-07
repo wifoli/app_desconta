@@ -14,11 +14,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.app_desconta.MainActivity;
 import com.app_desconta.R;
 import com.app_desconta.RedefinirSenhaActivity;
 import com.app_desconta.Usuario;
 import com.app_desconta.api.Api;
 import com.app_desconta.api.User;
+import com.app_desconta.util.RetrofitCliente;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -43,8 +45,6 @@ import java.util.Arrays;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.app_desconta.util.Util.errosFirebase;
 import static com.app_desconta.util.Util.verificaConexao;
@@ -263,18 +263,15 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
 
     private void verificarSeExisteUsuario() {
 
-        if (Usuario.getInsance().getUsuario().getId().trim().equals("")){
+        if (Usuario.getInsance().getUsuario().getId().trim().equals(""))
             startActivity(new Intent(getBaseContext(), TelaVerificarCpf.class));
-        }
+        else startActivity(new Intent(getBaseContext(), MainActivity.class));
+
     }
 
     private void getUsuario() {
-        Retrofit client = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.129/public/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
 
-        Api httpRequest = client.create(Api.class);
+        Api httpRequest = RetrofitCliente.getCliente().create(Api.class);
 
         Call<User> call = httpRequest.getUsuario(Usuario.getInsance().getUid());
         call.enqueue(callback);

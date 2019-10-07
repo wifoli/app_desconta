@@ -19,6 +19,7 @@ import com.app_desconta.R;
 import com.app_desconta.api.Api;
 import com.app_desconta.api.CEP;
 import com.app_desconta.api.Pessoa;
+import com.app_desconta.util.RetrofitCliente;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -213,6 +214,7 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
             editTextBairro.setText(response.body().getBairro());
             editTextRua.setText(response.body().getLogradouro());
             editTextComplemento.setText(response.body().getComplemento());
+            editTextNumero.requestFocus();
         }
 
         @Override
@@ -222,12 +224,8 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
     };
 
     private void cadastrar(String nome, String sobrenome, String rg, String cpf, String dataNasc, String telefone1, String telefone2) throws JSONException {
-        Retrofit client = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.129/public/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
 
-        Api httpRequest = client.create(Api.class);
+        Api httpRequest = RetrofitCliente.getCliente().create(Api.class);
         Toast.makeText(getBaseContext(), nome + " - " + sobrenome + " - " + rg + " - " + cpf + " - " + dataNasc + " - " + telefone1 + " - " + telefone2 + " - " + rua + " - " + bairro + " - " + numero + " - " + cep + " - " + complemento + " - " + cidade, Toast.LENGTH_LONG).show();
         // Pessoa pessoa = new Pessoa(nome, sobrenome, cpf, rg, dataNasc, telefone1, telefone2, rua, bairro, numero, cep, complemento, "1");
         //  Call<Pessoa> call = httpRequest.criarUsuario(pessoa);
@@ -368,4 +366,3 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
         posicaoEstado.put("TO", 27);
     }
 }
-

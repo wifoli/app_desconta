@@ -217,34 +217,23 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
             public void onTextChanged(
                     CharSequence s, int start, int before, int after) {
 
-                // Quando o texto é alterado o onTextChange é chamado
-                // Essa flag evita a chamada infinita desse método
                 if (isUpdating) {
                     isUpdating = false;
                     return;
                 }
 
-                // Ao apagar o texto, a máscara é removida,
-                // então o posicionamento do cursor precisa
-                // saber se o texto atual tinha ou não, máscara
                 boolean hasMask =
                         s.toString().indexOf('.') > -1 ||
                                 s.toString().indexOf('-') > -1;
 
-                // Remove o '.' e '-' da String
                 String str = s.toString()
                         .replaceAll("[.]", "")
                         .replaceAll("[-]", "");
 
-                // as variáveis before e after dizem o tamanho
-                // anterior e atual da String, se after > before
-                // é pq está apagando
                 if (after > before) {
 
                     if (str.length() == 11) verificaCPF(str);
 
-                    // Se tem mais de 5 caracteres (sem máscara)
-                    // coloca o '.' e o '-'
                     if (str.length() > 9) {
                         str =
                                 str.substring(0, 3) + '.' +
@@ -252,7 +241,6 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
                                         str.substring(6, 9) + '-' +
                                         str.substring(9);
 
-                        // Se tem mais de 2, coloca só o ponto
                     } else if (str.length() > 6) {
                         str =
                                 str.substring(0, 3) + '.' +
@@ -263,11 +251,8 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
                                 str.substring(0, 3) + '.' +
                                         str.substring(3);
                     }
-                    // Seta a flag pra evitar chamada infinita
                     isUpdating = true;
-                    // seta o novo texto
                     editTextCpf.setText(str);
-                    // seta a posição do cursor
                     editTextCpf.setSelection(editTextCpf.getText().length());
 
                 } else {
@@ -277,9 +262,6 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
                         setarErro(editTextCpf, imagemCpf);
                         isCpf = false;
                     }
-                    // Se estiver apagando posiciona o cursor
-                    // no local correto. Isso trata a deleção dos
-                    // caracteres da máscara.
                     editTextCpf.setSelection(
                             Math.max(0, Math.min(
                                     hasMask ? start - before : start,
@@ -306,26 +288,17 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
             public void onTextChanged(
                     CharSequence s, int start, int before, int after) {
 
-                // Quando o texto é alterado o onTextChange é chamado
-                // Essa flag evita a chamada infinita desse método
                 if (isUpdating) {
                     isUpdating = false;
                     return;
                 }
 
-                // Ao apagar o texto, a máscara é removida,
-                // então o posicionamento do cursor precisa
-                // saber se o texto atual tinha ou não, máscara
                 boolean hasMask =
                         s.toString().indexOf('/') > -1;
 
-                // Remove o '.' e '-' da String
                 String str = s.toString()
                         .replaceAll("[/]", "");
 
-                // as variáveis before e after dizem o tamanho
-                // anterior e atual da String, se after > before
-                // é pq está apagando
                 if (after > before) {
 
                     if (str.length() == 8) verificaData(str);
@@ -341,11 +314,8 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
                                 str.substring(0, 2) + '/' +
                                         str.substring(2);
                     }
-                    // Seta a flag pra evitar chamada infinita
                     isUpdating = true;
-                    // seta o novo texto
                     editTextDataNasc.setText(str);
-                    // seta a posição do cursor
                     editTextDataNasc.setSelection(editTextDataNasc.getText().length());
 
                 } else {
@@ -355,9 +325,7 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
                         setarErro(editTextDataNasc, imagemData);
                         isdata = false;
                     }
-                    // Se estiver apagando posiciona o cursor
-                    // no local correto. Isso trata a deleção dos
-                    // caracteres da máscara.
+
                     editTextDataNasc.setSelection(
                             Math.max(0, Math.min(
                                     hasMask ? start - before : start,
@@ -384,32 +352,23 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
             public void onTextChanged(
                     CharSequence s, int start, int before, int after) {
 
-                // Quando o texto é alterado o onTextChange é chamado
-                // Essa flag evita a chamada infinita desse método
                 if (isUpdating) {
                     isUpdating = false;
                     return;
                 }
 
-                // Ao apagar o texto, a máscara é removida,
-                // então o posicionamento do cursor precisa
-                // saber se o texto atual tinha ou não, máscara
                 boolean hasMask =
                         s.toString().indexOf('(') > -1 ||
                                 s.toString().indexOf(')') > -1 ||
                                 s.toString().indexOf('-') > -1 ||
                                 s.toString().indexOf('.') > -1;
 
-                // Remove o '.' e '-' da String
                 String str = s.toString()
                         .replaceAll("[(]", "")
                         .replaceAll("[)]", "")
                         .replaceAll("[-]", "")
                         .replaceAll("[.]", "");
 
-                // as variáveis before e after dizem o tamanho
-                // anterior e atual da String, se after > before
-                // é pq está apagando
                 if (after > before) {
                     if (str.length() > 7) {
                         str =
@@ -432,19 +391,13 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
                     } else if (str.length() > 0) {
                         str = '(' + str;
                     }
-                    // Seta a flag pra evitar chamada infinita
                     isUpdating = true;
-                    // seta o novo texto
                     editText.setText(str);
-                    // seta a posição do cursor
                     editText.setSelection(editText.getText().length());
 
                 } else {
                     isUpdating = true;
                     editText.setText(str);
-                    // Se estiver apagando posiciona o cursor
-                    // no local correto. Isso trata a deleção dos
-                    // caracteres da máscara.
                     editText.setSelection(
                             Math.max(0, Math.min(
                                     hasMask ? start - before : start,
