@@ -119,6 +119,7 @@
     <string name="rgObrigatorio">O campo RG é obrigatório</string>
     <string name="telefoneObrigatorio">O campo telefone 1 é obrigatório</string>
     <string name="cepInvalido">CEP inválido</string>
+    <string name="carregando">Carregando...</string>
 
     <string-array name="estados">
         <item>Selecione</item>

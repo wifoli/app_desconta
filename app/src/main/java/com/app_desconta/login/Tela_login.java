@@ -1,11 +1,14 @@
 package com.app_desconta.login;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,6 +65,8 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
     private String email;
     private String senha;
 
+    private ProgressBar progressBar;
+
     private FirebaseAuth auth;
     private GoogleSignInClient googleSignInClient;
     private CallbackManager callbackManager;
@@ -78,6 +83,7 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
         editTextSenha = (EditText) findViewById(R.id.et_login_senha);
         esqueceuSenha = (TextView) findViewById(R.id.esqueceuSenha);
         cadastrar = (TextView) findViewById(R.id.et_cadastrese);
+        progressBar = (ProgressBar) findViewById(R.id.login_progress);
 
         auth = FirebaseAuth.getInstance();
         iniciarServicosGoogle();
@@ -99,7 +105,10 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
                 email = editTextEmail.getText().toString().trim();
                 senha = editTextSenha.getText().toString().trim();
 
-                if (!estaVazio() && verificaConexao(getBaseContext())) logarComEmail();
+                if (!estaVazio() && verificaConexao(getBaseContext())) {
+                    iniciarProgess();
+                    logarComEmail();
+                }
                 break;
             case R.id.et_cadastrese:
                 startActivity(new Intent(getBaseContext(), TelaCadastroEmail.class));
@@ -115,6 +124,7 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
                 break;
         }
     }
+
 
     @Override
     public void onFocusChange(View view, boolean estaComFoco) {
@@ -163,7 +173,10 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
                             }
                         }
                     });  */
-                } else errosFirebase(getBaseContext(), task.getException().toString());
+                } else {
+                    errosFirebase(getBaseContext(), task.getException().toString());
+                    fecharProgess();
+                }
             }
         });
     }
@@ -262,7 +275,7 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
     }
 
     private void verificarSeExisteUsuario() {
-
+        fecharProgess();
         if (Usuario.getInsance().getUsuario().getId().trim().equals(""))
             startActivity(new Intent(getBaseContext(), TelaVerificarCpf.class));
         else startActivity(new Intent(getBaseContext(), MainActivity.class));
@@ -289,4 +302,12 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
             Log.e("Retrofit get_usuario", "Falha no Retrofit: " + t.toString());
         }
     };
+
+    private void iniciarProgess(){
+        progressBar.setVisibility(ProgressBar.VISIBLE);
+    }
+
+    private void fecharProgess(){
+        progressBar.setVisibility(ProgressBar.GONE);
+    }
 }

@@ -28,6 +28,13 @@
             android:background="#fff"
             android:orientation="vertical">
 
+            <ProgressBar
+                android:id="@+id/login_progress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminateDrawable="@drawable/meu_progress_bar"
+                android:visibility="gone"/>
+
             <TextView
                 android:id="@+id/tv_login_login"
                 android:layout_width="wrap_content"
