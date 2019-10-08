@@ -89,9 +89,9 @@ public class ComprasFragment extends Fragment {
 
         Api httpRequest = client.create(Api.class);
 
-        Call<List<PojoCompra>> call = httpRequest.getInfCompra();
+       // Call<List<PojoCompra>> call = httpRequest.getInfCompra();
         Log.d("Test", "Antes do callback");
-        call.enqueue(callback);
+        //call.enqueue(callback);
     }
 
     private Callback<List<PojoCompra>> callback = new Callback<List<PojoCompra>>() {

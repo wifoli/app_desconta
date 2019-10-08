@@ -16,13 +16,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.app_desconta.R;
+import com.app_desconta.Usuario;
 import com.app_desconta.api.Api;
 import com.app_desconta.api.CEP;
 import com.app_desconta.api.Pessoa;
 import com.app_desconta.util.RetrofitCliente;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -86,6 +84,7 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
         setarMascaraCep();
         setarArrayAdapterEstado();
         povoarMapPosicaoEstado();
+        setarCampos();
     }
 
     @Override
@@ -106,11 +105,7 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
                 break;
             case R.id.bt_cadastrar2_proximo:
                 if ((!estaVazio()) && (verificaCep()) && (verificaConexao(getBaseContext()))) {
-                    try {
                         obterInfoParaCadastro();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
                 }
                 break;
             default:
@@ -180,7 +175,7 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
         spinnerEstado.setAdapter(adapter);
     }
 
-    private void obterInfoParaCadastro() throws JSONException {
+    private void obterInfoParaCadastro()   {
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         String nome = extras.getString("nome");
@@ -192,6 +187,22 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
         String telefone2 = extras.getString("telefone2");
 
         cadastrar(nome, sobrenome, rg, cpf, dataNasc, telefone1, telefone2);
+    }
+
+    private void setarCampos(){
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        boolean temRegistro = extras.getBoolean("Tem Registro");
+        if (temRegistro) {
+            Pessoa pessoa = Usuario.getInsance().getUsuario().getPessoa();
+            editTextCidade.setText(pessoa.getCidade());
+            spinnerEstado.setSelection((Integer) posicaoEstado.get(pessoa.getEstado().toUpperCase()));
+            editTextRua.setText(pessoa.getRua());
+            editTextBairro.setText(pessoa.getBairro());
+            editTextNumero.setText(pessoa.getNumero());
+            editTextCep.setText(pessoa.getCep());
+            editTextComplemento.setText(pessoa.getComplemento());
+        }
     }
 
     private void getEndereco(String cep) {
@@ -223,28 +234,14 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
         }
     };
 
-    private void cadastrar(String nome, String sobrenome, String rg, String cpf, String dataNasc, String telefone1, String telefone2) throws JSONException {
+    private void cadastrar(String nome, String sobrenome, String rg, String cpf, String dataNasc, String telefone1, String telefone2){
 
         Api httpRequest = RetrofitCliente.getCliente().create(Api.class);
         Toast.makeText(getBaseContext(), nome + " - " + sobrenome + " - " + rg + " - " + cpf + " - " + dataNasc + " - " + telefone1 + " - " + telefone2 + " - " + rua + " - " + bairro + " - " + numero + " - " + cep + " - " + complemento + " - " + cidade, Toast.LENGTH_LONG).show();
         // Pessoa pessoa = new Pessoa(nome, sobrenome, cpf, rg, dataNasc, telefone1, telefone2, rua, bairro, numero, cep, complemento, "1");
         //  Call<Pessoa> call = httpRequest.criarUsuario(pessoa);
-        //  Call<Pessoa> call = httpRequest.criarUsuario(nome, sobrenome, rg, cpf, dataNasc, telefone1, telefone2, rua, bairro, numero, cep, complemento, cidade);
-        JSONObject jsonPessoa = new JSONObject();
-        jsonPessoa.put("nome", nome);
-        jsonPessoa.put("sobrenome", sobrenome);
-        jsonPessoa.put("cpf", cpf);
-        jsonPessoa.put("rg", rg);
-        jsonPessoa.put("dataNasc", dataNasc);
-        jsonPessoa.put("telefone1", telefone1);
-        jsonPessoa.put("telefone2", telefone2);
-        jsonPessoa.put("rua", rua);
-        jsonPessoa.put("bairro", bairro);
-        jsonPessoa.put("numero", numero);
-        jsonPessoa.put("cep", cep);
-        jsonPessoa.put("complemento", complemento);
-        jsonPessoa.put("cidade", cidade);
-        Call<Pessoa> call = httpRequest.criarUsuario(jsonPessoa.toString());
+          Call<Pessoa> call = httpRequest.criarUsuario(nome, sobrenome, rg, cpf, dataNasc, telefone1, telefone2, rua, bairro, numero, cep, complemento, cidade);
+
         call.enqueue(callbackCadastro);
     }
 
@@ -274,27 +271,18 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
             public void onTextChanged(
                     CharSequence s, int start, int before, int after) {
 
-                // Quando o texto é alterado o onTextChange é chamado
-                // Essa flag evita a chamada infinita desse método
                 if (isUpdating) {
                     isUpdating = false;
                     return;
                 }
 
-                // Ao apagar o texto, a máscara é removida,
-                // então o posicionamento do cursor precisa
-                // saber se o texto atual tinha ou não, máscara
                 boolean hasMask =
                         s.toString().indexOf('/') > -1;
 
-                // Remove o '.' e '-' da String
                 String str = s.toString()
                         .replaceAll("[.]", "")
                         .replaceAll("[-]", "");
 
-                // as variáveis before e after dizem o tamanho
-                // anterior e atual da String, se after > before
-                // é pq está apagando
                 if (after > before) {
 
                     if (str.length() > 5) {
@@ -308,19 +296,13 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
                                 str.substring(0, 2) + '.' +
                                         str.substring(2);
                     }
-                    // Seta a flag pra evitar chamada infinita
                     isUpdating = true;
-                    // seta o novo texto
                     editTextCep.setText(str);
-                    // seta a posição do cursor
                     editTextCep.setSelection(editTextCep.getText().length());
 
                 } else {
                     isUpdating = true;
                     editTextCep.setText(str);
-                    // Se estiver apagando posiciona o cursor
-                    // no local correto. Isso trata a deleção dos
-                    // caracteres da máscara.
                     editTextCep.setSelection(
                             Math.max(0, Math.min(
                                     hasMask ? start - before : start,

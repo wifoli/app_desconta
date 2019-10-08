@@ -14,6 +14,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.app_desconta.R;
+import com.app_desconta.Usuario;
+import com.app_desconta.api.Pessoa;
 import com.app_desconta.util.ValidaCPF;
 import com.app_desconta.util.ValidaData;
 
@@ -45,6 +47,8 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
 
     private boolean isCpf = false;
     private boolean isdata = false;
+
+    private Bundle extras = new Bundle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,18 +93,9 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
 
         if (!estaVazio() && (isCpf) && (isdata) && (verificaTelefone()) && (verificaConexao(getBaseContext()))) {
             Intent intent = new Intent(this, TelaCadastroLocalizacao.class);
-            Bundle extras = new Bundle();
-            extras.putString("nome", nome);
-            extras.putString("sobrenome", sobrenome);
-            extras.putString("rg", rg);
-            extras.putString("cpf", cpf);
-            extras.putString("dataNasc", dataNasc);
-            extras.putString("telefone1", telefone1);
-            extras.putString("telefone2", telefone2);
             intent.putExtras(extras);
             startActivity(intent);
         }
-
     }
 
     @Override
@@ -197,10 +192,15 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
         Bundle extras = intent.getExtras();
         boolean temRegistro = extras.getBoolean("Tem Registro");
         if (temRegistro) {
-
+            Pessoa pessoa = Usuario.getInsance().getUsuario().getPessoa();
+            editTextNome.setText(pessoa.getNome());
+            editTextSobreNome.setText(pessoa.getSobrenome());
+            editTextCpf.setText(pessoa.getCpf());
+            this.extras.putBoolean("Tem Registro", true);
         } else {
             editTextCpf.setText(extras.getString("CPF"));
             Toast.makeText(getBaseContext(), getString(R.string.CPF_nao_identificado), Toast.LENGTH_LONG).show();
+            this.extras.putBoolean("Tem Registro", false);
         }
     }
 

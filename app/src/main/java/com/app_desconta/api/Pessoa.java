@@ -44,11 +44,15 @@ public class Pessoa {
     @SerializedName("complemento")
     @Expose
     private String complemento;
-    @SerializedName("cidade_id")
+    @SerializedName("cidade")
     @Expose
-    private String cidadeId;
+    private String cidade;
+    @SerializedName("estado")
+    @Expose
+    private String estado;
 
-    public Pessoa(String nome, String sobrenome, String cpf, String rg, String dataNasc, String tel1, String tel2, String rua, String bairro, String numero, String cep, String complemento, String cidadeId) {
+    public Pessoa(String nome, String sobrenome, String cpf, String rg, String dataNasc, String tel1, String tel2, String rua,
+                  String bairro, String numero, String cep, String complemento, String cidade, String estado) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.cpf = cpf;
@@ -61,7 +65,8 @@ public class Pessoa {
         this.numero = numero;
         this.cep = cep;
         this.complemento = complemento;
-        this.cidadeId = cidadeId;
+        this.cidade = cidade;
+        this.estado = estado;
     }
 
     public String getId() {
@@ -168,12 +173,19 @@ public class Pessoa {
         this.complemento = complemento;
     }
 
-    public String getCidadeId() {
-        return cidadeId;
+    public String getCidade() {
+        return cidade;
     }
 
-    public void setCidadeId(String cidadeId) {
-        this.cidadeId = cidadeId;
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 }

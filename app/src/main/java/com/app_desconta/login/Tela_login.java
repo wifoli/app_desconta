@@ -281,7 +281,6 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
         @Override
         public void onResponse(Call<User> call, Response<User> response) {
             Usuario.getInsance().setUsuario(response.body());
-            Usuario.getInsance().teste();
             verificarSeExisteUsuario();
         }
 

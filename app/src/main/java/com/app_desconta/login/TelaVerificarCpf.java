@@ -23,8 +23,6 @@ import com.app_desconta.util.ValidaCPF;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.app_desconta.util.Util.verificaConexao;
 
@@ -94,15 +92,15 @@ public class TelaVerificarCpf extends AppCompatActivity implements View.OnClickL
         imagemCpf.setImageDrawable(getDrawable(R.drawable.incorreto));
     }
 
-    private void verificarSeExisteCpf() {
+    private void iniciarActivitPassandoOCPF() {
         Intent intent = new Intent(this, TelaCadastroDadosPessoais.class);
         Bundle extras = new Bundle();
+
         if (Usuario.getInsance().getUsuario().getPessoa().getId().trim().equals("")) {
             extras.putBoolean("Tem Registro", false);
             extras.putString("CPF", cpf);
-        } else {
+        }else extras.putBoolean("Tem Registro", true);
 
-        }
         intent.putExtras(extras);
         startActivity(intent);
     }
@@ -118,7 +116,7 @@ public class TelaVerificarCpf extends AppCompatActivity implements View.OnClickL
         @Override
         public void onResponse(Call<User> call, Response<User> response) {
             Usuario.getInsance().setUsuario(response.body());
-            verificarSeExisteCpf();
+            iniciarActivitPassandoOCPF();
         }
 
         @Override

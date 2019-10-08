@@ -16,20 +16,15 @@ public interface Api {
     @GET("cep/find/{cep}/json")
     Call<CEP> buscarCEP(@Path("cep") String cep);
 
-    @GET("compras")
-    Call<List<PojoCompra>> getInfCompra();
-
     @GET("get_usuarioComUid/{uid}")
     Call<User> getUsuario(@Path("uid") String uid);
 
     @GET("get_usuarioComCpf/{cpf}")
     Call<User> getUsuarioComCpf(@Path("cpf") String cpf);
 
- //   @FormUrlEncoded
+    @FormUrlEncoded
     @POST("set_usuario")
-    Call<Pessoa> criarUsuario(@Body String pessoa);
-
-   /* Call<Pessoa> criarUsuario(@Field("nome") String nome,
+    Call<Pessoa> criarUsuario(@Field("nome") String nome,
                             @Field("sobrenome") String sobrenome,
                             @Field("rg") String rg,
                             @Field("cpf") String cpf,
@@ -41,5 +36,5 @@ public interface Api {
                             @Field("numero") String numero,
                             @Field("cep") String cep,
                             @Field("complemento") String complemento,
-                            @Field("cidade") String cidade);        */
+                            @Field("cidade") String cidade);
 }
