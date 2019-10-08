@@ -52,12 +52,12 @@ import static com.app_desconta.util.Util.verificaConexao;
 public class Tela_login extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener {
 
     private Button bt_acessar;
-    private Button bt_cadastrar;
     private CardView loginGoogle;
     private CardView loginFacebbok;
     private EditText editTextEmail;
     private EditText editTextSenha;
     private TextView esqueceuSenha;
+    private TextView cadastrar;
 
     private String email;
     private String senha;
@@ -72,19 +72,19 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.tela_login);
 
         bt_acessar = (Button) findViewById(R.id.bt_login_acessar);
-        bt_cadastrar = (Button) findViewById(R.id.bt_login_cadastrar);
         loginGoogle = (CardView) findViewById(R.id.logar_com_google);
         loginFacebbok = (CardView) findViewById(R.id.logar_com_facebook);
         editTextEmail = (EditText) findViewById(R.id.et_login_login);
         editTextSenha = (EditText) findViewById(R.id.et_login_senha);
         esqueceuSenha = (TextView) findViewById(R.id.esqueceuSenha);
+        cadastrar = (TextView) findViewById(R.id.et_cadastrese);
 
         auth = FirebaseAuth.getInstance();
         iniciarServicosGoogle();
         iniciarServicosFacebook();
 
         bt_acessar.setOnClickListener(this);
-        bt_cadastrar.setOnClickListener(this);
+        cadastrar.setOnClickListener(this);
         esqueceuSenha.setOnClickListener(this);
         loginGoogle.setOnClickListener(this);
         loginFacebbok.setOnClickListener(this);
@@ -101,7 +101,7 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
 
                 if (!estaVazio() && verificaConexao(getBaseContext())) logarComEmail();
                 break;
-            case R.id.bt_login_cadastrar:
+            case R.id.et_cadastrese:
                 startActivity(new Intent(getBaseContext(), TelaCadastroEmail.class));
                 break;
             case R.id.esqueceuSenha:
