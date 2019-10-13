@@ -20,7 +20,9 @@ import com.app_desconta.Usuario;
 import com.app_desconta.api.Api;
 import com.app_desconta.api.CEP;
 import com.app_desconta.api.Pessoa;
+import com.app_desconta.api.User;
 import com.app_desconta.util.RetrofitCliente;
+import com.google.gson.JsonObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -56,6 +58,8 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
     private String rua;
     private String numero;
     private String complemento;
+
+    private boolean temRegistro = false;
 
     private Map posicaoEstado;
 
@@ -105,7 +109,8 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
                 break;
             case R.id.bt_cadastrar2_proximo:
                 if ((!estaVazio()) && (verificaCep()) && (verificaConexao(getBaseContext()))) {
-                        obterInfoParaCadastro();
+                        setarPessoa();
+                        finalizarCadastro();
                 }
                 break;
             default:
@@ -175,24 +180,11 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
         spinnerEstado.setAdapter(adapter);
     }
 
-    private void obterInfoParaCadastro()   {
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
-        String nome = extras.getString("nome");
-        String sobrenome = extras.getString("sobrenome");
-        String rg = extras.getString("rg");
-        String cpf = extras.getString("cpf");
-        String dataNasc = extras.getString("dataNasc");
-        String telefone1 = extras.getString("telefone1");
-        String telefone2 = extras.getString("telefone2");
-
-        cadastrar(nome, sobrenome, rg, cpf, dataNasc, telefone1, telefone2);
-    }
 
     private void setarCampos(){
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        boolean temRegistro = extras.getBoolean("Tem Registro");
+        temRegistro = extras.getBoolean("Tem Registro");
         if (temRegistro) {
             Pessoa pessoa = Usuario.getInsance().getUsuario().getPessoa();
             editTextCidade.setText(pessoa.getCidade());
@@ -203,6 +195,22 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
             editTextCep.setText(pessoa.getCep());
             editTextComplemento.setText(pessoa.getComplemento());
         }
+    }
+
+    private void setarPessoa(){
+        Usuario.getInsance().getUsuario().getPessoa().setRua(rua);
+        Usuario.getInsance().getUsuario().getPessoa().setBairro(bairro);
+        Usuario.getInsance().getUsuario().getPessoa().setNumero(numero);
+        Usuario.getInsance().getUsuario().getPessoa().setCep(cep);
+        Usuario.getInsance().getUsuario().getPessoa().setComplemento(complemento);
+        //pessoa.setCidade(); setar a cidade
+    }
+
+    private void finalizarCadastro(){
+        if(temRegistro){ retrofitCadastro();
+
+        }else retrofitCadastro();
+
     }
 
     private void getEndereco(String cep) {
@@ -234,29 +242,47 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
         }
     };
 
-    private void cadastrar(String nome, String sobrenome, String rg, String cpf, String dataNasc, String telefone1, String telefone2){
+    private void retrofitCadastro(){
 
         Api httpRequest = RetrofitCliente.getCliente().create(Api.class);
-        Toast.makeText(getBaseContext(), nome + " - " + sobrenome + " - " + rg + " - " + cpf + " - " + dataNasc + " - " + telefone1 + " - " + telefone2 + " - " + rua + " - " + bairro + " - " + numero + " - " + cep + " - " + complemento + " - " + cidade, Toast.LENGTH_LONG).show();
-        // Pessoa pessoa = new Pessoa(nome, sobrenome, cpf, rg, dataNasc, telefone1, telefone2, rua, bairro, numero, cep, complemento, "1");
-        //  Call<Pessoa> call = httpRequest.criarUsuario(pessoa);
-          Call<Pessoa> call = httpRequest.criarUsuario(nome, sobrenome, rg, cpf, dataNasc, telefone1, telefone2, rua, bairro, numero, cep, complemento, cidade);
 
-        call.enqueue(callbackCadastro);
+        Call<User> call = httpRequest.criarPessoa(criarJsonPessoa());
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if(response.isSuccessful()) Usuario.getInsance().setUsuario(response.body());
+                else{
+                    Log.e("Retrofit cadastrar", "Falha no Retrofit Code: " + response.code());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.e("Retrofit cadastrar", "Falha no Retrofit: " + t.toString());
+            }
+        });
     }
 
-    private Callback<Pessoa> callbackCadastro = new Callback<Pessoa>() {
-        @Override
-        public void onResponse(Call<Pessoa> call, Response<Pessoa> response) {
-            Log.d("test", response.body().getNome());
-            Log.d("test", "passei aqui");
-        }
+    private JsonObject criarJsonPessoa(){
+        Pessoa pessoa = Usuario.getInsance().getUsuario().getPessoa();
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("nome",pessoa.getNome());
+        jsonObject.addProperty("sobrenome",pessoa.getSobrenome());
+        jsonObject.addProperty("cpf",pessoa.getCpf());
+        jsonObject.addProperty("rg",pessoa.getRg());
+        jsonObject.addProperty("data_nasc",pessoa.getDataNasc());
+        jsonObject.addProperty("tel1",pessoa.getTel1());
+        jsonObject.addProperty("tel2",pessoa.getTel2());
+        jsonObject.addProperty("rua",pessoa.getRua());
+        jsonObject.addProperty("bairro",pessoa.getBairro());
+        jsonObject.addProperty("numero",pessoa.getNumero());
+        jsonObject.addProperty("cep",pessoa.getCep());
+        jsonObject.addProperty("complemento",pessoa.getComplemento());
+        //cidade aqui
+        return jsonObject;
+    }
 
-        @Override
-        public void onFailure(Call<Pessoa> call, Throwable t) {
-            Log.e("Retrofit castrarUsuário", "Falha no Retrofit: " + t.toString());
-        }
-    };
 
     private void setarMascaraCep() {
         editTextCep.addTextChangedListener(new TextWatcher() {

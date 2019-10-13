@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -92,6 +91,7 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
         telefone2 = editTextTelefone2.getText().toString().trim();
 
         if (!estaVazio() && (isCpf) && (isdata) && (verificaTelefone()) && (verificaConexao(getBaseContext()))) {
+            setarPessoa();
             Intent intent = new Intent(this, TelaCadastroLocalizacao.class);
             intent.putExtras(extras);
             startActivity(intent);
@@ -196,12 +196,24 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
             editTextNome.setText(pessoa.getNome());
             editTextSobreNome.setText(pessoa.getSobrenome());
             editTextCpf.setText(pessoa.getCpf());
+            editTextCpf.setFocusable(false);
+
             this.extras.putBoolean("Tem Registro", true);
         } else {
             editTextCpf.setText(extras.getString("CPF"));
             Toast.makeText(getBaseContext(), getString(R.string.CPF_nao_identificado), Toast.LENGTH_LONG).show();
             this.extras.putBoolean("Tem Registro", false);
         }
+    }
+
+    private void setarPessoa(){
+        Usuario.getInsance().getUsuario().getPessoa().setNome(nome);
+        Usuario.getInsance().getUsuario().getPessoa().setSobrenome(sobrenome);
+        Usuario.getInsance().getUsuario().getPessoa().setCpf(cpf.replaceAll("[.]","").replaceAll("[-]",""));
+        Usuario.getInsance().getUsuario().getPessoa().setRg(rg);
+        Usuario.getInsance().getUsuario().getPessoa().setDataNasc(dataNasc);
+        Usuario.getInsance().getUsuario().getPessoa().setTel1(telefone1);
+        Usuario.getInsance().getUsuario().getPessoa().setTel2(telefone2);
     }
 
     private void setarMascaraCPF() {

@@ -58,7 +58,7 @@ public class TelaVerificarCpf extends AppCompatActivity implements View.OnClickL
         cpf = editTextCpf.getText().toString().trim();
 
         if ((!estaVazio()) && (isCpf) && (verificaConexao(getBaseContext())))
-            getUsuarioComCpf(cpf
+            retrofitGetUsuarioComCpf(cpf
                     .replaceAll("[.]", "")
                     .replaceAll("[-]", ""));
     }
@@ -105,7 +105,7 @@ public class TelaVerificarCpf extends AppCompatActivity implements View.OnClickL
         startActivity(intent);
     }
 
-    private void getUsuarioComCpf(String cpf) {
+    private void retrofitGetUsuarioComCpf(String cpf) {
         Api httpRequest = RetrofitCliente.getCliente().create(Api.class);
 
         Call<User> call = httpRequest.getUsuarioComCpf(cpf);
