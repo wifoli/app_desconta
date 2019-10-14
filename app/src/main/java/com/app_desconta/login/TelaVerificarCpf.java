@@ -109,21 +109,19 @@ public class TelaVerificarCpf extends AppCompatActivity implements View.OnClickL
         Api httpRequest = RetrofitCliente.getCliente().create(Api.class);
 
         Call<User> call = httpRequest.getUsuarioComCpf(cpf);
-        call.enqueue(callback);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                Usuario.getInsance().setUsuario(response.body());
+                iniciarActivitPassandoOCPF();
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.e("Retrofit get_usuario", "Falha no Retrofit: " + t.toString());
+            }
+        });
     }
-
-    private Callback<User> callback = new Callback<User>() {
-        @Override
-        public void onResponse(Call<User> call, Response<User> response) {
-            Usuario.getInsance().setUsuario(response.body());
-            iniciarActivitPassandoOCPF();
-        }
-
-        @Override
-        public void onFailure(Call<User> call, Throwable t) {
-            Log.e("Retrofit get_usuario", "Falha no Retrofit: " + t.toString());
-        }
-    };
 
     private void setarMascaraCPF() {
         editTextCpf.addTextChangedListener(new TextWatcher() {

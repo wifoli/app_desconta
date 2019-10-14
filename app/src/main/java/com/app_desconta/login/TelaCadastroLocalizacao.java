@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.app_desconta.MainActivity;
 import com.app_desconta.R;
 import com.app_desconta.Usuario;
 import com.app_desconta.api.Api;
@@ -103,14 +104,14 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
 
         switch (view.getId()) {
             case R.id.iv_cadastrar2_encontrar_cep:
-                if (verificaCep()) getEndereco(cep
+                if (verificaCep()) retrofitGetEndereco(cep
                         .replaceAll("[.]", "")
                         .replaceAll("[-]", ""));
                 break;
             case R.id.bt_cadastrar2_proximo:
                 if ((!estaVazio()) && (verificaCep()) && (verificaConexao(getBaseContext()))) {
-                        setarPessoa();
-                        finalizarCadastro();
+                    setarPessoa();
+                    finalizarCadastro();
                 }
                 break;
             default:
@@ -181,7 +182,7 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
     }
 
 
-    private void setarCampos(){
+    private void setarCampos() {
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         temRegistro = extras.getBoolean("Tem Registro");
@@ -197,7 +198,7 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
         }
     }
 
-    private void setarPessoa(){
+    private void setarPessoa() {
         Usuario.getInsance().getUsuario().getPessoa().setRua(rua);
         Usuario.getInsance().getUsuario().getPessoa().setBairro(bairro);
         Usuario.getInsance().getUsuario().getPessoa().setNumero(numero);
@@ -206,14 +207,13 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
         //pessoa.setCidade(); setar a cidade
     }
 
-    private void finalizarCadastro(){
-        if(temRegistro){ retrofitCadastro();
-
-        }else retrofitCadastro();
+    private void finalizarCadastro() {
+        if (temRegistro) retrofitAlterarUsuario();
+        else retrofitCadastro();
 
     }
 
-    private void getEndereco(String cep) {
+    private void retrofitGetEndereco(String cep) {
         Retrofit client = new Retrofit.Builder()
                 .baseUrl("http://ws.matheuscastiglioni.com.br/ws/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -222,39 +222,37 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
         Api httpRequest = client.create(Api.class);
 
         Call<CEP> call = httpRequest.buscarCEP(cep);
-        call.enqueue(callback);
+        call.enqueue(new Callback<CEP>() {
+            @Override
+            public void onResponse(Call<CEP> call, Response<CEP> response) {
+                editTextCidade.setText(response.body().getCidade());
+                spinnerEstado.setSelection(posicaoEstado.get(response.body().getEstado()) != null ? (Integer) posicaoEstado.get(response.body().getEstado()) : 0);
+                editTextBairro.setText(response.body().getBairro());
+                editTextRua.setText(response.body().getLogradouro());
+                editTextComplemento.setText(response.body().getComplemento());
+                editTextNumero.requestFocus();
+            }
+
+            @Override
+            public void onFailure(Call<CEP> call, Throwable t) {
+                Log.e("Retrofit getEndereço", "Falha no Retrofit: " + t.toString());
+            }
+        });
     }
 
-    private Callback<CEP> callback = new Callback<CEP>() {
-        @Override
-        public void onResponse(Call<CEP> call, Response<CEP> response) {
-            editTextCidade.setText(response.body().getCidade());
-            spinnerEstado.setSelection(posicaoEstado.get(response.body().getEstado()) != null ? (Integer) posicaoEstado.get(response.body().getEstado()) : 0);
-            editTextBairro.setText(response.body().getBairro());
-            editTextRua.setText(response.body().getLogradouro());
-            editTextComplemento.setText(response.body().getComplemento());
-            editTextNumero.requestFocus();
-        }
-
-        @Override
-        public void onFailure(Call<CEP> call, Throwable t) {
-            Log.e("Retrofit getEndereço", "Falha no Retrofit: " + t.toString());
-        }
-    };
-
-    private void retrofitCadastro(){
+    private void retrofitCadastro() {
 
         Api httpRequest = RetrofitCliente.getCliente().create(Api.class);
 
-        Call<User> call = httpRequest.criarPessoa(criarJsonPessoa());
+        Call<User> call = httpRequest.criarUsuario(Usuario.getInsance().getEmail(), Usuario.getInsance().getUid(), criarJsonPessoa());
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if(response.isSuccessful()) Usuario.getInsance().setUsuario(response.body());
-                else{
-                    Log.e("Retrofit cadastrar", "Falha no Retrofit Code: " + response.code());
-                }
-
+                if (response.isSuccessful()) {
+                    Usuario.getInsance().setUsuario(response.body());
+                    Toast.makeText(getBaseContext(), getString(R.string.cadastroEfetuadoComSucesso), Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(getBaseContext(), MainActivity.class));
+                } else Log.e("Retrofit cadastrar", "Falha no Retrofit Code: " + response.code());
             }
 
             @Override
@@ -264,25 +262,65 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
         });
     }
 
-    private JsonObject criarJsonPessoa(){
+    private void retrofitAlterarUsuario() {
+        Api httpRequest = RetrofitCliente.getCliente().create(Api.class);
+
+        Call<User> call = httpRequest.alterarUsuario(Usuario.getInsance().getUsuario().getPessoa().getId(), Usuario.getInsance().getEmail(), Usuario.getInsance().getUid(), criarJsonPessoaAlterar());
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    Usuario.getInsance().setUsuario(response.body());
+                    Toast.makeText(getBaseContext(), getString(R.string.cadastroEfetuadoComSucesso), Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(getBaseContext(), MainActivity.class));
+                }
+                else Log.e("Retrofit alterar", "Falha no Retrofit Code: " + response.code());
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.e("Retrofit update", "Falha no Retrofit: " + t.toString());
+            }
+        });
+    }
+
+    private JsonObject criarJsonPessoa() {
         Pessoa pessoa = Usuario.getInsance().getUsuario().getPessoa();
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("nome",pessoa.getNome());
-        jsonObject.addProperty("sobrenome",pessoa.getSobrenome());
-        jsonObject.addProperty("cpf",pessoa.getCpf());
-        jsonObject.addProperty("rg",pessoa.getRg());
-        jsonObject.addProperty("data_nasc",pessoa.getDataNasc());
-        jsonObject.addProperty("tel1",pessoa.getTel1());
-        jsonObject.addProperty("tel2",pessoa.getTel2());
-        jsonObject.addProperty("rua",pessoa.getRua());
-        jsonObject.addProperty("bairro",pessoa.getBairro());
-        jsonObject.addProperty("numero",pessoa.getNumero());
-        jsonObject.addProperty("cep",pessoa.getCep());
-        jsonObject.addProperty("complemento",pessoa.getComplemento());
-        //cidade aqui
+        jsonObject.addProperty("nome", pessoa.getNome());
+        jsonObject.addProperty("sobrenome", pessoa.getSobrenome());
+        jsonObject.addProperty("rg", pessoa.getRg());
+        jsonObject.addProperty("cpf", pessoa.getCpf());
+        jsonObject.addProperty("data_nasc", pessoa.getDataNasc());
+        jsonObject.addProperty("tel_1", pessoa.getTel1());
+        jsonObject.addProperty("tel_2", pessoa.getTel2());
+        jsonObject.addProperty("rua", pessoa.getRua());
+        jsonObject.addProperty("bairro", pessoa.getBairro());
+        jsonObject.addProperty("numero", pessoa.getNumero());
+        jsonObject.addProperty("cep", pessoa.getCep());
+        jsonObject.addProperty("complemento", pessoa.getComplemento());
+        jsonObject.addProperty("tipo_pessoa", "Física");
+        jsonObject.addProperty("cidade_id", "1");  //cidade aqui
+
         return jsonObject;
     }
 
+    private JsonObject criarJsonPessoaAlterar() {
+        Pessoa pessoa = Usuario.getInsance().getUsuario().getPessoa();
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("nome", pessoa.getNome());
+        jsonObject.addProperty("sobrenome", pessoa.getSobrenome());
+        jsonObject.addProperty("rg", pessoa.getRg());
+        jsonObject.addProperty("data_nasc", pessoa.getDataNasc());
+        jsonObject.addProperty("tel_1", pessoa.getTel1());
+        jsonObject.addProperty("tel_2", pessoa.getTel2());
+        jsonObject.addProperty("rua", pessoa.getRua());
+        jsonObject.addProperty("bairro", pessoa.getBairro());
+        jsonObject.addProperty("numero", pessoa.getNumero());
+        jsonObject.addProperty("cep", pessoa.getCep());
+        jsonObject.addProperty("complemento", pessoa.getComplemento());
+        return jsonObject;
+    }
 
     private void setarMascaraCep() {
         editTextCep.addTextChangedListener(new TextWatcher() {

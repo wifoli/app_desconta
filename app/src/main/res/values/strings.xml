@@ -120,6 +120,7 @@
     <string name="telefoneObrigatorio">O campo telefone 1 é obrigatório</string>
     <string name="cepInvalido">CEP inválido</string>
     <string name="carregando">Carregando...</string>
+    <string name="cadastroEfetuadoComSucesso">Cadastro realizado com sucesso</string>
 
     <string-array name="estados">
         <item>Selecione</item>

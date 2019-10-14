@@ -276,10 +276,11 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
 
     private void verificarSeExisteUsuario() {
         fecharProgess();
-        if (Usuario.getInsance().getUsuario().getId().trim().equals(""))
+        if (Usuario.getInsance().getUsuario().getId().trim().equals("")){
+            Usuario.getInsance().setEmail(editTextEmail.getText().toString().trim());
             startActivity(new Intent(getBaseContext(), TelaVerificarCpf.class));
+        }
         else startActivity(new Intent(getBaseContext(), MainActivity.class));
-
     }
 
     private void getUsuario() {
@@ -287,21 +288,20 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
         Api httpRequest = RetrofitCliente.getCliente().create(Api.class);
 
         Call<User> call = httpRequest.getUsuario(Usuario.getInsance().getUid());
-        call.enqueue(callback);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                Usuario.getInsance().setUsuario(response.body());
+                verificarSeExisteUsuario();
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.e("Retrofit get_usuario", "Falha no Retrofit: " + t.toString());
+
+            }
+        });
     }
-
-    private Callback<User> callback = new Callback<User>() {
-        @Override
-        public void onResponse(Call<User> call, Response<User> response) {
-            Usuario.getInsance().setUsuario(response.body());
-            verificarSeExisteUsuario();
-        }
-
-        @Override
-        public void onFailure(Call<User> call, Throwable t) {
-            Log.e("Retrofit get_usuario", "Falha no Retrofit: " + t.toString());
-        }
-    };
 
     private void iniciarProgess(){
         progressBar.setVisibility(ProgressBar.VISIBLE);

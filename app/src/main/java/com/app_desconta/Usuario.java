@@ -9,7 +9,7 @@ public class Usuario {
     public static Usuario instance;
     private User usuario;
     private String uid;
-
+    private String email;
 
     public static Usuario getInsance() {
         if (Usuario.instance == null)  Usuario.instance = new Usuario();
@@ -33,9 +33,11 @@ public class Usuario {
         return uid;
     }
 
-    public void teste(){
-        Log.d("Test - Email", usuario.getEmail());
-        Log.d("Test - Nomme", usuario.getPessoa().getNome());
-        Log.d("Test - CPF", usuario.getPessoa().getRg());
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
