@@ -40,7 +40,7 @@
     <string name="tv_login_ConfSenha">Confirmar senha</string>
     <string name="et_cadastro3_ConfSenha_hint">Insira novamente sua senha</string>
     <string name="tv_login_termos">Concordo com os termos de contrato</string>
-    <string name="bt_login_finalizar">Cadastrar usuário</string>
+    <string name="bt_login_finalizar">Cadastrar login</string>
 
 
     <string name="title_activity_tabs">TabsActivity</string>
@@ -121,6 +121,7 @@
     <string name="cepInvalido">CEP inválido</string>
     <string name="carregando">Carregando...</string>
     <string name="cadastroEfetuadoComSucesso">Cadastro realizado com sucesso</string>
+    <string name="esteCpfJaeUtilizado">Erro ao tentar criar novo usuário com o CPF fornecido</string>
 
     <string-array name="estados">
         <item>Selecione</item>

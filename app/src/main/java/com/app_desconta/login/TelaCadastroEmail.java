@@ -11,8 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.app_desconta.MainActivity;
 import com.app_desconta.R;
+import com.app_desconta.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -120,8 +120,10 @@ public class TelaCadastroEmail extends AppCompatActivity implements View.OnClick
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+                    Usuario.getInsance().setarUid(task.getResult().getUser().getUid());
+                    Usuario.getInsance().setEmail(editTextEmail.getText().toString().trim());
                     Toast.makeText(getBaseContext(), getString(R.string.loginCriadoComSucesso), Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(getBaseContext(), MainActivity.class));
+                    startActivity(new Intent(getBaseContext(), TelaVerificarCpf.class));
                     finish();
                 } else errosFirebase(getBaseContext(), task.getException().toString());
             }

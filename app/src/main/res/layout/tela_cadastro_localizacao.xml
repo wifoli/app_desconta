@@ -32,20 +32,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:maxLength="10"
                 android:background="@drawable/meu_edit_text"
                 android:hint="@string/et_cadastro2_cep_hint"
                 android:inputType="number"
+                android:maxLength="10"
                 android:textSize="16sp" />
 
             <ImageView
                 android:id="@+id/iv_cadastrar2_encontrar_cep"
                 android:layout_width="45dp"
                 android:layout_height="40dp"
-                android:foreground="?attr/selectableItemBackground"
+                android:layout_marginStart="10dp"
                 android:background="@drawable/meu_botao"
-                android:src="@drawable/search"
-                android:layout_marginStart="10dp"/>
+                android:foreground="?attr/selectableItemBackground"
+                android:src="@drawable/search" />
 
         </LinearLayout>
 
@@ -72,23 +72,23 @@
 
         </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_cadastro2_cidade"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tv_cadastrar2_cidade"
-                android:textColor="@color/colorPrimaryText"
-                android:textSize="20sp"
-                android:layout_marginTop="25dp"/>
+        <TextView
+            android:id="@+id/tv_cadastro2_cidade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/tv_cadastrar2_cidade"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="20sp" />
 
-            <EditText
-                android:id="@+id/et_cadastro2_cidade"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/meu_edit_text"
-                android:hint="@string/et_cadastrar_cidade"
-                android:inputType="text"
-                android:textSize="16sp"  />
+        <EditText
+            android:id="@+id/et_cadastro2_cidade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/meu_edit_text"
+            android:hint="@string/et_cadastrar_cidade"
+            android:inputType="text"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tv_cadastrar2_bairro"
@@ -168,6 +168,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:background="@drawable/meu_botao"
+            android:foreground="?attr/selectableItemBackground"
             android:text="@string/bt_login_finalizar" />
 
     </LinearLayout>

@@ -50,6 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:background="@drawable/meu_botao"
+        android:foreground="?attr/selectableItemBackground"
         android:text="@string/bt_verificar" />
 
 </LinearLayout>

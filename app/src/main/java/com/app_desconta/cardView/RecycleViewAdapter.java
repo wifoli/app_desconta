@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app_desconta.R;
-import com.app_desconta.api.PojoCompra;
+import com.app_desconta.api.Compra;
 
 import java.util.ArrayList;
 
@@ -50,10 +50,10 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         }
     }
 
-    private ArrayList<PojoCompra> listaCompras;
+    private ArrayList<Compra> listaCompras;
     private OnItemClickListener mlistener;
 
-    public RecycleViewAdapter(ArrayList<PojoCompra> listaCompras) {
+    public RecycleViewAdapter(ArrayList<Compra> listaCompras) {
         this.listaCompras = listaCompras;
     }
 
@@ -68,7 +68,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull RecycleViewHolder holder, int position) {
-        PojoCompra itemAtual = listaCompras.get(position);
+        Compra itemAtual = listaCompras.get(position);
 
         holder.empresa.setText(itemAtual.getNomeFantasia());
         holder.valor.setText(itemAtual.getValorTotal());

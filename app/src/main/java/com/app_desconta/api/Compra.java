@@ -3,7 +3,7 @@ package com.app_desconta.api;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class PojoCompra {
+public class Compra {
 
 
     @SerializedName("data_venda")

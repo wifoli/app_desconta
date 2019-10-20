@@ -99,7 +99,7 @@ public class TelaVerificarCpf extends AppCompatActivity implements View.OnClickL
         if (Usuario.getInsance().getUsuario().getPessoa().getId().trim().equals("")) {
             extras.putBoolean("Tem Registro", false);
             extras.putString("CPF", cpf);
-        }else extras.putBoolean("Tem Registro", true);
+        } else extras.putBoolean("Tem Registro", true);
 
         intent.putExtras(extras);
         startActivity(intent);
@@ -112,8 +112,12 @@ public class TelaVerificarCpf extends AppCompatActivity implements View.OnClickL
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                Usuario.getInsance().setUsuario(response.body());
-                iniciarActivitPassandoOCPF();
+                if (response.isSuccessful()) {
+                    Usuario.getInsance().setUsuario(response.body());
+                    iniciarActivitPassandoOCPF();
+                } else if (response.code() == 417){
+                    Toast.makeText(getBaseContext(), response.message() + ": " + getString(R.string.esteCpfJaeUtilizado), Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override
