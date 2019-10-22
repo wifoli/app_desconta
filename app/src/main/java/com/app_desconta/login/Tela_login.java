@@ -280,7 +280,10 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
             Usuario.getInsance().setEmail(editTextEmail.getText().toString().trim());
             startActivity(new Intent(getBaseContext(), TelaVerificarCpf.class));
         }
-        else startActivity(new Intent(getBaseContext(), MainActivity.class));
+        else {
+            startActivity(new Intent(getBaseContext(), MainActivity.class));
+            finish();
+        }
     }
 
     private void getUsuario() {

@@ -11,8 +11,8 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:foreground="?attr/selectableItemBackground"
         android:background="@drawable/meu_cards"
+        android:foreground="?attr/selectableItemBackground"
         android:padding="16dp">
 
         <TextView
@@ -20,28 +20,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:textSize="30sp" />
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/valor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/cv_nome_empresa"
-            android:text="@string/tv_card_valor" />
+            android:text="@string/tv_card_valor"
+            android:textColor="@color/colorPrimaryText" />
 
         <TextView
             android:id="@+id/valor_compra"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/cv_nome_empresa"
-            android:layout_toRightOf="@+id/valor" />
+            android:layout_toRightOf="@+id/valor"
+            android:textColor="@color/colorPrimaryText" />
 
         <TextView
             android:id="@+id/cv_data_compra"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/cv_nome_empresa"
-            android:layout_alignParentRight="true" />
+            android:layout_alignParentRight="true"
+            android:textColor="@color/colorPrimaryText" />
 
         <TextView
             android:id="@+id/data"
@@ -49,7 +53,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/cv_nome_empresa"
             android:layout_toLeftOf="@+id/cv_data_compra"
-            android:text="@string/tv_card_data_compra" />
+            android:text="@string/tv_card_data_compra"
+            android:textColor="@color/colorPrimaryText" />
 
     </RelativeLayout>
 

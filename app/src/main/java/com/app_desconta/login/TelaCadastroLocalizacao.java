@@ -250,8 +250,7 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
                     Usuario.getInsance().setUsuario(response.body());
-                    Toast.makeText(getBaseContext(), getString(R.string.cadastroEfetuadoComSucesso), Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(getBaseContext(), MainActivity.class));
+                    loginSucesso();
                 } else Log.e("Retrofit cadastrar", "Falha no Retrofit Code: " + response.code());
             }
 
@@ -271,10 +270,11 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
                     Usuario.getInsance().setUsuario(response.body());
-                    Toast.makeText(getBaseContext(), getString(R.string.cadastroEfetuadoComSucesso), Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(getBaseContext(), MainActivity.class));
+                    loginSucesso();
                 }
-                else Log.e("Retrofit alterar", "Falha no Retrofit Code: " + response.code());
+                else {
+                    Log.e("Retrofit update", "Falha no Retrofit Code: " + response.code());
+                }
             }
 
             @Override
@@ -282,6 +282,12 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
                 Log.e("Retrofit update", "Falha no Retrofit: " + t.toString());
             }
         });
+    }
+
+    private void loginSucesso(){
+        Toast.makeText(getBaseContext(), getString(R.string.cadastroEfetuadoComSucesso), Toast.LENGTH_LONG).show();
+        startActivity(new Intent(getBaseContext(), MainActivity.class));
+        finish();
     }
 
     private JsonObject criarJsonPessoa() {

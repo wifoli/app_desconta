@@ -1,5 +1,7 @@
 package com.app_desconta.cardView;
 
+import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.app_desconta.R;
 import com.app_desconta.api.Compra;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 
 import java.util.ArrayList;
 
@@ -52,16 +56,18 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
     private ArrayList<Compra> listaCompras;
     private OnItemClickListener mlistener;
+    private LayoutInflater mlaLayoutInflater;
 
-    public RecycleViewAdapter(ArrayList<Compra> listaCompras) {
+    public RecycleViewAdapter(Context context, ArrayList<Compra> listaCompras) {
         this.listaCompras = listaCompras;
+        mlaLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
 
     @NonNull
     @Override
     public RecycleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_layout, parent, false);
+        View view = mlaLayoutInflater.inflate(R.layout.card_view_layout, parent, false);
         RecycleViewHolder recycleViewHolder = new RecycleViewHolder(view, mlistener);
         return recycleViewHolder;
     }
@@ -71,9 +77,21 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         Compra itemAtual = listaCompras.get(position);
 
         holder.empresa.setText(itemAtual.getNomeFantasia());
-        holder.valor.setText(itemAtual.getValorTotal());
-        holder.data.setText(itemAtual.getDataVenda());
+        holder.valor.setText(" " + itemAtual.getValorTotal());
+        holder.data.setText(" " + itemAtual.getDataVenda());
 
+        try {
+            YoYo.with(Techniques.ZoomInDown) // FadeInDown, ZoomInDown, BounceInDown
+                    .duration(680)
+                    .playOn(holder.itemView);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
     }
 
     @Override

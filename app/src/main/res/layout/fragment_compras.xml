@@ -15,9 +15,15 @@
     <FrameLayout
         android:id="@+id/frameCompras"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameDetalhes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
