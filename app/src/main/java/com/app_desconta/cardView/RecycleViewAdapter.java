@@ -1,7 +1,6 @@
 package com.app_desconta.cardView;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app_desconta.R;
-import com.app_desconta.api.Compra;
+import com.app_desconta.api.Compras;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 
@@ -54,11 +53,11 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         }
     }
 
-    private ArrayList<Compra> listaCompras;
+    private ArrayList<Compras> listaCompras;
     private OnItemClickListener mlistener;
     private LayoutInflater mlaLayoutInflater;
 
-    public RecycleViewAdapter(Context context, ArrayList<Compra> listaCompras) {
+    public RecycleViewAdapter(Context context, ArrayList<Compras> listaCompras) {
         this.listaCompras = listaCompras;
         mlaLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -74,7 +73,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull RecycleViewHolder holder, int position) {
-        Compra itemAtual = listaCompras.get(position);
+        Compras itemAtual = listaCompras.get(position);
 
         holder.empresa.setText(itemAtual.getNomeFantasia());
         holder.valor.setText(" " + itemAtual.getValorTotal());

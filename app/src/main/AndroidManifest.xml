@@ -13,7 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".login.TelaVerificarCpf"></activity>
+        <activity android:name=".ComprasActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".DetalhesCompraActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".login.TelaVerificarCpf" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

@@ -1,10 +1,8 @@
 package com.app_desconta.api;
 
-
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -45,5 +43,11 @@ public interface Api {
                               @Body JsonObject jsonPessoa);
 
     @GET("api/get_compras/{id}")
-    Call<ArrayList<Compra>> getCompras(@Path("id") String id);
+    Call<ArrayList<Empresa>> getEmpresas(@Path("id") String id);
+
+    @GET("api/get_compras/{id}")
+    Call<ArrayList<Compras>> getCompras(@Path("id") String id);
+
+  //  @GET("api/get_compra/{id}")
+   // Call<Compra> getCompra(@Path("id") String idCompra);
 }

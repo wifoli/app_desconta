@@ -3,7 +3,7 @@ package com.app_desconta.api;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Compra {
+public class Compras {
 
     @SerializedName("id")
     @Expose
@@ -63,7 +63,7 @@ public class Compra {
 
     @Override
     public String toString() {
-        return "Compra{" +
+        return "Compras{" +
                 "id='" + id + '\'' +
                 ", dataVenda='" + dataVenda + '\'' +
                 ", qtdeParcelas=" + qtdeParcelas +

@@ -122,6 +122,8 @@
     <string name="carregando">Carregando...</string>
     <string name="cadastroEfetuadoComSucesso">Cadastro realizado com sucesso</string>
     <string name="esteCpfJaeUtilizado">Erro ao tentar criar novo usuário com o CPF fornecido</string>
+    <string name="detalhes_compra">Detalhes de compra</string>
+    <string name="compras">Compras</string>
 
     <string-array name="estados">
         <item>Selecione</item>

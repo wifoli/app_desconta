@@ -1,23 +1,16 @@
-package com.app_desconta.fragments;
-
+package com.app_desconta;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.app_desconta.ComprasActivity;
-import com.app_desconta.DetalhesCompraActivity;
-import com.app_desconta.R;
-import com.app_desconta.Usuario;
 import com.app_desconta.api.Api;
 import com.app_desconta.api.Compras;
 import com.app_desconta.cardView.RecycleViewAdapter;
@@ -29,8 +22,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+public class ComprasActivity extends AppCompatActivity implements View.OnClickListener {
 
-public class ComprasFragment extends Fragment {
+    private TextView textViewDetalhesCompraToolbar;
+
+    private Button botaoVoltar;
 
     private RecyclerView rv;
     private RecycleViewAdapter rvAdpt;
@@ -39,26 +35,31 @@ public class ComprasFragment extends Fragment {
     private ArrayList<Compras> listaCampras;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_compras, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_compras);
+
+        textViewDetalhesCompraToolbar = (TextView) findViewById(R.id.tv_detalhes_compra);
+        textViewDetalhesCompraToolbar.setText(getString(R.string.compras));
+        botaoVoltar = (Button) findViewById(R.id.bt_voltar);
+
+        botaoVoltar.setOnClickListener(this);
+
         retrofitGetCompras();
-        return v;
+
+        rv = (RecyclerView) findViewById(R.id.rv);
+        rv.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(getBaseContext());
+        rv.setLayoutManager(layoutManager);
     }
 
     @Override
-    public void onViewCreated(@NonNull View v, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(v, savedInstanceState);
-
-        rv = (RecyclerView) v.findViewById(R.id.rv);
-        rv.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getActivity());
-        rv.setLayoutManager(layoutManager);
-
+    public void onClick(View view) {
+        onBackPressed();
     }
 
     private void setarAdapter(){
-        rvAdpt = new RecycleViewAdapter(getActivity(), listaCampras);
+        rvAdpt = new RecycleViewAdapter(getBaseContext(), listaCampras);
 
 
         rv.setAdapter(rvAdpt);
@@ -67,12 +68,11 @@ public class ComprasFragment extends Fragment {
             @Override
             public void onItemClick(int position) {
                 Log.d("test", listaCampras.get(position).getValorTotal());
-               // Intent intent = new Intent(getActivity(), DetalhesCompraActivity.class);
-              //  Bundle extras = new Bundle();
-                //extras.putString("id", listaCampras.get(position).getId());
-               // intent.putExtras(extras);
-               // startActivity(intent);
-                startActivity(new Intent(getActivity(), ComprasActivity.class));
+                Intent intent = new Intent(getBaseContext(), DetalhesCompraActivity.class);
+                Bundle extras = new Bundle();
+                extras.putString("id", listaCampras.get(position).getId());
+                intent.putExtras(extras);
+                startActivity(intent);
             }
         });
     }
