@@ -15,12 +15,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app_desconta.ComprasActivity;
-import com.app_desconta.DetalhesCompraActivity;
 import com.app_desconta.R;
 import com.app_desconta.Usuario;
 import com.app_desconta.api.Api;
 import com.app_desconta.api.Compras;
-import com.app_desconta.cardView.RecycleViewAdapter;
+import com.app_desconta.adapters.RecycleViewAdapter;
 import com.app_desconta.util.RetrofitCliente;
 
 import java.util.ArrayList;

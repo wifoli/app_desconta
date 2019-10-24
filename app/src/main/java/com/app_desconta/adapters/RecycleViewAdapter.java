@@ -1,4 +1,4 @@
-package com.app_desconta.cardView;
+package com.app_desconta.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
