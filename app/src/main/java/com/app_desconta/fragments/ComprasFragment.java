@@ -41,7 +41,7 @@ public class ComprasFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_compras, container, false);
-        retrofitGetCompras();
+
         return v;
     }
 
@@ -53,10 +53,10 @@ public class ComprasFragment extends Fragment {
         rv.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(layoutManager);
-
+        retrofitGetCompras();
     }
 
-    private void setarAdapter(){
+    private void setarAdapter() {
         rvAdpt = new RecycleViewAdapter(getActivity(), listaCampras);
 
 
@@ -66,11 +66,11 @@ public class ComprasFragment extends Fragment {
             @Override
             public void onItemClick(int position) {
                 Log.d("test", listaCampras.get(position).getValorTotal());
-               // Intent intent = new Intent(getActivity(), DetalhesCompraActivity.class);
-              //  Bundle extras = new Bundle();
+                // Intent intent = new Intent(getActivity(), DetalhesCompraActivity.class);
+                //  Bundle extras = new Bundle();
                 //extras.putString("id", listaCampras.get(position).getId());
-               // intent.putExtras(extras);
-               // startActivity(intent);
+                // intent.putExtras(extras);
+                // startActivity(intent);
                 startActivity(new Intent(getActivity(), ComprasActivity.class));
             }
         });
@@ -79,15 +79,15 @@ public class ComprasFragment extends Fragment {
     private void retrofitGetCompras() {
         Api httpRequest = RetrofitCliente.getCliente().create(Api.class);
 
-        Call<ArrayList<Compras>> call = httpRequest.getCompras(Usuario.getInsance().getUsuario().getPessoa().getId());
+        Call<ArrayList<Compras>> call = httpRequest.getCompras(Usuario.getInsance().getUsuario().getPessoa().getId(), "2");
 
         call.enqueue(new Callback<ArrayList<Compras>>() {
             @Override
             public void onResponse(Call<ArrayList<Compras>> call, Response<ArrayList<Compras>> response) {
-                if( response.isSuccessful()){
+                if (response.isSuccessful()) {
                     listaCampras = response.body();
                     setarAdapter();
-                }else Log.e("Retrofit get_compras", "Falha no Retrofit Code: " + response.code());
+                } else Log.e("Retrofit get_compras", "Falha no Retrofit Code: " + response.code());
             }
 
             @Override

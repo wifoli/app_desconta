@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.app_desconta.R;
 import com.app_desconta.fragments.ComprasFragment;
 import com.app_desconta.fragments.DescontoFragment;
+import com.app_desconta.fragments.EmpresaFragment;
 import com.app_desconta.fragments.PesquisaFragment;
 
 /**
@@ -35,7 +36,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         Fragment fragment = null;
         switch (position) {
             case 0:
-                fragment = new ComprasFragment();
+                fragment = new EmpresaFragment();
                 break;
             case 1:
                 fragment = new DescontoFragment();

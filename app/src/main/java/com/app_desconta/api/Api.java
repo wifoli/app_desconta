@@ -42,12 +42,12 @@ public interface Api {
                               @Path("uid") String uid,
                               @Body JsonObject jsonPessoa);
 
-    @GET("api/get_compras/{id}")
+    @GET("api/get_empresas/{id}")
     Call<ArrayList<Empresa>> getEmpresas(@Path("id") String id);
 
-    @GET("api/get_compras/{id}")
-    Call<ArrayList<Compras>> getCompras(@Path("id") String id);
+    @GET("api/get_compras/{idUsuario}/{idEmpresa}")
+    Call<ArrayList<Compras>> getCompras(@Path("idUsuario") String idUsuario, @Path("idEmpresa") String idEmpresa);
 
-  //  @GET("api/get_compra/{id}")
-   // Call<Compra> getCompra(@Path("id") String idCompra);
+    @GET("api/get_parcelas/{idCompra}")
+    Call<ArrayList<Parcela>> getParcela(@Path("idCompra") String idCompra);
 }

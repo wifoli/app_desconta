@@ -44,7 +44,7 @@
 
 
     <string name="title_activity_tabs">TabsActivity</string>
-    <string name="tab_text_1">Minhas Compras</string>
+    <string name="tab_text_1">Empresas</string>
     <string name="tab_text_2">Meus Descontos</string>
     <string name="tab_text_3">Pesquisar Empresas</string>
 
@@ -124,6 +124,17 @@
     <string name="esteCpfJaeUtilizado">Erro ao tentar criar novo usuário com o CPF fornecido</string>
     <string name="detalhes_compra">Detalhes de compra</string>
     <string name="compras">Compras</string>
+    <string name="tv_recycle_nome_fantasia">Nome Fantasia: </string>
+    <string name="tv_recycle_razao_social">Razão Social:</string>
+    <string name="tv_recycle_cnpj">CNPJ:</string>
+    <string name="tv_recycle_inscricao_estadual">Inscrição Estadual:</string>
+    <string name="tv_recycle_tel">Telefone:</string>
+    <string name="parcelas">Parcelas</string>
+    <string name="compra">Compra</string>
+    <string name="tv_recycle_parcela_atual">Parcela nº:</string>
+    <string name="tv_recycle_numero_boleto">Boleto:</string>
+    <string name="tv_recycle_valor_parcela">Valor da parcela: R$</string>
+    <string name="pagar">Pagar</string>
 
     <string-array name="estados">
         <item>Selecione</item>

@@ -23,8 +23,13 @@ import retrofit2.Response;
 public class DetalhesCompraActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView textViewDetalhesCompraToolbar;
+    private TextView nome_fantasia;
+    private TextView data_compra;
+    private TextView valor_compra;
 
     private Button botaoVoltar;
+
+    private Bundle extras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +37,18 @@ public class DetalhesCompraActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_detalhes_compra);
 
         textViewDetalhesCompraToolbar = (TextView) findViewById(R.id.tv_detalhes_compra);
+        nome_fantasia= (TextView) findViewById(R.id.nome_fantasia_detalhe);
+        data_compra = (TextView) findViewById(R.id.data_compra_detalhes);
+        valor_compra = (TextView) findViewById(R.id.valor_detalhes);
+
         botaoVoltar = (Button) findViewById(R.id.bt_voltar);
 
         textViewDetalhesCompraToolbar.setText(getString(R.string.detalhes_compra));
+
+        Intent intent = getIntent();
+        extras = intent.getExtras();
+
+        setarCompra();
 
         botaoVoltar.setOnClickListener(this);
 
@@ -45,12 +59,14 @@ public class DetalhesCompraActivity extends AppCompatActivity implements View.On
         onBackPressed();
     }
 
+    private void setarCompra(){
+        nome_fantasia.setText(" " + extras.getString("nomeEmpresa"));
+        data_compra.setText(" " + extras.getString("data"));
+        valor_compra.setText(" " + extras.getString("valor"));
+    }
+
     private String idCompra(){
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
-
         String id = extras.getString("id");
-
         return id;
     }
 
