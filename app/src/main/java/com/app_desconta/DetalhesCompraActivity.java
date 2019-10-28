@@ -1,6 +1,8 @@
 package com.app_desconta;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 
 import com.app_desconta.api.Api;
 import com.app_desconta.api.Compras;
+import com.app_desconta.fragments.ParcelasFragment;
 import com.app_desconta.util.RetrofitCliente;
 
 
@@ -49,6 +52,7 @@ public class DetalhesCompraActivity extends AppCompatActivity implements View.On
         extras = intent.getExtras();
 
         setarCompra();
+        setarFragment();
 
         botaoVoltar.setOnClickListener(this);
 
@@ -70,24 +74,16 @@ public class DetalhesCompraActivity extends AppCompatActivity implements View.On
         return id;
     }
 
-   /* private void retrofitGetCompra() {
-        Api httpRequest = RetrofitCliente.getCliente().create(Api.class);
+    private void setarFragment(){
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
 
-        Call<Compra> call = httpRequest.getCompra(idCompra());
+        ParcelasFragment parcelasFragment = new ParcelasFragment();
 
-        call.enqueue(new Callback<ArrayList<Compras>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Compras>> call, Response<ArrayList<Compras>> response) {
-                if( response.isSuccessful()){
-                    listaCampras = response.body();
-                    setarAdapter();
-                }else Log.e("Retrofit get_compras", "Falha no Retrofit Code: " + response.code());
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<Compras>> call, Throwable t) {
-                Log.e("Retrofit get_compras", "Falha no Retrofit: " + t.toString());
-            }
-        });
-    }  */
+        Bundle extra = new Bundle();
+        extra.putString("idCompra",idCompra());
+        parcelasFragment.setArguments(extra);
+        ft.add(R.id.frameParcelas, parcelasFragment);
+        ft.commit();
+    }
 }

@@ -132,7 +132,7 @@
     <string name="parcelas">Parcelas</string>
     <string name="compra">Compra</string>
     <string name="tv_recycle_parcela_atual">Parcela nº:</string>
-    <string name="tv_recycle_numero_boleto">Boleto:</string>
+    <string name="tv_recycle_numero_boleto">Boleton nº:</string>
     <string name="tv_recycle_valor_parcela">Valor da parcela: R$</string>
     <string name="pagar">Pagar</string>
 

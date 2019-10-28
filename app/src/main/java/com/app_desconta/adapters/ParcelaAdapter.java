@@ -1,6 +1,7 @@
 package com.app_desconta.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,7 @@ public class ParcelaAdapter  extends RecyclerView.Adapter<ParcelaAdapter.MyViewH
             super(itemView);
 
             numero_parcela = itemView.findViewById(R.id.numero_parcela);
-            numero_boleto = itemView.findViewById(R.id.numero_parcela);
+            numero_boleto = itemView.findViewById(R.id.numero_boleto);
             valor_parcela = itemView.findViewById( R.id.valor_parcela);
             pagar = itemView.findViewById(R.id.btn_pagar);
         }
@@ -43,7 +44,6 @@ public class ParcelaAdapter  extends RecyclerView.Adapter<ParcelaAdapter.MyViewH
         this.listaParcela = listaParcela;
         mlaLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
-
 
     @NonNull
     @Override
@@ -63,12 +63,12 @@ public class ParcelaAdapter  extends RecyclerView.Adapter<ParcelaAdapter.MyViewH
         holder.pagar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Log.d("test", "btn clicked");
             }
         });
 
         try {
-            YoYo.with(Techniques.ZoomInDown) // FadeInDown, ZoomInDown, BounceInDown
+            YoYo.with(Techniques.FadeInDown) // FadeInDown, ZoomInDown, BounceInDown
                     .duration(680)
                     .playOn(holder.itemView);
         }catch (Exception e){

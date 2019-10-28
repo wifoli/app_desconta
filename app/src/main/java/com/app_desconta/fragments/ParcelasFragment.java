@@ -50,6 +50,7 @@ public class ParcelasFragment extends Fragment {
 
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(RecyclerView.VERTICAL);
+        llm.setSmoothScrollbarEnabled(true);
         mRecyclerView.setLayoutManager(llm);
 
         retrofitGetlistaEmpresa();
@@ -60,10 +61,16 @@ public class ParcelasFragment extends Fragment {
         mRecyclerView.setAdapter(adapter);
     }
 
+    private String getIdCompra(){
+        Bundle extra = getArguments();
+        String idCompra = extra.getString("idCompra");
+        return idCompra;
+    }
+
     private void retrofitGetlistaEmpresa() {
         Api httpRequest = RetrofitCliente.getCliente().create(Api.class);
 
-        Call<ArrayList<Parcela>> call = httpRequest.getParcela("3");
+        Call<ArrayList<Parcela>> call = httpRequest.getParcela(getIdCompra());
 
         call.enqueue(new Callback<ArrayList<Parcela>>() {
             @Override
