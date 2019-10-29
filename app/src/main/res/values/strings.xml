@@ -135,6 +135,12 @@
     <string name="tv_recycle_numero_boleto">Boleton nº:</string>
     <string name="tv_recycle_valor_parcela">Valor da parcela: R$</string>
     <string name="pagar">Pagar</string>
+    <string name="realizar_pagamento">Realizar Pagamento</string>
+    <string name="pagarBoleto">Pagar Boleto</string>
+    <string name="boleto_pago">Boleto Pago</string>
+    <string name="numero_do_boleto">Número do boleto:</string>
+    <string name="valor_do_boleto">Valor do Boleto</string>
+    <string name="pagamento_realizado_comSucesso">Pagamento realizado com sucesso</string>
 
     <string-array name="estados">
         <item>Selecione</item>

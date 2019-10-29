@@ -17,6 +17,9 @@ public class Parcela {
     @SerializedName("valor_parcela")
     @Expose
     private String valorParcela;
+    @SerializedName("boleto_pago")
+    @Expose
+    private String boleto_pago;
 
     public String getId() {
         return id;
@@ -50,6 +53,14 @@ public class Parcela {
         this.valorParcela = valorParcela;
     }
 
+    public String getBoleto_pago() {
+        return boleto_pago;
+    }
+
+    public void setBoleto_pago(String boleto_pago) {
+        this.boleto_pago = boleto_pago;
+    }
+
     @Override
     public String toString() {
         return "Parcela{" +
@@ -57,6 +68,7 @@ public class Parcela {
                 ", nrParcela=" + nrParcela +
                 ", nrBoleto='" + nrBoleto + '\'' +
                 ", valorParcela='" + valorParcela + '\'' +
+                ", boleto_pago='" + boleto_pago + '\'' +
                 '}';
     }
 }

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PagarBoletoActivity">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar_detalhes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/primeiroComponente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/include"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="16dp"
+        android:text="Esta tela tenta apenas simular o que seria o pagamento de um boleto em um sistema externo, tendo em que vista este App não tem a função de pagamentos, apenas cobranças."
+        android:textColor="@color/colorPrimaryText" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/primeiroComponente"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/numero_do_boleto"
+            android:textColor="@color/colorPrimaryText" />
+
+        <EditText
+            android:id="@+id/et_pagar_valor_boleto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/meu_edit_text"
+            android:focusable="false"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:text="@string/valor_do_boleto"
+            android:textColor="@color/colorPrimaryText" />
+
+        <EditText
+            android:id="@+id/et_pagar_numero_boleto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/meu_edit_text"
+            android:focusable="false"/>
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_check_black_24dp"
+            android:visibility="invisible"/>
+
+        <Button
+            android:id="@+id/btn_pagarBoleto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/meu_botao"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            android:padding="10dp"
+            android:text="@string/realizar_pagamento" />
+
+    </LinearLayout>
+
+</RelativeLayout>

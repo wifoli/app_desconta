@@ -50,4 +50,12 @@ public interface Api {
 
     @GET("api/get_parcelas/{idCompra}")
     Call<ArrayList<Parcela>> getParcela(@Path("idCompra") String idCompra);
+
+    @Headers({
+            "Accept: application/json",
+            "Content-Type: application/json"
+    })
+    @PATCH("api/pagar_parcela/{idParcela}")
+    Call<String> pagarParcela(@Path("idParcela") String idParcela,
+                              @Body JsonObject jsonPessoa);
 }

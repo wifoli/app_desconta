@@ -1,6 +1,8 @@
 package com.app_desconta.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.app_desconta.PagarBoletoActivity;
 import com.app_desconta.R;
 import com.app_desconta.api.Parcela;
 import com.daimajia.androidanimations.library.Techniques;
@@ -39,9 +42,11 @@ public class ParcelaAdapter  extends RecyclerView.Adapter<ParcelaAdapter.MyViewH
 
     private ArrayList<Parcela> listaParcela;
     private LayoutInflater mlaLayoutInflater;
+    private Context context;
 
     public ParcelaAdapter(Context context, ArrayList<Parcela> listaParcela) {
         this.listaParcela = listaParcela;
+        this.context = context;
         mlaLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -55,7 +60,7 @@ public class ParcelaAdapter  extends RecyclerView.Adapter<ParcelaAdapter.MyViewH
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Parcela itemAtual = listaParcela.get(position);
+        final Parcela itemAtual = listaParcela.get(position);
 
         holder.numero_parcela.setText(" " + itemAtual.getNrParcela());
         holder.numero_boleto.setText(" " + itemAtual.getNrBoleto());
@@ -63,9 +68,23 @@ public class ParcelaAdapter  extends RecyclerView.Adapter<ParcelaAdapter.MyViewH
         holder.pagar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("test", "btn clicked");
+                Intent intent = new Intent(context, PagarBoletoActivity.class);
+                Bundle extras = new Bundle();
+                extras.putString("id", itemAtual.getId());
+                extras.putString("nr_boleto", itemAtual.getNrBoleto());
+                extras.putString("valor", itemAtual.getValorParcela());
+                intent.putExtras(extras);
+                context.startActivity(intent);
             }
         });
+
+        if (itemAtual.getBoleto_pago().trim().equals("S")){
+            holder.pagar.setBackgroundResource(R.drawable.meu_botao_parcela_paga);
+            holder.pagar.setText(context.getString(R.string.boleto_pago));
+            holder.pagar.setTextSize(10);
+            holder.pagar.setForeground(null);
+            holder.pagar.setClickable(false);
+        }
 
         try {
             YoYo.with(Techniques.FadeInDown) // FadeInDown, ZoomInDown, BounceInDown
