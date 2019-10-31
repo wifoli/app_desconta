@@ -1,27 +1,16 @@
 package com.app_desconta;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.app_desconta.api.Api;
-import com.app_desconta.api.Compras;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.app_desconta.fragments.ParcelasFragment;
-import com.app_desconta.util.RetrofitCliente;
-
-
-import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class DetalhesCompraActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -34,13 +23,15 @@ public class DetalhesCompraActivity extends AppCompatActivity implements View.On
 
     private Bundle extras;
 
+    private FragmentManager fm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_compra);
 
         textViewDetalhesCompraToolbar = (TextView) findViewById(R.id.tv_detalhes_compra);
-        nome_fantasia= (TextView) findViewById(R.id.nome_fantasia_detalhe);
+        nome_fantasia = (TextView) findViewById(R.id.nome_fantasia_detalhe);
         data_compra = (TextView) findViewById(R.id.data_compra_detalhes);
         valor_compra = (TextView) findViewById(R.id.valor_detalhes);
 
@@ -52,38 +43,56 @@ public class DetalhesCompraActivity extends AppCompatActivity implements View.On
         extras = intent.getExtras();
 
         setarCompra();
-        setarFragment();
 
         botaoVoltar.setOnClickListener(this);
 
     }
 
     @Override
+    protected void onResume() {
+        setarFragment();
+        super.onResume();
+    }
+
+
+    @Override
     public void onClick(View view) {
         onBackPressed();
     }
 
-    private void setarCompra(){
+    private void setarCompra() {
         nome_fantasia.setText(" " + extras.getString("nomeEmpresa"));
         data_compra.setText(" " + extras.getString("data"));
         valor_compra.setText(" " + extras.getString("valor"));
     }
 
-    private String idCompra(){
+    private String idCompra() {
         String id = extras.getString("id");
         return id;
     }
 
-    private void setarFragment(){
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
+    private void setarFragment() {
+        if (fm == null) {
+            fm = getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
 
-        ParcelasFragment parcelasFragment = new ParcelasFragment();
+            ParcelasFragment parcelasFragment = new ParcelasFragment();
 
-        Bundle extra = new Bundle();
-        extra.putString("idCompra",idCompra());
-        parcelasFragment.setArguments(extra);
-        ft.add(R.id.frameParcelas, parcelasFragment);
-        ft.commit();
+            Bundle extra = new Bundle();
+            extra.putString("idCompra", idCompra());
+            parcelasFragment.setArguments(extra);
+            ft.add(R.id.frameParcelas, parcelasFragment);
+            ft.commit();
+        }else {
+            FragmentTransaction ft = fm.beginTransaction();
+
+            ParcelasFragment parcelasFragment = new ParcelasFragment();
+
+            Bundle extra = new Bundle();
+            extra.putString("idCompra", idCompra());
+            parcelasFragment.setArguments(extra);
+            ft.replace(R.id.frameParcelas, parcelasFragment);
+            ft.commit();
+        }
     }
 }

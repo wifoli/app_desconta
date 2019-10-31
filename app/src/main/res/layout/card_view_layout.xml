@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_compras"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
@@ -9,6 +10,7 @@
     app:cardUseCompatPadding="true">
 
     <RelativeLayout
+        android:id="@+id/layout_card_compras"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/meu_cards"
@@ -55,6 +57,24 @@
             android:layout_toLeftOf="@+id/cv_data_compra"
             android:text="@string/tv_card_data_compra"
             android:textColor="@color/colorPrimaryText" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout_card_compra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/data"
+            android:layout_marginTop="10dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:text="@string/boleto_pagop"
+                android:textColor="@color/colorPrimary"
+                android:textSize="8pt"/>
+
+        </LinearLayout>
 
     </RelativeLayout>
 

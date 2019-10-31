@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import java.util.ArrayList;
 
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -56,6 +57,6 @@ public interface Api {
             "Content-Type: application/json"
     })
     @PATCH("api/pagar_parcela/{idParcela}")
-    Call<String> pagarParcela(@Path("idParcela") String idParcela,
-                              @Body JsonObject jsonPessoa);
+    Call<Void> pagarParcela(@Path("idParcela") String idParcela,
+                                      @Body JsonObject jsonPessoa);
 }

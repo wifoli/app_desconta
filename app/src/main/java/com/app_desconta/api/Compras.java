@@ -20,6 +20,9 @@ public class Compras {
     @SerializedName("nome_fantasia")
     @Expose
     private String nomeFantasia;
+    @SerializedName("compra_paga")
+    @Expose
+    private String compra_paga;
 
     public String getId() {
         return id;
@@ -61,6 +64,14 @@ public class Compras {
         this.nomeFantasia = nomeFantasia;
     }
 
+    public String getCompra_paga() {
+        return compra_paga;
+    }
+
+    public void setCompra_paga(String compra_paga) {
+        this.compra_paga = compra_paga;
+    }
+
     @Override
     public String toString() {
         return "Compras{" +
@@ -69,6 +80,7 @@ public class Compras {
                 ", qtdeParcelas=" + qtdeParcelas +
                 ", valorTotal='" + valorTotal + '\'' +
                 ", nomeFantasia='" + nomeFantasia + '\'' +
+                ", compra_paga='" + compra_paga + '\'' +
                 '}';
     }
 }

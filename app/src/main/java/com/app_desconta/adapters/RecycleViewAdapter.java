@@ -4,9 +4,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app_desconta.R;
@@ -31,6 +34,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         public TextView empresa;
         public TextView valor;
         public TextView data;
+        public LinearLayout linear;
 
         public RecycleViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
@@ -38,6 +42,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             empresa = itemView.findViewById(R.id.cv_nome_empresa);
             valor = itemView.findViewById(R.id.valor_compra);
             data = itemView.findViewById(R.id.cv_data_compra);
+            linear = itemView.findViewById(R.id.linearLayout_card_compra);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -56,12 +61,13 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     private ArrayList<Compras> listaCompras;
     private OnItemClickListener mlistener;
     private LayoutInflater mlaLayoutInflater;
+    private Context context;
 
     public RecycleViewAdapter(Context context, ArrayList<Compras> listaCompras) {
         this.listaCompras = listaCompras;
+        this.context = context;
         mlaLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
-
 
     @NonNull
     @Override
@@ -79,8 +85,12 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         holder.valor.setText(" " + itemAtual.getValorTotal());
         holder.data.setText(" " + itemAtual.getDataVenda());
 
+        if(itemAtual.getCompra_paga().equals("S")){
+            holder.linear.setVisibility(LinearLayout.VISIBLE);
+        }
+
         try {
-            YoYo.with(Techniques.ZoomInDown) // FadeInDown, ZoomInDown, BounceInDown
+            YoYo.with(Techniques.SlideInDown) // FadeInDown, ZoomInDown, BounceInDown
                     .duration(680)
                     .playOn(holder.itemView);
         }catch (Exception e){

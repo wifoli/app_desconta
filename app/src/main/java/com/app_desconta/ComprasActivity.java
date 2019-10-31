@@ -45,7 +45,7 @@ public class ComprasActivity extends AppCompatActivity implements View.OnClickLi
 
         botaoVoltar.setOnClickListener(this);
 
-        retrofitGetCompras();
+
 
         rv = (RecyclerView) findViewById(R.id.rv);
         rv.setHasFixedSize(true);
@@ -57,6 +57,13 @@ public class ComprasActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         onBackPressed();
     }
+
+    @Override
+    protected void onResume() {
+        retrofitGetCompras();
+        super.onResume();
+    }
+
 
     private void setarAdapter() {
         rvAdpt = new RecycleViewAdapter(getBaseContext(), listaCampras);

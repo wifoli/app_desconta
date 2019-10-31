@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,8 @@ public class PagarBoletoActivity extends AppCompatActivity implements View.OnCli
     private EditText numero_boleto;
     private EditText valor_boleto;
 
+    private ImageView imagem;
+
     private Button botaoVoltar;
     private Button pagar;
 
@@ -43,6 +46,7 @@ public class PagarBoletoActivity extends AppCompatActivity implements View.OnCli
         valor_boleto = (EditText) findViewById(R.id.et_pagar_valor_boleto);
         botaoVoltar = (Button) findViewById(R.id.bt_voltar);
         pagar = (Button) findViewById(R.id.btn_pagarBoleto);
+        imagem = (ImageView) findViewById(R.id.imagem_parcela_paga);
 
         textoManu.setText(getString(R.string.pagarBoleto));
 
@@ -59,7 +63,11 @@ public class PagarBoletoActivity extends AppCompatActivity implements View.OnCli
                 onBackPressed();
                 break;
             case R.id.btn_pagarBoleto:
-                retrofitPagarCompra();
+                if (pagar.getText().toString().equals(getText(R.string.realizar_pagamento)))
+                    retrofitPagarCompra();
+                else if(pagar.getText().toString().equals(getText(R.string.finalizar))){
+                    startActivity(new Intent(getBaseContext(), MainActivity.class));
+                }
                 break;
             default:
                 break;
@@ -80,11 +88,16 @@ public class PagarBoletoActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void confirmarPagamento() {
-        pagar.setVisibility(Button.VISIBLE);
+        imagem.setVisibility(ImageView.VISIBLE);
+        setarAnimacao(imagem, Techniques.BounceInDown);
+        pagar.setText(getText(R.string.finalizar));
+    }
+
+    private void setarAnimacao(View v, Techniques animacao) {
         try {
-            YoYo.with(Techniques.Wave) // FadeInDown, ZoomInDown, BounceInDown
-                    .duration(680)
-                    .playOn(pagar);
+            YoYo.with(animacao) // FadeInDown, ZoomInDown, BounceInDown
+                    .duration(1000)
+                    .playOn(v);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -93,25 +106,20 @@ public class PagarBoletoActivity extends AppCompatActivity implements View.OnCli
     private void retrofitPagarCompra() {
         Api httpRequest = RetrofitCliente.getCliente().create(Api.class);
 
-        Call<String> call = httpRequest.pagarParcela(idParcela, getJson());
-        call.enqueue(new Callback<String>() {
+        Call<Void> call = httpRequest.pagarParcela(idParcela, getJson());
+        call.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 Log.d("test", "passei - " + response.code());
                 if (response.isSuccessful()) {
-
-                    if (response.code() == 200) {
-
-                        confirmarPagamento();
-                        Toast.makeText(getBaseContext(), getString(R.string.pagamento_realizado_comSucesso), Toast.LENGTH_LONG).show();
-                    }
+                    confirmarPagamento();
+                    Toast.makeText(getBaseContext(), getString(R.string.pagamento_realizado_comSucesso), Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
                 Log.e("Retrofit pagarParcela", "Falha no Retrofit: " + t.toString());
-
             }
         });
     }

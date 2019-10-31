@@ -141,6 +141,8 @@
     <string name="numero_do_boleto">Número do boleto:</string>
     <string name="valor_do_boleto">Valor do Boleto</string>
     <string name="pagamento_realizado_comSucesso">Pagamento realizado com sucesso</string>
+    <string name="finalizar">Finalizar e Retornar</string>
+    <string name="boleto_pagop">Compra Paga</string>
 
     <string-array name="estados">
         <item>Selecione</item>
