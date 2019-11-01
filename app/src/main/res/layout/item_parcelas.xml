@@ -78,7 +78,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:background="@drawable/meu_botao"
-
         android:foreground="?attr/selectableItemBackground"
         android:text="@string/pagar" />
 

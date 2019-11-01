@@ -143,6 +143,8 @@
     <string name="pagamento_realizado_comSucesso">Pagamento realizado com sucesso</string>
     <string name="finalizar">Finalizar e Retornar</string>
     <string name="boleto_pagop">Compra Paga</string>
+    <string name="mostrar_mais">Mostrar Mais</string>
+    <string name="sobreEmpresa">Sobre a Empresa</string>
 
     <string-array name="estados">
         <item>Selecione</item>

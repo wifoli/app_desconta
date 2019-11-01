@@ -1,104 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:foreground="?attr/selectableItemBackground"
     android:paddingStart="16dp"
     android:paddingTop="20dp"
     android:paddingEnd="16dp"
-    android:paddingBottom="20dp"
-    android:foreground="?attr/selectableItemBackground">
+    android:paddingBottom="20dp">
 
-    <!-- Fazer o meu Layout -->
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-        android:id="@+id/tv_nome_fantasia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tv_recycle_nome_fantasia"
-        android:textColor="@color/colorPrimaryText" />
-
-        <TextView
-            android:id="@+id/nome_fantasia"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryText" />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/pai"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_razao_social"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/primeiro_empresa"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/tv_recycle_razao_social"
-            android:textColor="@color/colorPrimaryText" />
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
 
-        <TextView
-            android:id="@+id/razao_social"
+            <TextView
+                android:id="@+id/nome_fantasia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10pt"
+                android:textColor="@color/colorPrimaryText" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/terceiro_empresa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryText" />
-    </LinearLayout>
+            android:layout_below="@id/primeiro_empresa"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/tv_cnpj"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_recycle_cnpj"
+                android:textColor="@color/colorPrimaryText" />
+
+            <TextView
+                android:id="@+id/cnpj"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryText" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/quarto_empresa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/primeiro_empresa"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/tv_tel"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignStart="@+id/quarto_empresa"
+                android:layout_alignTop="@+id/quarto_empresa"
+                android:text="@string/tv_recycle_tel"
+                android:textColor="@color/colorPrimaryText" />
+
+            <TextView
+                android:id="@+id/tel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryText" />
+        </LinearLayout>
+
+    </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/tv_cnpj"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tv_recycle_cnpj"
-            android:textColor="@color/colorPrimaryText" />
-
-        <TextView
-            android:id="@+id/cnpj"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryText" />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/tv_tel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tv_recycle_tel"
-            android:textColor="@color/colorPrimaryText" />
-
-        <TextView
-            android:id="@+id/tel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryText" />
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/mais"
-        android:layout_width="wrap_content"
+        android:id="@+id/image_mais"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/meu_botao"
-        android:foreground="?attr/selectableItemBackground"
-        android:src="@drawable/ic_add_circle_outline_black_24dp" />
+        android:layout_below="@+id/pai"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/mais"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+
+            android:background="@drawable/meu_botao"
+            android:foreground="?attr/selectableItemBackground"
+            android:paddingStart="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/mostrar_mais"
+            android:textAllCaps="false" />
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.8dp"
+        android:layout_below="@+id/image_mais"
         android:layout_marginTop="20dp"
         android:background="@color/colorPrimary" />
 
 
-</LinearLayout>
+</RelativeLayout>

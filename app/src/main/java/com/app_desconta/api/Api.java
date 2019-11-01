@@ -59,4 +59,7 @@ public interface Api {
     @PATCH("api/pagar_parcela/{idParcela}")
     Call<Void> pagarParcela(@Path("idParcela") String idParcela,
                                       @Body JsonObject jsonPessoa);
+
+    @GET("api/get_cidade/{idCidade}")
+    Call<Cidade> getCidade(@Path("idCidade") String idCidade);
 }
