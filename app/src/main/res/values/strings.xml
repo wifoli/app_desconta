@@ -145,6 +145,7 @@
     <string name="boleto_pagop">Compra Paga</string>
     <string name="mostrar_mais">Mostrar Mais</string>
     <string name="sobreEmpresa">Sobre a Empresa</string>
+    <string name="selecione_cidade">Selecione uma cidade</string>
 
     <string-array name="estados">
         <item>Selecione</item>

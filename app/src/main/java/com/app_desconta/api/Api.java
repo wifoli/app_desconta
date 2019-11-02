@@ -62,4 +62,7 @@ public interface Api {
 
     @GET("api/get_cidade/{idCidade}")
     Call<Cidade> getCidade(@Path("idCidade") String idCidade);
+
+    @GET("api/get_cidades/{idEstado}")
+    Call<ArrayList<Cidade>> getCidades(@Path("idEstado") String idEstado);
 }

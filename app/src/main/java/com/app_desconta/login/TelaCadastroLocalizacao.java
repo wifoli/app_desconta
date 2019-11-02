@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,11 +21,13 @@ import com.app_desconta.R;
 import com.app_desconta.Usuario;
 import com.app_desconta.api.Api;
 import com.app_desconta.api.CEP;
+import com.app_desconta.api.Cidade;
 import com.app_desconta.api.Pessoa;
 import com.app_desconta.api.User;
 import com.app_desconta.util.RetrofitCliente;
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,12 +43,12 @@ import static com.app_desconta.util.Util.verificaConexao;
 public class TelaCadastroLocalizacao extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener {
 
     private EditText editTextCep;
-    private EditText editTextCidade;
     private EditText editTextBairro;
     private EditText editTextRua;
     private EditText editTextNumero;
     private EditText editTextComplemento;
 
+    private Spinner spinnerCidade;
     private Spinner spinnerEstado;
 
     private ImageView procurarCep;
@@ -60,7 +63,11 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
     private String numero;
     private String complemento;
 
+    private CEP objectCep;
+
     private boolean temRegistro = false;
+
+    private ArrayList<Cidade> arrayCidade;
 
     private Map posicaoEstado;
 
@@ -75,17 +82,29 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
         setTitle("Localização");
 
         editTextCep = (EditText) findViewById(R.id.et_cadastro2_cep);
-        editTextCidade = (EditText) findViewById(R.id.et_cadastro2_cidade);
         editTextBairro = (EditText) findViewById(R.id.et_cadastrar2_bairro);
         editTextRua = (EditText) findViewById(R.id.et_cadastrar2_rua);
         editTextNumero = (EditText) findViewById(R.id.et_cadastrar2_numero);
         editTextComplemento = (EditText) findViewById(R.id.et_cadastrar2_complemento);
+        spinnerCidade = (Spinner) findViewById(R.id.sp_cadastro2_cidade);
         spinnerEstado = (Spinner) findViewById(R.id.sp_cadastro2_estado);
         procurarCep = (ImageView) findViewById(R.id.iv_cadastrar2_encontrar_cep);
         botaoCadastrar = (Button) findViewById(R.id.bt_cadastrar2_proximo);
 
         botaoCadastrar.setOnClickListener(this);
         procurarCep.setOnClickListener(this);
+        spinnerEstado.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                preencherCidades(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         setarMascaraCep();
         setarArrayAdapterEstado();
         povoarMapPosicaoEstado();
@@ -96,7 +115,7 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
     public void onClick(View view) {
         cep = editTextCep.getText().toString().trim();
         estado = spinnerEstado.getSelectedItemId() != 0 ? spinnerEstado.getSelectedItem().toString() : "";
-        cidade = editTextCidade.getText().toString().trim();
+        cidade = spinnerCidade.getSelectedItemId() != 0 ? spinnerEstado.getSelectedItem().toString() : "";
         bairro = editTextBairro.getText().toString().trim();
         rua = editTextRua.getText().toString().trim();
         numero = editTextNumero.getText().toString().trim();
@@ -126,6 +145,7 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
         else if (et.getText().toString().trim().isEmpty())
             view.setBackground(getDrawable(R.drawable.meu_edit_text_error));
     }
+
 
     private boolean estaVazio() {
         String erro = "";
@@ -160,8 +180,8 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
             editTextBairro.requestFocus();
         }
         if (erro.contains(getString(R.string.cidadeObrigatorio))) {
-            editTextCidade.setBackground(getDrawable(R.drawable.meu_edit_text_error));
-            editTextCidade.requestFocus();
+            spinnerCidade.setBackground(getDrawable(R.drawable.meu_edit_text_error));
+            spinnerCidade.requestFocus();
         }
         if (erro.contains(getString(R.string.cep_obrigatorio))) {
             editTextCep.setBackground(getDrawable(R.drawable.meu_edit_text_error));
@@ -181,6 +201,27 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
         spinnerEstado.setAdapter(adapter);
     }
 
+    private void setarArrayAdapterCidade() {
+        ArrayList<String> arrayList = new ArrayList<>();
+
+        for (Cidade cidade : arrayCidade) {
+            arrayList.add(cidade.getNome());
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, arrayList);
+        spinnerCidade.setAdapter(adapter);
+
+        if (objectCep != null) {
+            for (int i = 0; i < arrayCidade.size(); i++) {
+                if (arrayCidade.get(i).getNome().equals(objectCep.getCidade())) {
+                    spinnerCidade.setSelection(i);
+                    return;
+
+                }
+            }
+        }
+    }
+
 
     private void setarCampos() {
         Intent intent = getIntent();
@@ -188,8 +229,6 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
         temRegistro = extras.getBoolean("Tem Registro");
         if (temRegistro) {
             Pessoa pessoa = Usuario.getInsance().getUsuario().getPessoa();
-            editTextCidade.setText(pessoa.getCidade());
-            spinnerEstado.setSelection((Integer) posicaoEstado.get(pessoa.getEstado().toUpperCase()));
             editTextRua.setText(pessoa.getRua());
             editTextBairro.setText(pessoa.getBairro());
             editTextNumero.setText(pessoa.getNumero());
@@ -204,7 +243,7 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
         Usuario.getInsance().getUsuario().getPessoa().setNumero(numero);
         Usuario.getInsance().getUsuario().getPessoa().setCep(cep);
         Usuario.getInsance().getUsuario().getPessoa().setComplemento(complemento);
-        //pessoa.setCidade(); setar a cidade
+        Usuario.getInsance().getUsuario().getPessoa().setCidade("" + arrayCidade.get(spinnerCidade.getSelectedItemPosition()).getId());
     }
 
     private void finalizarCadastro() {
@@ -225,12 +264,12 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
         call.enqueue(new Callback<CEP>() {
             @Override
             public void onResponse(Call<CEP> call, Response<CEP> response) {
-                editTextCidade.setText(response.body().getCidade());
+                objectCep = response.body();
                 spinnerEstado.setSelection(posicaoEstado.get(response.body().getEstado()) != null ? (Integer) posicaoEstado.get(response.body().getEstado()) : 0);
                 editTextBairro.setText(response.body().getBairro());
                 editTextRua.setText(response.body().getLogradouro());
                 editTextComplemento.setText(response.body().getComplemento());
-                editTextNumero.requestFocus();
+                setarArrayAdapterCidade();
             }
 
             @Override
@@ -271,8 +310,7 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
                 if (response.isSuccessful()) {
                     Usuario.getInsance().setUsuario(response.body());
                     loginSucesso();
-                }
-                else {
+                } else {
                     Log.e("Retrofit update", "Falha no Retrofit Code: " + response.code());
                 }
             }
@@ -284,7 +322,26 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
         });
     }
 
-    private void loginSucesso(){
+    private void preencherCidades(int idEstado) {
+
+        Api httpRequest = RetrofitCliente.getCliente().create(Api.class);
+
+        Call<ArrayList<Cidade>> call = httpRequest.getCidades("" + idEstado);
+        call.enqueue(new Callback<ArrayList<Cidade>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Cidade>> call, Response<ArrayList<Cidade>> response) {
+                arrayCidade = response.body();
+                setarArrayAdapterCidade();
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Cidade>> call, Throwable t) {
+                Log.e("Retrofit get_cidades", "Falha no Retrofit: " + t.toString());
+            }
+        });
+    }
+
+    private void loginSucesso() {
         Toast.makeText(getBaseContext(), getString(R.string.cadastroEfetuadoComSucesso), Toast.LENGTH_LONG).show();
         startActivity(new Intent(getBaseContext(), MainActivity.class));
         finish();
@@ -306,7 +363,7 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
         jsonObject.addProperty("cep", pessoa.getCep());
         jsonObject.addProperty("complemento", pessoa.getComplemento());
         jsonObject.addProperty("tipo_pessoa", "Física");
-        jsonObject.addProperty("cidade_id", "1");  //cidade aqui
+        jsonObject.addProperty("cidade_id", pessoa.getCidade());
 
         return jsonObject;
     }
@@ -325,6 +382,7 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
         jsonObject.addProperty("numero", pessoa.getNumero());
         jsonObject.addProperty("cep", pessoa.getCep());
         jsonObject.addProperty("complemento", pessoa.getComplemento());
+        jsonObject.addProperty("cidade_id", pessoa.getCidade());
         return jsonObject;
     }
 
