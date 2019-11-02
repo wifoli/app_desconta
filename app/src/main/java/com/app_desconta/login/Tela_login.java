@@ -1,9 +1,7 @@
 package com.app_desconta.login;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -68,7 +66,7 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
     private ProgressBar progressBar;
 
     private FirebaseAuth auth;
-    private GoogleSignInClient googleSignInClient;
+
     private CallbackManager callbackManager;
 
     @Override
@@ -157,14 +155,14 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
     }
 
     private void logarComEmail() {
-        auth.signInWithEmailAndPassword(email, senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    Usuario.getInsance().setarUid(task.getResult().getUser().getUid());
-                    getUsuario();
+            auth.signInWithEmailAndPassword(email, senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        Usuario.getInsance().setarUid(task.getResult().getUser().getUid());
+                        getUsuario();
 
-                    //----------METODO PARA RETORNAR O TOKEN--------------
+                        //----------METODO PARA RETORNAR O TOKEN--------------
                    /* Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getIdToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
                         @Override
                         public void onComplete(@NonNull Task<GetTokenResult> task) {
@@ -173,21 +171,23 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
                             }
                         }
                     });  */
-                } else {
-                    errosFirebase(getBaseContext(), task.getException().toString());
-                    fecharProgess();
+                    } else {
+                        errosFirebase(getBaseContext(), task.getException().toString());
+                        fecharProgess();
+                    }
                 }
-            }
-        });
+            });
+            
     }
 
     private void logarComGoogle() {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
 
         if (account == null) {
-            Intent intent = googleSignInClient.getSignInIntent();
+            Intent intent = Usuario.getInsance().getGoogleSignInClient().getSignInIntent();
             startActivityForResult(intent, 555);
-        } else googleSignInClient.signOut();
+        }else{
+        }
 
     }
 
@@ -207,6 +207,7 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 adicionarContaGoogleAoFirebase(account);
+                iniciarProgess();
 
             } catch (ApiException e) {
                 Toast.makeText(getBaseContext(), getString(R.string.erroAoLogarComGoogle), Toast.LENGTH_LONG).show();
@@ -220,7 +221,7 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
                 .requestEmail()
                 .build();
 
-        googleSignInClient = GoogleSignIn.getClient(this, gso);
+        Usuario.getInsance().setGoogleSignInClient(GoogleSignIn.getClient(this, gso));
     }
 
     private void iniciarServicosFacebook() {
@@ -251,9 +252,10 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful())
+                        if (task.isSuccessful()) {
+                            Usuario.getInsance().setarUid(auth.getCurrentUser().getUid());
                             getUsuario();
-                        else
+                        } else
                             Toast.makeText(getBaseContext(), getString(R.string.erroAoAdicionarContaGoogleAoFirebase), Toast.LENGTH_LONG).show();
                     }
                 });
@@ -276,11 +278,10 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
 
     private void verificarSeExisteUsuario() {
         fecharProgess();
-        if (Usuario.getInsance().getUsuario().getId().trim().equals("")){
+        if (Usuario.getInsance().getUsuario().getId().trim().equals("")) {
             Usuario.getInsance().setEmail(editTextEmail.getText().toString().trim());
             startActivity(new Intent(getBaseContext(), TelaVerificarCpf.class));
-        }
-        else {
+        } else {
             startActivity(new Intent(getBaseContext(), MainActivity.class));
             finish();
         }
@@ -306,11 +307,11 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
         });
     }
 
-    private void iniciarProgess(){
+    private void iniciarProgess() {
         progressBar.setVisibility(ProgressBar.VISIBLE);
     }
 
-    private void fecharProgess(){
+    private void fecharProgess() {
         progressBar.setVisibility(ProgressBar.GONE);
     }
 }

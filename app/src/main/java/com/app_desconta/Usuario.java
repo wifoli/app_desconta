@@ -3,6 +3,7 @@ package com.app_desconta;
 import android.util.Log;
 
 import com.app_desconta.api.User;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 
 public class Usuario {
 
@@ -10,6 +11,7 @@ public class Usuario {
     private User usuario;
     private String uid;
     private String email;
+    private GoogleSignInClient googleSignInClient;
 
     public static Usuario getInsance() {
         if (Usuario.instance == null)  Usuario.instance = new Usuario();
@@ -39,5 +41,13 @@ public class Usuario {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public GoogleSignInClient getGoogleSignInClient() {
+        return googleSignInClient;
+    }
+
+    public void setGoogleSignInClient(GoogleSignInClient googleSignInClient) {
+        this.googleSignInClient = googleSignInClient;
     }
 }
