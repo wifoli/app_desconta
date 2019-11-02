@@ -74,7 +74,6 @@ public class ComprasActivity extends AppCompatActivity implements View.OnClickLi
         rvAdpt.setOnItemClickListenet(new RecycleViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Log.d("test", listaCampras.get(position).getValorTotal());
                 Intent intent = new Intent(getBaseContext(), DetalhesCompraActivity.class);
                 Bundle extras = new Bundle();
                 extras.putString("id", listaCampras.get(position).getId());

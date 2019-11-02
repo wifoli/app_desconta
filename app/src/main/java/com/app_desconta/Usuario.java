@@ -1,7 +1,5 @@
 package com.app_desconta;
 
-import android.util.Log;
-
 import com.app_desconta.api.User;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 

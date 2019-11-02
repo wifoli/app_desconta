@@ -10,15 +10,8 @@ import androidx.fragment.app.Fragment;
 
 import com.app_desconta.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class DescontoFragment extends Fragment {
-
-
-    public DescontoFragment() {
-        // Required empty public constructor
-    }
 
 
     @Override

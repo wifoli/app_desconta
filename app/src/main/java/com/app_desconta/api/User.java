@@ -50,4 +50,13 @@ public class User {
         this.pessoa = pessoa;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", email='" + email + '\'' +
+                ", emailVerifiedAt='" + emailVerifiedAt + '\'' +
+                ", pessoa=" + pessoa.toString() +
+                '}';
+    }
 }

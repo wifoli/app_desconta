@@ -36,7 +36,7 @@ public class EmpresaFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_empresa, container, false);
 
         return view;
@@ -83,7 +83,6 @@ public class EmpresaFragment extends Fragment {
             public void onResponse(Call<ArrayList<Empresa>> call, Response<ArrayList<Empresa>> response) {
                 if (response.isSuccessful()) {
                     listaEmpresa = response.body();
-                    Log.d("test", "" + response.body().size());
                     setarAdapter();
                 } else Log.e("Retrofit get_Empresa", "Falha no Retrofit Code: " + response.code());
             }

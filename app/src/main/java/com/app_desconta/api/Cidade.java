@@ -72,4 +72,15 @@ public class Cidade {
         this.updatedAt = updatedAt;
     }
 
+    @Override
+    public String toString() {
+        return "Cidade{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", ibgeCode='" + ibgeCode + '\'' +
+                ", estadoId=" + estadoId +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
 }

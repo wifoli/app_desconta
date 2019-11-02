@@ -30,7 +30,6 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -155,14 +154,14 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
     }
 
     private void logarComEmail() {
-            auth.signInWithEmailAndPassword(email, senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        Usuario.getInsance().setarUid(task.getResult().getUser().getUid());
-                        getUsuario();
+        auth.signInWithEmailAndPassword(email, senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    Usuario.getInsance().setarUid(task.getResult().getUser().getUid());
+                    getUsuario();
 
-                        //----------METODO PARA RETORNAR O TOKEN--------------
+                    //----------METODO PARA RETORNAR O TOKEN--------------
                    /* Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getIdToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
                         @Override
                         public void onComplete(@NonNull Task<GetTokenResult> task) {
@@ -171,13 +170,13 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
                             }
                         }
                     });  */
-                    } else {
-                        errosFirebase(getBaseContext(), task.getException().toString());
-                        fecharProgess();
-                    }
+                } else {
+                    errosFirebase(getBaseContext(), task.getException().toString());
+                    fecharProgess();
                 }
-            });
-            
+            }
+        });
+
     }
 
     private void logarComGoogle() {
@@ -187,7 +186,11 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
             Intent intent = Usuario.getInsance().getGoogleSignInClient().getSignInIntent();
             startActivityForResult(intent, 555);
         }else{
+            Usuario.getInsance().getGoogleSignInClient().signOut();
+            logarComGoogle();
         }
+
+
 
     }
 
@@ -240,7 +243,6 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
 
             @Override
             public void onError(FacebookException error) {
-                Log.d("Test", error.toString());
                 Toast.makeText(getBaseContext(), getString(R.string.erroAoLogarComFacebook), Toast.LENGTH_LONG).show();
             }
         });

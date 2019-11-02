@@ -94,4 +94,17 @@ public class CEP {
         this.estado = estado;
     }
 
+    @Override
+    public String toString() {
+        return "CEP{" +
+                "codibge=" + codibge +
+                ", codestado=" + codestado +
+                ", cep='" + cep + '\'' +
+                ", logradouro='" + logradouro + '\'' +
+                ", complemento='" + complemento + '\'' +
+                ", bairro='" + bairro + '\'' +
+                ", cidade='" + cidade + '\'' +
+                ", estado='" + estado + '\'' +
+                '}';
+    }
 }

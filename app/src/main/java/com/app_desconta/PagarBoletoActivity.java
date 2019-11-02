@@ -110,7 +110,6 @@ public class PagarBoletoActivity extends AppCompatActivity implements View.OnCli
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                Log.d("test", "passei - " + response.code());
                 if (response.isSuccessful()) {
                     confirmarPagamento();
                     Toast.makeText(getBaseContext(), getString(R.string.pagamento_realizado_comSucesso), Toast.LENGTH_LONG).show();

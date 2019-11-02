@@ -3,7 +3,6 @@ package com.app_desconta.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,9 +43,8 @@ public class PesquisaFragment extends Fragment {
                 if (Usuario.getInsance().getGoogleSignInClient() != null) {
                     Usuario.getInsance().getGoogleSignInClient().signOut();
                     Usuario.getInsance().setUsuario(null);
-                    fecharApp();
                 }
-
+                fecharApp();
             }
         });
 
