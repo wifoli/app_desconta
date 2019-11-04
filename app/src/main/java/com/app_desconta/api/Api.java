@@ -64,4 +64,23 @@ public interface Api {
 
     @GET("api/get_cidades/{idEstado}")
     Call<ArrayList<Cidade>> getCidades(@Path("idEstado") String idEstado);
+
+    @GET("api/get_cidadeEstado/{idPessoa}")
+    Call<CidadeEstado> getCidadeEstado(@Path("idPessoa") String idPessoa);
+
+    @Headers({
+            "Accept: application/json",
+            "Content-Type: application/json"
+    })
+    @PATCH("api/up_pessoa/{idPessoa}")
+    Call<Pessoa> atualizarPessoa(@Path("idPessoa") String idPessoa,
+                            @Body JsonObject jsonPessoa);
+
+    @Headers({
+            "Accept: application/json",
+            "Content-Type: application/json"
+    })
+    @PATCH("api/up_endereco/{idPessoa}")
+    Call<Pessoa> atualizarEndereco(@Path("idPessoa") String idPessoa,
+                                 @Body JsonObject jsonPessoa);
 }

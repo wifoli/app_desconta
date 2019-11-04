@@ -3,17 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.PesquisaFragment"
-    android:background="#489">
+    android:padding="16dp"
+    tools:context=".fragments.PesquisaFragment">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/botaooo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+
+
+
+    </RelativeLayout>
 
 </FrameLayout>

@@ -13,8 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PagarBoletoActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".PerfilActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PagarBoletoActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ComprasActivity"
             android:theme="@style/AppTheme.NoActionBar" />

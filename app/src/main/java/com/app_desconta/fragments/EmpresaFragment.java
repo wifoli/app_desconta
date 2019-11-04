@@ -63,7 +63,6 @@ public class EmpresaFragment extends Fragment {
         adapter.setOnItemClickListenet(new EmpresaAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Log.d("test", listaEmpresa.get(position).getTel());
                 Intent intent = new Intent(getActivity(), ComprasActivity.class);
                 Bundle extras = new Bundle();
                 extras.putString("idEmpresa", listaEmpresa.get(position).getId());

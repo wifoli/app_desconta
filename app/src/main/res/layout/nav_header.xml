@@ -23,8 +23,14 @@
         android:id="@+id/nav_header_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="16dp"
-        android:text="Nome Sobreno"
+        android:textSize="8pt"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+    <TextView
+        android:id="@+id/nav_header_textView_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="5.5pt"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 </LinearLayout>

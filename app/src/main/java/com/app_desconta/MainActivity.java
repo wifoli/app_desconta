@@ -7,17 +7,26 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.viewpager.widget.ViewPager;
 
+import com.app_desconta.login.Tela_login;
 import com.app_desconta.ui.main.SectionsPagerAdapter;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+
+    private TextView nomeSobrenome;
+    private TextView email;
+    private Toolbar toolbar;
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -27,13 +36,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        navigationView = (NavigationView) findViewById(R.id.navView);
-
         setarDrawer();
         setarTabs();
+        setarNomeeEmailNoDrawer();
 
         navigationView.setNavigationItemSelectedListener(this);
+
     }
 
     @Override
@@ -45,11 +53,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+
+    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.dn_perfil:
-                Log.d("Teste", "item 1");
+                startActivity(new Intent(this, PerfilActivity.class));
                 break;
             case R.id.dn_duvidas:
                 Log.d("Teste", "item 2");
@@ -60,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.dn_sair:
-                Log.d("Teste", "item 4");
+                sair();
                 break;
 
             default:
@@ -73,9 +83,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void setarDrawer(){
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, (Toolbar) findViewById(R.id.toolbar), R.string.open_drawer, R.string.close_drawer);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        navigationView = (NavigationView) findViewById(R.id.navView);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+    }
+
+    private void setarNomeeEmailNoDrawer(){
+        View headerView = navigationView.getHeaderView(0);
+        nomeSobrenome = (TextView) headerView.findViewById(R.id.nav_header_textView);
+        email = (TextView) headerView.findViewById(R.id.nav_header_textView_email);
+        nomeSobrenome.setText(Usuario.getInsance().getUsuario().getPessoa().getNome() + " " + Usuario.getInsance().getUsuario().getPessoa().getSobrenome());
+        email.setText(Usuario.getInsance().getUsuario().getEmail());
     }
 
     private void setarTabs(){
@@ -86,5 +108,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
+    }
+
+    private void sair(){
+        FirebaseAuth.getInstance().signOut();
+        if (Usuario.getInsance().getGoogleSignInClient() != null) {
+            Usuario.getInsance().getGoogleSignInClient().signOut();
+            Usuario.getInsance().setUsuario(null);
+        }
+
+        this.finishAffinity();
+        startActivity(new Intent(this, Tela_login.class));
     }
  }

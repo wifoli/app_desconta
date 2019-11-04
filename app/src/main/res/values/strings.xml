@@ -146,6 +146,23 @@
     <string name="mostrar_mais">Mostrar Mais</string>
     <string name="sobreEmpresa">Sobre a Empresa</string>
     <string name="selecione_cidade">Selecione uma cidade</string>
+    <string name="nome_perfil">Nome:</string>
+    <string name="novo_nome">Digite o nome de sua preferência:</string>
+    <string name="novo_sobrenome">Digite seu Sobrenome:</string>
+    <string name="novo_telefone1">Digite seu novo telefone:</string>
+    <string name="atualizar">Atualizar</string>
+    <string name="nome_atualizado_sucesso">Nome atualizado com sucesso</string>
+    <string name="sobrenome_atualizado_sucesso">Sobrenome atualizado com sucesso</string>
+    <string name="telefone_atualizado_sucesso">Telefone atualizado com sucesso</string>
+    <string name="endereco_atualizado_sucesso">Endereço atualizado com sucesso</string>
+    <string name="sobrenome_perfil">Sobrenome:</string>
+    <string name="telefone1_perfil">Telefone (opção 1):</string>
+    <string name="telefone2_perfil">Telefone (opção 2):</string>
+    <string name="endereço_perfil">Endereço:</string>
+    <string name="meu_endereco">Meu endereço</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
+    <string name="confirmarDados">Os dados inseridos estão corretos?</string>
 
     <string-array name="estados">
         <item>Selecione</item>

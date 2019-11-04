@@ -3,32 +3,31 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <group>
+    <group >
 
         <item
             android:id="@+id/dn_perfil"
-            android:icon="@android:drawable/ic_menu_add"
+            android:icon="@drawable/ic_person_black_24dp"
             android:title="@string/dn_perfil" />
 
         <item
             android:id="@+id/dn_duvidas"
-            android:icon="@android:drawable/ic_menu_agenda"
+            android:icon="@drawable/ic_question_answer_black_24dp"
             android:title="@string/dn_duvidas" />
 
         <item
             android:id="@+id/dn_comentarios"
-            android:icon="@android:drawable/ic_menu_call"
+            android:icon="@drawable/ic_comment_black_24dp"
             android:title="@string/dn_comentarios" />
 
     </group>
 
 
-    <group android:id="@+id/group_sair"
-        >
+    <group android:id="@+id/group_sair">
 
         <item
             android:id="@+id/dn_sair"
-            android:icon="@android:drawable/ic_menu_upload"
+            android:icon="@drawable/ic_exit_to_app_black_24dp"
             android:title="@string/dn_sair" />
 
     </group>

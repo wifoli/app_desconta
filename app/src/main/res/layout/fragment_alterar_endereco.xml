@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <LinearLayout
+            android:id="@+id/primeiro"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_alterar_cep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="@string/tv_cadastro2_cep"
+                android:textColor="@color/colorPrimaryText" />
+
+            <EditText
+                android:id="@+id/et_alterar_cep"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:inputType="number"
+                android:maxLength="10"
+                android:textColor="#808080"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/iv_alterar_encontrar_cep"
+                android:layout_width="37dp"
+                android:layout_height="37dp"
+                android:layout_marginStart="10dp"
+                android:layout_weight="0"
+                android:background="@drawable/meu_edit_text"
+                android:foreground="?attr/selectableItemBackground"
+                android:src="@drawable/search" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/segundo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/primeiro"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_alterar_estado"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="@string/tv_cadastrar2_estado"
+                    android:textColor="@color/colorPrimaryText" />
+
+                <Spinner
+                    android:id="@+id/sp_alterar_estado"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_alterar_cidade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="@string/tv_cadastrar2_cidade"
+                    android:textColor="@color/colorPrimaryText" />
+
+                <Spinner
+                    android:id="@+id/sp_alterar_cidade"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/terceiro"
+            android:layout_width="379dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/segundo"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_alterar_rua"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="@string/tv_cadastrar2_logradouro"
+                    android:textColor="@color/colorPrimaryText" />
+
+                <EditText
+                    android:id="@+id/et_alterar_rua"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="text"
+                    android:textColor="#808080"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/quarto"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/terceiro"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_alterar_bairro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="@string/tv_cadastrar2_bairro"
+                android:textColor="@color/colorPrimaryText" />
+
+            <EditText
+                android:id="@+id/et_alterar_bairro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:inputType="text"
+
+                android:textColor="#808080"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_alterar_numero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="@string/tv_cadastrar2_numero"
+                android:textColor="@color/colorPrimaryText" />
+
+            <EditText
+                android:id="@+id/et_alterar_numero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:inputType="text"
+                android:textColor="#808080"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/quinto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/quarto"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/tv_alterar_complemento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="@string/tv_cadastrar2_complemento"
+                android:textColor="@color/colorPrimaryText" />
+
+            <EditText
+                android:id="@+id/et_alterar_complemento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:inputType="text"
+                android:textColor="#808080"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/quinto"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/btn_atualizar_endereco"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/meu_edit_text"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="5dp"
+                android:text="@string/atualizar"
+                android:textColor="#0047ab" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

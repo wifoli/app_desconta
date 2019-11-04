@@ -20,40 +20,19 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class PesquisaFragment extends Fragment {
 
-    private Button botao;
-    View view;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_pesquisa, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_pesquisa, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        botao = (Button) view.findViewById(R.id.botaooo);
-
-        botao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-                if (Usuario.getInsance().getGoogleSignInClient() != null) {
-                    Usuario.getInsance().getGoogleSignInClient().signOut();
-                    Usuario.getInsance().setUsuario(null);
-                }
-                fecharApp();
-            }
-        });
-
-
     }
 
-    private void fecharApp(){
-        getActivity().finishAffinity();
-        startActivity(new Intent(getActivity(), Tela_login.class));
 
-    }
 }
