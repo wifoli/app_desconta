@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Strings para a tela de Login -->
-    <string name="app_name" translatable="false">Des-Conta</string>
+    <string name="app_name" translatable="false">DES-CONTA</string>
     <string name="description_et_login">EditText para do login de usuário</string>
     <string name="tv_login_login">Login</string>
     <string name="et_login_login_hint">Digite seu Email</string>

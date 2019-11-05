@@ -281,7 +281,7 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
     private void verificarSeExisteUsuario() {
         fecharProgess();
         if (Usuario.getInsance().getUsuario().getId().trim().equals("")) {
-            Usuario.getInsance().setEmail(editTextEmail.getText().toString().trim());
+            Usuario.getInsance().setEmail(auth.getCurrentUser().getEmail());
             startActivity(new Intent(getBaseContext(), TelaVerificarCpf.class));
         } else {
             startActivity(new Intent(getBaseContext(), MainActivity.class));

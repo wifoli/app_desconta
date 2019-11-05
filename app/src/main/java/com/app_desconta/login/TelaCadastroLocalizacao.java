@@ -383,6 +383,7 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
         jsonObject.addProperty("cep", pessoa.getCep());
         jsonObject.addProperty("complemento", pessoa.getComplemento());
         jsonObject.addProperty("cidade_id", pessoa.getCidade());
+
         return jsonObject;
     }
 
