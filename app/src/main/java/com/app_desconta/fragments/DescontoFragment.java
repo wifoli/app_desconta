@@ -16,8 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.app_desconta.R;
 import com.app_desconta.Usuario;
+import com.app_desconta.adapters.ComprasDescontoAdapter;
 import com.app_desconta.adapters.EmpresaDescontoAdapter;
 import com.app_desconta.api.Api;
+import com.app_desconta.api.Compras;
 import com.app_desconta.api.Empresa;
 import com.app_desconta.util.RetrofitCliente;
 
@@ -37,6 +39,9 @@ public class DescontoFragment extends Fragment {
     private RecyclerView mRecyclerViewEmpresa;
     private ArrayList<Empresa> listaEmpresa;
 
+    private RecyclerView mRecyclerViewCompra;
+    private ArrayList<Compras> listaCompra;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,14 +60,21 @@ public class DescontoFragment extends Fragment {
         mRecyclerViewEmpresa = (RecyclerView) view.findViewById(R.id.rv_empresa_desconto);
         mRecyclerViewEmpresa.setHasFixedSize(true);
 
-        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
-        llm.setOrientation(RecyclerView.VERTICAL);
-        mRecyclerViewEmpresa.setLayoutManager(llm);
+        LinearLayoutManager llmEmpresa = new LinearLayoutManager(getActivity());
+        llmEmpresa.setOrientation(RecyclerView.VERTICAL);
+        mRecyclerViewEmpresa.setLayoutManager(llmEmpresa);
+
+        mRecyclerViewCompra = (RecyclerView) view.findViewById(R.id.rv_compras_desconto);
+        mRecyclerViewCompra.setHasFixedSize(true);
+
+        LinearLayoutManager llmCompra = new LinearLayoutManager(getActivity());
+        llmCompra.setOrientation(RecyclerView.VERTICAL);
+        mRecyclerViewCompra.setLayoutManager(llmCompra);
 
         retrofitGetlistaEmpresa();
     }
 
-    private void setarAdapter() {
+    private void setarAdapterEmpresa() {
         EmpresaDescontoAdapter adapter = new EmpresaDescontoAdapter(getActivity(), listaEmpresa);
         mRecyclerViewEmpresa.setAdapter(adapter);
 
@@ -71,11 +83,44 @@ public class DescontoFragment extends Fragment {
             public void onItemClick(int position) {
                 nomeEmpresa.setText(listaEmpresa.get(position).getNomeFantasia());
                 porcentagemDesconto.setText("" + listaEmpresa.get(position).getPorcentagemDesc() + "%");
-            //    retrofitGetCompras();
+                retrofitGetComprasPagas(listaEmpresa.get(position).getId());
+                Log.d("test", listaEmpresa.get(position).getId());
             }
         });
     }
 
+    private void setarAdapterCompra() {
+        ComprasDescontoAdapter adapter = new ComprasDescontoAdapter(getActivity(), listaCompra);
+        mRecyclerViewCompra.setAdapter(adapter);
+
+        adapter.setOnItemClickListenet(new ComprasDescontoAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+            }
+        });
+    }
+
+    private void retrofitGetComprasPagas(String idEmpresa){
+        Api httpRequest = RetrofitCliente.getCliente().create(Api.class);
+
+        Call<ArrayList<Compras>> call = httpRequest.getComprasPagas(Usuario.getInsance().getUsuario().getPessoa().getId(), idEmpresa);
+
+        call.enqueue(new Callback<ArrayList<Compras>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Compras>> call, Response<ArrayList<Compras>> response) {
+                if (response.isSuccessful()) {
+                   listaCompra = response.body();
+                   setarAdapterCompra();
+                } else Log.e("Retrofit get_Empresa", "Falha no Retrofit Code: " + response.code());
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Compras>> call, Throwable t) {
+                Log.e("Retrofit get_Empresa", "Falha no Retrofit: " + t.toString());
+            }
+        });
+    }
 
     private void retrofitGetlistaEmpresa() {
         Api httpRequest = RetrofitCliente.getCliente().create(Api.class);
@@ -87,7 +132,7 @@ public class DescontoFragment extends Fragment {
             public void onResponse(Call<ArrayList<Empresa>> call, Response<ArrayList<Empresa>> response) {
                 if (response.isSuccessful()) {
                     listaEmpresa = response.body();
-                    setarAdapter();
+                    setarAdapterEmpresa();
                 } else Log.e("Retrofit get_Empresa", "Falha no Retrofit Code: " + response.code());
             }
 
@@ -97,4 +142,6 @@ public class DescontoFragment extends Fragment {
             }
         });
     }
+
+
 }

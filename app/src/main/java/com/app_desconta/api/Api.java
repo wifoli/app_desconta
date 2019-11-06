@@ -57,7 +57,7 @@ public interface Api {
     })
     @PATCH("pagar_parcela/{idParcela}")
     Call<Void> pagarParcela(@Path("idParcela") String idParcela,
-                                      @Body JsonObject jsonPessoa);
+                            @Body JsonObject jsonPessoa);
 
     @GET("get_cidade/{idCidade}")
     Call<Cidade> getCidade(@Path("idCidade") String idCidade);
@@ -74,7 +74,7 @@ public interface Api {
     })
     @PATCH("up_pessoa/{idPessoa}")
     Call<Pessoa> atualizarPessoa(@Path("idPessoa") String idPessoa,
-                            @Body JsonObject jsonPessoa);
+                                 @Body JsonObject jsonPessoa);
 
     @Headers({
             "Accept: application/json",
@@ -82,8 +82,13 @@ public interface Api {
     })
     @PATCH("up_endereco/{idPessoa}")
     Call<Pessoa> atualizarEndereco(@Path("idPessoa") String idPessoa,
-                                 @Body JsonObject jsonPessoa);
+                                   @Body JsonObject jsonPessoa);
 
     @PATCH("gerar_boleto/{idParcela}")
     Call<Parcela> gerarBoleto(@Path("idParcela") String idParcela);
+
+    @GET("get_compras_pagas/{idPessoa}/{idEmpresa}")
+    Call<ArrayList<Compras>> getComprasPagas(@Path("idPessoa") String idPessoa,
+                                  @Path("idEmpresa") String idEmpresa);
+
 }
