@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,9 +25,8 @@ import retrofit2.Response;
 
 public class ComprasActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView textViewDetalhesCompraToolbar;
 
-    private Button botaoVoltar;
+    private ImageView botaoVoltar;
 
     private RecyclerView rv;
     private RecycleViewAdapter rvAdpt;
@@ -39,9 +39,7 @@ public class ComprasActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compras);
 
-        textViewDetalhesCompraToolbar = (TextView) findViewById(R.id.tv_detalhes_compra);
-        textViewDetalhesCompraToolbar.setText(getString(R.string.compras));
-        botaoVoltar = (Button) findViewById(R.id.bt_voltar);
+        botaoVoltar = (ImageView) findViewById(R.id.bt_voltar);
 
         botaoVoltar.setOnClickListener(this);
 

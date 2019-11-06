@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,12 +15,11 @@ import com.app_desconta.fragments.ParcelasFragment;
 
 public class DetalhesCompraActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView textViewDetalhesCompraToolbar;
     private TextView nome_fantasia;
     private TextView data_compra;
     private TextView valor_compra;
 
-    private Button botaoVoltar;
+    private ImageView botaoVoltar;
 
     private Bundle extras;
 
@@ -30,14 +30,11 @@ public class DetalhesCompraActivity extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_compra);
 
-        textViewDetalhesCompraToolbar = (TextView) findViewById(R.id.tv_detalhes_compra);
         nome_fantasia = (TextView) findViewById(R.id.nome_fantasia_detalhe);
         data_compra = (TextView) findViewById(R.id.data_compra_detalhes);
         valor_compra = (TextView) findViewById(R.id.valor_detalhes);
 
-        botaoVoltar = (Button) findViewById(R.id.bt_voltar);
-
-        textViewDetalhesCompraToolbar.setText(getString(R.string.detalhes_compra));
+        botaoVoltar = (ImageView) findViewById(R.id.bt_voltar);
 
         Intent intent = getIntent();
         extras = intent.getExtras();

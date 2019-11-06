@@ -15,7 +15,7 @@ public class RetrofitCliente {
 
         OkHttpClient okHttpClient = new OkHttpClient();
         Retrofit client = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.129/public/")
+                .baseUrl("http://desconta.herokuapp.com/api/")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();

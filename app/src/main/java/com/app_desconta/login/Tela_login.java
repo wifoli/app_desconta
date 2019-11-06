@@ -22,12 +22,7 @@ import com.app_desconta.Usuario;
 import com.app_desconta.api.Api;
 import com.app_desconta.api.User;
 import com.app_desconta.util.RetrofitCliente;
-import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -36,11 +31,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
-
-import java.util.Arrays;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,7 +45,6 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
 
     private Button bt_acessar;
     private CardView loginGoogle;
-    private CardView loginFacebbok;
     private EditText editTextEmail;
     private EditText editTextSenha;
     private TextView esqueceuSenha;
@@ -75,7 +66,6 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
 
         bt_acessar = (Button) findViewById(R.id.bt_login_acessar);
         loginGoogle = (CardView) findViewById(R.id.logar_com_google);
-        loginFacebbok = (CardView) findViewById(R.id.logar_com_facebook);
         editTextEmail = (EditText) findViewById(R.id.et_login_login);
         editTextSenha = (EditText) findViewById(R.id.et_login_senha);
         esqueceuSenha = (TextView) findViewById(R.id.esqueceuSenha);
@@ -84,13 +74,11 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
 
         auth = FirebaseAuth.getInstance();
         iniciarServicosGoogle();
-        iniciarServicosFacebook();
 
         bt_acessar.setOnClickListener(this);
         cadastrar.setOnClickListener(this);
         esqueceuSenha.setOnClickListener(this);
         loginGoogle.setOnClickListener(this);
-        loginFacebbok.setOnClickListener(this);
         editTextEmail.setOnFocusChangeListener(this);
         editTextSenha.setOnFocusChangeListener(this);
     }
@@ -115,9 +103,6 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
                 break;
             case R.id.logar_com_google:
                 logarComGoogle();
-                break;
-            case R.id.logar_com_facebook:
-                logarComFacebook();
                 break;
         }
     }
@@ -194,14 +179,8 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
 
     }
 
-    private void logarComFacebook() {
-        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "email"));
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
-
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 555) {
@@ -227,26 +206,6 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
         Usuario.getInsance().setGoogleSignInClient(GoogleSignIn.getClient(this, gso));
     }
 
-    private void iniciarServicosFacebook() {
-        callbackManager = CallbackManager.Factory.create();
-
-        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                adicionarContaFacebookAoFirebase(loginResult.getAccessToken());
-            }
-
-            @Override
-            public void onCancel() {
-                LoginManager.getInstance().logOut();
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-                Toast.makeText(getBaseContext(), getString(R.string.erroAoLogarComFacebook), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
 
     private void adicionarContaGoogleAoFirebase(GoogleSignInAccount acct) {
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -259,21 +218,6 @@ public class Tela_login extends AppCompatActivity implements View.OnClickListene
                             getUsuario();
                         } else
                             Toast.makeText(getBaseContext(), getString(R.string.erroAoAdicionarContaGoogleAoFirebase), Toast.LENGTH_LONG).show();
-                    }
-                });
-    }
-
-    private void adicionarContaFacebookAoFirebase(AccessToken token) {
-        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-        auth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            getUsuario();
-                        } else {
-                            Toast.makeText(getBaseContext(), getString(R.string.erroAoAdicionarContaFacebookAoFirebase), Toast.LENGTH_LONG).show();
-                        }
                     }
                 });
     }

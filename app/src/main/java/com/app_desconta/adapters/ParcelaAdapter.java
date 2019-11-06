@@ -3,6 +3,7 @@ package com.app_desconta.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,28 +15,34 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.app_desconta.PagarBoletoActivity;
 import com.app_desconta.R;
+import com.app_desconta.api.Api;
 import com.app_desconta.api.Parcela;
+import com.app_desconta.util.RetrofitCliente;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ParcelaAdapter  extends RecyclerView.Adapter<ParcelaAdapter.MyViewHolder> {
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         public TextView numero_parcela;
-        public TextView numero_boleto;
+        public TextView data_vencimento;
         public TextView valor_parcela;
-        public Button pagar;
+        public Button gerar_boleto;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             numero_parcela = itemView.findViewById(R.id.numero_parcela);
-            numero_boleto = itemView.findViewById(R.id.numero_boleto);
+            data_vencimento = itemView.findViewById(R.id.data_vencimento);
             valor_parcela = itemView.findViewById( R.id.valor_parcela);
-            pagar = itemView.findViewById(R.id.btn_pagar);
+            gerar_boleto = itemView.findViewById(R.id.btn_pagar);
         }
     }
 
@@ -62,27 +69,22 @@ public class ParcelaAdapter  extends RecyclerView.Adapter<ParcelaAdapter.MyViewH
         final Parcela itemAtual = listaParcela.get(position);
 
         holder.numero_parcela.setText(" " + itemAtual.getNrParcela());
-        holder.numero_boleto.setText(" " + itemAtual.getNrBoleto());
+        holder.data_vencimento.setText(" " + itemAtual.getData_vencimento());
         holder.valor_parcela.setText(" " + itemAtual.getValorParcela());
-        holder.pagar.setOnClickListener(new View.OnClickListener() {
+        holder.gerar_boleto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, PagarBoletoActivity.class);
-                Bundle extras = new Bundle();
-                extras.putString("id", itemAtual.getId());
-                extras.putString("nr_boleto", itemAtual.getNrBoleto());
-                extras.putString("valor", itemAtual.getValorParcela());
-                intent.putExtras(extras);
-                context.startActivity(intent);
+                retrofitGerarBoleto(itemAtual);
+
             }
         });
 
         if (itemAtual.getBoleto_pago().trim().equals("S")){
-            holder.pagar.setBackgroundResource(R.drawable.meu_botao_parcela_paga);
-            holder.pagar.setText(context.getString(R.string.boleto_pago));
-            holder.pagar.setTextSize(10);
-            holder.pagar.setForeground(null);
-            holder.pagar.setClickable(false);
+            holder.gerar_boleto.setBackgroundResource(R.drawable.meu_botao_parcela_paga);
+            holder.gerar_boleto.setText(context.getString(R.string.boleto_pago));
+            holder.gerar_boleto.setTextSize(10);
+            holder.gerar_boleto.setForeground(null);
+            holder.gerar_boleto.setClickable(false);
         }
 
         try {
@@ -103,5 +105,36 @@ public class ParcelaAdapter  extends RecyclerView.Adapter<ParcelaAdapter.MyViewH
     public int getItemCount() {
         if (listaParcela != null) return listaParcela.size();
         return 0;
+    }
+
+
+    private void retrofitGerarBoleto(final Parcela parcela){
+        Api httpRequest = RetrofitCliente.getCliente().create(Api.class);
+
+        Call<Parcela> call = httpRequest.gerarBoleto(parcela.getId());
+        call.enqueue(new Callback<Parcela>() {
+            @Override
+            public void onResponse(Call<Parcela> call, Response<Parcela> response) {
+                if (response.isSuccessful()){
+                    Log.d("test", "passei");
+                    Intent intent = new Intent(context, PagarBoletoActivity.class);
+                    Bundle extras = new Bundle();
+                    extras.putString("id", parcela.getId());
+                    extras.putString("nr_boleto", response.body().getNrBoleto());
+                    extras.putString("valor", parcela.getValorParcela());
+                    intent.putExtras(extras);
+                    context.startActivity(intent);
+                }else{
+                    Log.d("test", "deu erro - " + response.code());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Parcela> call, Throwable t) {
+                Log.e("Retrofit gerar_boleto", "Falha no Retrofit: " + t.toString());
+
+            }
+        });
     }
 }

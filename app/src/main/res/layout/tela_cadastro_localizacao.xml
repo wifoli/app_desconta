@@ -39,11 +39,11 @@
             <ImageView
                 android:id="@+id/iv_cadastrar2_encontrar_cep"
                 android:layout_width="45dp"
-                android:layout_height="40dp"
+                android:layout_height="35dp"
                 android:layout_marginStart="10dp"
                 android:background="@drawable/meu_botao"
                 android:foreground="?attr/selectableItemBackground"
-                android:src="@drawable/search" />
+                android:src="@mipmap/search" />
 
         </LinearLayout>
 
@@ -166,9 +166,12 @@
 
         <Button
             android:id="@+id/bt_cadastrar2_proximo"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:layout_gravity="center_horizontal"
+            android:padding="10dp"
+            android:textColor="@color/colorSecondaryText"
             android:background="@drawable/meu_botao"
             android:foreground="?attr/selectableItemBackground"
             android:text="@string/bt_login_finalizar" />

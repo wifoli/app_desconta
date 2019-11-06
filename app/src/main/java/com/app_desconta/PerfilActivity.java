@@ -35,7 +35,7 @@ import retrofit2.Response;
 public class PerfilActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView nomeToolbar;
-    private Button voltarToolbar;
+    private ImageView voltarToolbar;
 
     //Nome
     private TextView textViewNome;
@@ -76,7 +76,7 @@ public class PerfilActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_perfil);
 
         nomeToolbar = (TextView) findViewById(R.id.text_toolbar_drawer);
-        voltarToolbar = (Button) findViewById(R.id.booton_toolbar_drawer);
+        voltarToolbar = (ImageView) findViewById(R.id.booton_toolbar_drawer);
 
         nomeToolbar.setText(getString(R.string.dn_perfil));
 

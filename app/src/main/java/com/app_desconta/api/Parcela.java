@@ -21,6 +21,10 @@ public class Parcela {
     @Expose
     private String boleto_pago;
 
+    @SerializedName("data_vencimento")
+    @Expose
+    private String data_vencimento;
+
     public String getId() {
         return id;
     }
@@ -59,6 +63,14 @@ public class Parcela {
 
     public void setBoleto_pago(String boleto_pago) {
         this.boleto_pago = boleto_pago;
+    }
+
+    public String getData_vencimento() {
+        return data_vencimento;
+    }
+
+    public void setData_vencimento(String data_vencimento) {
+        this.data_vencimento = data_vencimento;
     }
 
     @Override

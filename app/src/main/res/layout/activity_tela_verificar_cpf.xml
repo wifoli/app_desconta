@@ -13,6 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
+        android:textAlignment="center"
         android:layout_marginTop="25dp"
         android:layout_marginBottom="15dp"
         android:text="@string/digiteCPF"
@@ -45,10 +46,11 @@
 
     <Button
         android:id="@+id/bt_verificar_cadastrar_verificar"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:background="@drawable/meu_botao"
+        android:textColor="@color/colorSecondaryText"
         android:foreground="?attr/selectableItemBackground"
         android:text="@string/bt_verificar" />
 

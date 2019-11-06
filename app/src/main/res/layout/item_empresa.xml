@@ -3,10 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:foreground="?attr/selectableItemBackground"
-    android:paddingStart="16dp"
-    android:paddingTop="20dp"
-    android:paddingEnd="16dp"
-    android:paddingBottom="20dp">
+    android:paddingLeft="20dp"
+    android:paddingTop="15dp"
+    android:paddingRight="20dp"
+    android:paddingBottom="10dp">
 
     <RelativeLayout
         android:id="@+id/pai"
@@ -31,11 +31,12 @@
 
         <LinearLayout
             android:id="@+id/terceiro_empresa"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/primeiro_empresa"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/tv_cnpj"
@@ -52,30 +53,7 @@
         </LinearLayout>
 
 
-        <LinearLayout
-            android:id="@+id/quarto_empresa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/primeiro_empresa"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp">
 
-            <TextView
-                android:id="@+id/tv_tel"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignStart="@+id/quarto_empresa"
-                android:layout_alignTop="@+id/quarto_empresa"
-                android:text="@string/tv_recycle_tel"
-                android:textColor="@color/colorPrimaryText" />
-
-            <TextView
-                android:id="@+id/tel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimaryText" />
-        </LinearLayout>
 
     </RelativeLayout>
 
@@ -86,24 +64,24 @@
         android:layout_below="@+id/pai"
         android:gravity="center_horizontal">
 
-        <Button
+        <ImageView
             android:id="@+id/mais"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:textColor="@color/colorSecondaryText"
             android:background="@drawable/meu_botao"
+            android:src="@drawable/ic_account_balance_black_24dp"
             android:foreground="?attr/selectableItemBackground"
             android:paddingStart="10dp"
             android:paddingRight="10dp"
-            android:text="@string/mostrar_mais"
             android:textAllCaps="false" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.8dp"
+        android:layout_height="1dp"
         android:layout_below="@+id/image_mais"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:background="@color/colorPrimary" />
 
 

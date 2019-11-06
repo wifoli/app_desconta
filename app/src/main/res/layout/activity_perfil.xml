@@ -87,11 +87,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/meu_edit_text"
+                    android:background="@drawable/meu_botao"
                     android:foreground="?attr/selectableItemBackground"
                     android:padding="5dp"
                     android:text="@string/atualizar"
-                    android:textColor="#0047ab"
+                    android:textColor="@color/colorSecondaryText"
                     android:visibility="gone" />
 
             </LinearLayout>
@@ -112,6 +112,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/segundo"
+            android:layout_marginTop="15dp"
             android:orientation="vertical"
             android:paddingLeft="16dp"
             android:paddingRight="16dp">
@@ -176,11 +177,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/meu_edit_text"
+                    android:background="@drawable/meu_botao"
                     android:foreground="?attr/selectableItemBackground"
                     android:padding="5dp"
                     android:text="@string/atualizar"
-                    android:textColor="#0047ab"
+                    android:textColor="@color/colorSecondaryText"
                     android:visibility="gone" />
 
             </LinearLayout>
@@ -201,6 +202,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/quarto"
+            android:layout_marginTop="15dp"
             android:orientation="vertical"
             android:paddingLeft="16dp"
             android:paddingRight="16dp">
@@ -267,11 +269,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/meu_edit_text"
+                    android:background="@drawable/meu_botao"
                     android:foreground="?attr/selectableItemBackground"
                     android:padding="5dp"
                     android:text="@string/atualizar"
-                    android:textColor="#0047ab"
+                    android:textColor="@color/colorSecondaryText"
                     android:visibility="gone" />
 
             </LinearLayout>
@@ -292,6 +294,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/sexto"
+            android:layout_marginTop="15dp"
             android:orientation="vertical"
             android:paddingLeft="16dp"
             android:paddingRight="16dp">
@@ -358,11 +361,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/meu_edit_text"
+                    android:background="@drawable/meu_botao"
                     android:foreground="?attr/selectableItemBackground"
                     android:padding="5dp"
                     android:text="@string/atualizar"
-                    android:textColor="#0047ab"
+                    android:textColor="@color/colorSecondaryText"
                     android:visibility="gone" />
 
             </LinearLayout>
@@ -383,6 +386,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/oitavo"
+            android:layout_marginTop="15dp"
             android:orientation="vertical"
             android:paddingLeft="16dp"
             android:paddingRight="16dp">

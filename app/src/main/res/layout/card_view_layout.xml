@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    app:cardMaxElevation="1dp"
+    app:cardElevation="4dp"
     app:cardUseCompatPadding="true">
 
     <RelativeLayout
@@ -62,16 +62,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/data"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal"
             android:visibility="gone">
 
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/ok" />
+
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:text="@string/boleto_pagop"
-                android:textColor="@color/colorPrimary"
-                android:textSize="8pt"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Pago"
+                android:textAppearance="?attr/textAppearancePopupMenuHeader"
+                android:textColor="@color/colorPrimaryDark" />
 
         </LinearLayout>
 

@@ -24,14 +24,13 @@ import retrofit2.Response;
 
 public class PagarBoletoActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView textoManu;
 
     private EditText numero_boleto;
     private EditText valor_boleto;
 
     private ImageView imagem;
 
-    private Button botaoVoltar;
+    private ImageView botaoVoltar;
     private Button pagar;
 
     String idParcela;
@@ -42,13 +41,11 @@ public class PagarBoletoActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_pagar_boleto);
 
         numero_boleto = (EditText) findViewById(R.id.et_pagar_numero_boleto);
-        textoManu = (TextView) findViewById(R.id.tv_detalhes_compra);
         valor_boleto = (EditText) findViewById(R.id.et_pagar_valor_boleto);
-        botaoVoltar = (Button) findViewById(R.id.bt_voltar);
+        botaoVoltar = (ImageView) findViewById(R.id.bt_voltar);
         pagar = (Button) findViewById(R.id.btn_pagarBoleto);
         imagem = (ImageView) findViewById(R.id.imagem_parcela_paga);
 
-        textoManu.setText(getString(R.string.pagarBoleto));
 
         setarDados();
 

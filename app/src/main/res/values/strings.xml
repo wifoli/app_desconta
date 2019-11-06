@@ -44,7 +44,7 @@
 
 
     <string name="title_activity_tabs">TabsActivity</string>
-    <string name="tab_text_1">Empresas</string>
+    <string name="tab_text_1">Compras</string>
     <string name="tab_text_2">Meus Descontos</string>
     <string name="tab_text_3">Pesquisar Empresas</string>
 
@@ -131,10 +131,10 @@
     <string name="tv_recycle_tel">Telefone:</string>
     <string name="parcelas">Parcelas</string>
     <string name="compra">Compra</string>
-    <string name="tv_recycle_parcela_atual">Parcela nº:</string>
-    <string name="tv_recycle_numero_boleto">Boleton nº:</string>
+    <string name="tv_recycle_parcela_atual">Parcela Nº:</string>
+    <string name="data_vencimento_boleto">Data de vencimento:</string>
     <string name="tv_recycle_valor_parcela">Valor da parcela: R$</string>
-    <string name="pagar">Pagar</string>
+    <string name="gerar_boleto">Gerar boleto</string>
     <string name="realizar_pagamento">Realizar Pagamento</string>
     <string name="pagarBoleto">Pagar Boleto</string>
     <string name="boleto_pago">Boleto Pago</string>
@@ -143,7 +143,7 @@
     <string name="pagamento_realizado_comSucesso">Pagamento realizado com sucesso</string>
     <string name="finalizar">Finalizar e Retornar</string>
     <string name="boleto_pagop">Compra Paga</string>
-    <string name="mostrar_mais">Mostrar Mais</string>
+    <string name="mostrar_mais">Informações</string>
     <string name="sobreEmpresa">Sobre a Empresa</string>
     <string name="selecione_cidade">Selecione uma cidade</string>
     <string name="nome_perfil">Nome:</string>
@@ -163,6 +163,9 @@
     <string name="sim">Sim</string>
     <string name="nao">Não</string>
     <string name="confirmarDados">Os dados inseridos estão corretos?</string>
+    <string name="total_de_desconto_nesta_loja">Total de desconto na empresa</string>
+    <string name="empresas">Empresas</string>
+    <string name="porcentagem_de_desconto">Desconto:</string>
 
     <string-array name="estados">
         <item>Selecione</item>

@@ -34,7 +34,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/numero_do_boleto"
+            android:text="@string/valor_do_boleto"
             android:textColor="@color/colorPrimaryText" />
 
         <EditText
@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
-            android:text="@string/valor_do_boleto"
+            android:text="@string/numero_do_boleto"
             android:textColor="@color/colorPrimaryText" />
 
         <EditText
@@ -87,6 +87,7 @@
             android:background="@drawable/meu_botao"
             android:foreground="?attr/selectableItemBackground"
             android:gravity="center_horizontal"
+            android:textColor="@color/colorSecondaryText"
             android:padding="10dp"
             android:text="@string/realizar_pagamento" />
 

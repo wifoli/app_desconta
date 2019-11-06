@@ -4,47 +4,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp"
+    android:layout_marginTop="5dp"
+    android:orientation="horizontal"
+    android:padding="5dp">
 
-    android:orientation="horizontal">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_detalhes"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
+        android:layout_height="wrap_content">
 
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_detalhes"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/meu_card_toolbar"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <Button
-            android:id="@+id/bt_voltar"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:foreground="?attr/selectableItemBackground"
-            android:background="@drawable/ic_arrow_back_black_24dp"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+                <ImageView
+                    android:id="@+id/bt_voltar"
+                    android:layout_width="60dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:background="@mipmap/back"
+                    android:foreground="?attr/selectableItemBackground" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/app_name"
-                android:layout_marginStart="30dp"
-                android:textSize="10pt" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal">
 
-            <TextView
-                android:id="@+id/tv_detalhes_compra"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:textSize="8pt" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:text="@string/app_name"
+                        android:textSize="30sp" />
 
-        </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
 
-    </androidx.appcompat.widget.Toolbar>
-
+        </androidx.appcompat.widget.Toolbar>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>

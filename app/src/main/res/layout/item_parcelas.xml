@@ -61,11 +61,11 @@
             android:id="@+id/tv_numero_boleto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tv_recycle_numero_boleto"
+            android:text="@string/data_vencimento_boleto"
             android:textColor="@color/colorPrimaryText" />
 
         <TextView
-            android:id="@+id/numero_boleto"
+            android:id="@+id/data_vencimento"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimaryText" />
@@ -76,16 +76,19 @@
         android:id="@+id/btn_pagar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_alignParentRight="true"
+       android:layout_gravity="center_vertical"
         android:background="@drawable/meu_botao"
+        android:textColor="@color/colorSecondaryText"
+        android:padding="10dp"
         android:foreground="?attr/selectableItemBackground"
-        android:text="@string/pagar" />
+        android:text="@string/gerar_boleto" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.8dp"
+        android:layout_height="1dp"
         android:layout_below="@+id/terceiro"
         android:layout_marginTop="20dp"
-
         android:background="@color/colorPrimary" />
 </RelativeLayout>

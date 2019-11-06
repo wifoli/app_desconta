@@ -89,9 +89,12 @@
 
         <Button
             android:id="@+id/bt_cadastrar_usuario_email"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:padding="10dp"
+            android:textColor="@color/colorSecondaryText"
+            android:layout_gravity="center_horizontal"
             android:foreground="?attr/selectableItemBackground"
             android:background="@drawable/meu_botao"
             android:text="@string/bt_login_finalizar" />

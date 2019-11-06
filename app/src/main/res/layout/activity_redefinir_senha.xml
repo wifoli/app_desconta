@@ -31,11 +31,13 @@
         android:layout_marginTop="20dp"
         android:foreground="?attr/selectableItemBackground"
         android:background="@drawable/meu_botao"
+        android:textColor="@color/colorSecondaryText"
         android:text="@string/enviar" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:text="@string/voc_receber_no_email_indicado_um_link_para_redefini_o_da_senha"
         android:textSize="5pt" />

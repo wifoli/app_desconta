@@ -17,17 +17,17 @@ public interface Api {
     @GET("cep/find/{cep}/json")
     Call<CEP> buscarCEP(@Path("cep") String cep);
 
-    @GET("api/get_usuarioComUid/{uid}")
+    @GET("get_usuarioComUid/{uid}")
     Call<User> getUsuario(@Path("uid") String uid);
 
-    @GET("api/get_usuarioComCpf/{cpf}")
+    @GET("get_usuarioComCpf/{cpf}")
     Call<User> getUsuarioComCpf(@Path("cpf") String cpf);
 
     @Headers({
             "Accept: application/json",
             "Content-Type: application/json"
     })
-    @POST("api/set_usuario/{email}/{uid}")
+    @POST("set_usuario/{email}/{uid}")
     Call<User> criarUsuario(@Path("email") String email,
                             @Path("uid") String uid,
                             @Body JsonObject jsonPessoa);
@@ -36,43 +36,43 @@ public interface Api {
             "Accept: application/json",
             "Content-Type: application/json"
     })
-    @PATCH("api/update_usuario/{id}/{email}/{uid}")
+    @PATCH("update_usuario/{id}/{email}/{uid}")
     Call<User> alterarUsuario(@Path("id") String id,
                               @Path("email") String email,
                               @Path("uid") String uid,
                               @Body JsonObject jsonPessoa);
 
-    @GET("api/get_empresas/{id}")
+    @GET("get_empresas/{id}")
     Call<ArrayList<Empresa>> getEmpresas(@Path("id") String id);
 
-    @GET("api/get_compras/{idUsuario}/{idEmpresa}")
+    @GET("get_compras/{idUsuario}/{idEmpresa}")
     Call<ArrayList<Compras>> getCompras(@Path("idUsuario") String idUsuario, @Path("idEmpresa") String idEmpresa);
 
-    @GET("api/get_parcelas/{idCompra}")
+    @GET("get_parcelas/{idCompra}")
     Call<ArrayList<Parcela>> getParcela(@Path("idCompra") String idCompra);
 
     @Headers({
             "Accept: application/json",
             "Content-Type: application/json"
     })
-    @PATCH("api/pagar_parcela/{idParcela}")
+    @PATCH("pagar_parcela/{idParcela}")
     Call<Void> pagarParcela(@Path("idParcela") String idParcela,
                                       @Body JsonObject jsonPessoa);
 
-    @GET("api/get_cidade/{idCidade}")
+    @GET("get_cidade/{idCidade}")
     Call<Cidade> getCidade(@Path("idCidade") String idCidade);
 
-    @GET("api/get_cidades/{idEstado}")
+    @GET("get_cidades/{idEstado}")
     Call<ArrayList<Cidade>> getCidades(@Path("idEstado") String idEstado);
 
-    @GET("api/get_cidadeEstado/{idPessoa}")
+    @GET("get_cidadeEstado/{idPessoa}")
     Call<CidadeEstado> getCidadeEstado(@Path("idPessoa") String idPessoa);
 
     @Headers({
             "Accept: application/json",
             "Content-Type: application/json"
     })
-    @PATCH("api/up_pessoa/{idPessoa}")
+    @PATCH("up_pessoa/{idPessoa}")
     Call<Pessoa> atualizarPessoa(@Path("idPessoa") String idPessoa,
                             @Body JsonObject jsonPessoa);
 
@@ -80,7 +80,10 @@ public interface Api {
             "Accept: application/json",
             "Content-Type: application/json"
     })
-    @PATCH("api/up_endereco/{idPessoa}")
+    @PATCH("up_endereco/{idPessoa}")
     Call<Pessoa> atualizarEndereco(@Path("idPessoa") String idPessoa,
                                  @Body JsonObject jsonPessoa);
+
+    @PATCH("gerar_boleto/{idParcela}")
+    Call<Parcela> gerarBoleto(@Path("idParcela") String idParcela);
 }

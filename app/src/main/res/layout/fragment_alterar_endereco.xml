@@ -40,9 +40,9 @@
                 android:layout_height="37dp"
                 android:layout_marginStart="10dp"
                 android:layout_weight="0"
-                android:background="@drawable/meu_edit_text"
+                android:background="@drawable/meu_botao"
                 android:foreground="?attr/selectableItemBackground"
-                android:src="@drawable/search" />
+                android:src="@mipmap/search" />
         </LinearLayout>
 
         <LinearLayout
@@ -213,11 +213,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/meu_edit_text"
+                android:background="@drawable/meu_botao"
                 android:foreground="?attr/selectableItemBackground"
                 android:padding="5dp"
                 android:text="@string/atualizar"
-                android:textColor="#0047ab" />
+                android:textColor="@color/colorSecondaryText" />
 
         </LinearLayout>
 

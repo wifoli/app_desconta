@@ -18,6 +18,11 @@ import com.app_desconta.api.Pessoa;
 import com.app_desconta.util.ValidaCPF;
 import com.app_desconta.util.ValidaData;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import static com.app_desconta.util.Util.verificaConexao;
 
 
@@ -177,11 +182,11 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
         imageView.setImageDrawable(getDrawable(R.drawable.incorreto));
     }
 
-    private boolean verificaTelefone(){
-        String tel =telefone1.replaceAll("[(]","")
-                .replaceAll("[)]","")
-                .replaceAll("[.]","")
-                .replaceAll("[-]","");
+    private boolean verificaTelefone() {
+        String tel = telefone1.replaceAll("[(]", "")
+                .replaceAll("[)]", "")
+                .replaceAll("[.]", "")
+                .replaceAll("[-]", "");
         if (tel.length() == 11) return true;
         editTextTelefone1.setBackground(getDrawable(R.drawable.meu_edit_text_error));
         return false;
@@ -206,14 +211,31 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
         }
     }
 
-    private void setarPessoa(){
+    private void setarPessoa() {
         Usuario.getInsance().getUsuario().getPessoa().setNome(nome);
         Usuario.getInsance().getUsuario().getPessoa().setSobrenome(sobrenome);
-        Usuario.getInsance().getUsuario().getPessoa().setCpf(cpf.replaceAll("[.]","").replaceAll("[-]",""));
+        Usuario.getInsance().getUsuario().getPessoa().setCpf(cpf.replaceAll("[.]", "").replaceAll("[-]", ""));
         Usuario.getInsance().getUsuario().getPessoa().setRg(rg);
-        Usuario.getInsance().getUsuario().getPessoa().setDataNasc(dataNasc);
+        Usuario.getInsance().getUsuario().getPessoa().setDataNasc(retornaDataConvertida());
         Usuario.getInsance().getUsuario().getPessoa().setTel1(telefone1);
         Usuario.getInsance().getUsuario().getPessoa().setTel2(telefone2);
+    }
+
+
+    private String retornaDataConvertida(){
+        Date date = null;
+        String dataString = "";
+        try {
+            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            date = new java.sql.Date( ((java.util.Date)formatter.parse(dataNasc)).getTime() );
+
+            dataString = date.toString();
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return dataString;
     }
 
     private void setarMascaraCPF() {

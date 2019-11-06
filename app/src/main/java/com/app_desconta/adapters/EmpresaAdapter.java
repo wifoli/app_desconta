@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,15 +42,13 @@ public class EmpresaAdapter extends RecyclerView.Adapter<EmpresaAdapter.MyViewHo
 
         public TextView nome_fantasia;
         public TextView cnpj;
-        public TextView telefone;
-        public Button mais;
+        public ImageView mais;
 
         public MyViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
 
             nome_fantasia = itemView.findViewById(R.id.nome_fantasia);
             cnpj = itemView.findViewById(R.id.cnpj);
-            telefone = itemView.findViewById(R.id.tel);
             mais = itemView.findViewById(R.id.mais);
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +91,6 @@ public class EmpresaAdapter extends RecyclerView.Adapter<EmpresaAdapter.MyViewHo
 
         holder.nome_fantasia.setText(" " + itemAtual.getNomeFantasia());
         holder.cnpj.setText(" " + itemAtual.getCnpj());
-        holder.telefone.setText(" " + itemAtual.getTel());
 
         holder.mais.setOnClickListener(new View.OnClickListener() {
             @Override
