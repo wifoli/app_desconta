@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.app_desconta.api.Api;
+import com.app_desconta.util.FormataValorEmReal;
 import com.app_desconta.util.RetrofitCliente;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
@@ -78,7 +79,7 @@ public class PagarBoletoActivity extends AppCompatActivity implements View.OnCli
 
         idParcela = extras.getString("id");
         String nrBoleto = extras.getString("nr_boleto");
-        String valorBoleto = extras.getString("valor");
+        String valorBoleto = FormataValorEmReal.formataValorEmReal(extras.getString("valor"));
 
         numero_boleto.setText(nrBoleto);
         valor_boleto.setText(valorBoleto);

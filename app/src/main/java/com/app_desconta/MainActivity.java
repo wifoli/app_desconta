@@ -22,6 +22,8 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
+import static com.app_desconta.util.Sair.sair;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private TextView nomeSobrenome;
@@ -71,6 +73,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.dn_sair:
                 sair();
+                this.finishAffinity();
+                startActivity(new Intent(this, Tela_login.class));
                 break;
 
             default:
@@ -110,14 +114,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tabs.setupWithViewPager(viewPager);
     }
 
-    private void sair(){
-        FirebaseAuth.getInstance().signOut();
-        if (Usuario.getInsance().getGoogleSignInClient() != null) {
-            Usuario.getInsance().getGoogleSignInClient().signOut();
-            Usuario.getInsance().setUsuario(null);
-        }
 
-        this.finishAffinity();
-        startActivity(new Intent(this, Tela_login.class));
-    }
  }

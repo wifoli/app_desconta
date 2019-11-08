@@ -40,7 +40,7 @@ public class ValidaData {
 
     private static boolean dataValida(Integer dia, Integer mes, Integer ano, Integer ano_atual) {
         if (ano > ano_atual) return false;
-        if (ano < 1945) return false;
+        if (ano < 1920) return false;
         if (mes > 12) return false;
         if ((mes == 1) || (mes == 3) || (mes == 5) || (mes == 7) || (mes == 8) || (mes == 10) || (mes == 12)) {
             if (dia > 31) return false;

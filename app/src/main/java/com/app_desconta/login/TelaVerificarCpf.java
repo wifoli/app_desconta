@@ -24,6 +24,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.app_desconta.util.Sair.sair;
 import static com.app_desconta.util.Util.verificaConexao;
 
 public class TelaVerificarCpf extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener {
@@ -51,6 +52,12 @@ public class TelaVerificarCpf extends AppCompatActivity implements View.OnClickL
 
         buttonVerificar.setOnClickListener(this);
         setarMascaraCPF();
+    }
+
+    @Override
+    protected void onDestroy() {
+       // sair();
+        super.onDestroy();
     }
 
     @Override

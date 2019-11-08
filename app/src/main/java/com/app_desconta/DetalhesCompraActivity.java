@@ -12,6 +12,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.app_desconta.fragments.ParcelasFragment;
+import com.app_desconta.util.FormataData;
+import com.app_desconta.util.FormataValorEmReal;
 
 public class DetalhesCompraActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -59,8 +61,8 @@ public class DetalhesCompraActivity extends AppCompatActivity implements View.On
 
     private void setarCompra() {
         nome_fantasia.setText(" " + extras.getString("nomeEmpresa"));
-        data_compra.setText(" " + extras.getString("data"));
-        valor_compra.setText(" " + extras.getString("valor"));
+        data_compra.setText(" " + FormataData.formataData(extras.getString("data")));
+        valor_compra.setText(" " + FormataValorEmReal.formataValorEmReal(extras.getString("valor")));
     }
 
     private String idCompra() {

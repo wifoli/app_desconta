@@ -17,6 +17,8 @@ import com.app_desconta.PagarBoletoActivity;
 import com.app_desconta.R;
 import com.app_desconta.api.Api;
 import com.app_desconta.api.Parcela;
+import com.app_desconta.util.FormataData;
+import com.app_desconta.util.FormataValorEmReal;
 import com.app_desconta.util.RetrofitCliente;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
@@ -69,8 +71,8 @@ public class ParcelaAdapter  extends RecyclerView.Adapter<ParcelaAdapter.MyViewH
         final Parcela itemAtual = listaParcela.get(position);
 
         holder.numero_parcela.setText(" " + itemAtual.getNrParcela());
-        holder.data_vencimento.setText(" " + itemAtual.getData_vencimento());
-        holder.valor_parcela.setText(" " + itemAtual.getValorParcela());
+        holder.data_vencimento.setText(" " + FormataData.formataData(itemAtual.getData_vencimento()));
+        holder.valor_parcela.setText(" " + FormataValorEmReal.formataValorEmReal(itemAtual.getValorParcela()));
         holder.gerar_boleto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -13,31 +13,31 @@
 
 
     <!-- Strings para a tela de Cadastrar 1 -->
-    <string name="tv_cadastrar_nome">Nome</string>
-    <string name="et_cadastrar_nome">Primeiro nome</string>
-    <string name="tv_cadastrar_sobrenome">Sobrenome</string>
+    <string name="tv_cadastrar_nome">Nome*</string>
+    <string name="et_cadastrar_nome">Primeiro nome*</string>
+    <string name="tv_cadastrar_sobrenome">Sobrenome*</string>
     <string name="et_cadastrar_sobrenome_hint">Sobrenome</string>
-    <string name="tv_cadastrar_cpf">CPF</string>
-    <string name="tv_cadastrar_dataNasc">Data de nascimento</string>
+    <string name="tv_cadastrar_cpf">CPF*</string>
+    <string name="tv_cadastrar_dataNasc">Data de nascimento*</string>
     <string name="bt_login_proximo">Próximo</string>
 
     <!-- Strings para a tela de Cadastrar 2 -->
-    <string name="tv_cadastrar2_estado">Estado</string>
-    <string name="tv_cadastrar2_cidade">Cidade</string>
-    <string name="tv_cadastro2_cep">CEP</string>
+    <string name="tv_cadastrar2_estado">Estado*</string>
+    <string name="tv_cadastrar2_cidade">Cidade*</string>
+    <string name="tv_cadastro2_cep">CEP*</string>
     <string name="et_cadastro2_cep_hint">Insira seu CEP</string>
-    <string name="tv_cadastrar2_bairro">Bairro</string>
+    <string name="tv_cadastrar2_bairro">Bairro*</string>
     <string name="et_cadastrar2_bairro">Insira seu bairro</string>
-    <string name="tv_cadastrar2_logradouro">Logradouro</string>
+    <string name="tv_cadastrar2_logradouro">Logradouro*</string>
     <string name="et_cadastrar2_rua">Insira sua rua ou avinada</string>
     <string name="tv_cadastrar2_complemento">Complementos</string>
     <string name="et_cadastrar2_complemento">Mais informações</string>
 
     <!-- Strings para a tela de Cadastrar 3 -->
-    <string name="tv_cadastro3_email">Email</string>
+    <string name="tv_cadastro3_email">Email*</string>
     <string name="et_cadastro3_email_hint">Insira seu Email</string>
     <string name="et_cadastro3_senha_hint">Insira sua senha</string>
-    <string name="tv_login_ConfSenha">Confirmar senha</string>
+    <string name="tv_login_ConfSenha">Confirmar senha*</string>
     <string name="et_cadastro3_ConfSenha_hint">Insira novamente sua senha</string>
     <string name="tv_login_termos">Concordo com os termos de contrato</string>
     <string name="bt_login_finalizar">Cadastrar login</string>
@@ -101,7 +101,7 @@
     <string name="digite_o_cpf_aqui">Digite o CPF aqui</string>
     <string name="bt_verificar">Verificar</string>
     <string name="CPF_nao_identificado">Não há registro deste CPF em nossa base de dados</string>
-    <string name="tv_cadastrar2_numero">Número</string>
+    <string name="tv_cadastrar2_numero">Número*</string>
     <string name="et_cadastrar2_numero">Insira o número da sua casa</string>
     <string name="et_cadastrar_cidade">Insira sua cidade</string>
     <string name="cep_obrigatorio">O campo CEP é obrigatório</string>
@@ -110,12 +110,12 @@
     <string name="bairroObrigatorio">O campo bairro é obrigatório</string>
     <string name="ruaObrigatorio">O campo rua é obrigatório</string>
     <string name="numeroObrigatorio">O campo número é obrigatório</string>
-    <string name="tv_cadastrar_telefone1">Telefone 1</string>
+    <string name="tv_cadastrar_telefone1">Telefone 1*</string>
     <string name="tv_cadastrar_telefone2">Telefone 2</string>
     <string name="et_cadastrar_telefone_hint">Telefone de contato</string>
     <string name="et_cadastrar_opcional_hint">Opicional</string>
-    <string name="tv_cadastrar_rg">RG</string>
-    <string name="et_registroGeral">Registro geral</string>
+    <string name="tv_cadastrar_rg">RG*</string>
+    <string name="et_registroGeral">Registro geral*</string>
     <string name="rgObrigatorio">O campo RG é obrigatório</string>
     <string name="telefoneObrigatorio">O campo telefone 1 é obrigatório</string>
     <string name="cepInvalido">CEP inválido</string>
@@ -165,7 +165,8 @@
     <string name="confirmarDados">Os dados inseridos estão corretos?</string>
     <string name="total_de_desconto_nesta_loja">Total de desconto na empresa</string>
     <string name="empresas">Empresas</string>
-    <string name="porcentagem_de_desconto">Desconto:</string>
+    <string name="porcentagem_de_desconto">Porcentagem CashBack:</string>
+    <string name="data_venda">Data:</string>
 
     <string-array name="estados">
         <item>Selecione</item>

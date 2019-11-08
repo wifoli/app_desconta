@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.app_desconta.R;
 import com.app_desconta.api.Compras;
+import com.app_desconta.util.FormataData;
+import com.app_desconta.util.FormataValorEmReal;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 
@@ -80,8 +82,8 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         Compras itemAtual = listaCompras.get(position);
 
         holder.empresa.setText(itemAtual.getNomeFantasia());
-        holder.valor.setText(" " + itemAtual.getValorTotal());
-        holder.data.setText(" " + itemAtual.getDataVenda());
+        holder.valor.setText(" " + FormataValorEmReal.formataValorEmReal(itemAtual.getValorTotal()));
+        holder.data.setText(" " + FormataData.formataData(itemAtual.getDataVenda()));
 
         if(itemAtual.getCompra_paga().equals("S")){
             holder.linear.setVisibility(LinearLayout.VISIBLE);

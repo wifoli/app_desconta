@@ -37,6 +37,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.app_desconta.util.Sair.sair;
 import static com.app_desconta.util.Util.verificaConexao;
 
 
@@ -109,6 +110,12 @@ public class TelaCadastroLocalizacao extends AppCompatActivity implements View.O
         setarArrayAdapterEstado();
         povoarMapPosicaoEstado();
         setarCampos();
+    }
+
+    @Override
+    protected void onDestroy() {
+        //sair();
+        super.onDestroy();
     }
 
     @Override

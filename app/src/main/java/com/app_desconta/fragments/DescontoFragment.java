@@ -19,10 +19,12 @@ import com.app_desconta.Usuario;
 import com.app_desconta.adapters.ComprasDescontoAdapter;
 import com.app_desconta.adapters.EmpresaDescontoAdapter;
 import com.app_desconta.api.Api;
-import com.app_desconta.api.Compras;
+import com.app_desconta.api.ComprasComdesconto;
 import com.app_desconta.api.Empresa;
+import com.app_desconta.util.FormataValorEmReal;
 import com.app_desconta.util.RetrofitCliente;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -40,7 +42,7 @@ public class DescontoFragment extends Fragment {
     private ArrayList<Empresa> listaEmpresa;
 
     private RecyclerView mRecyclerViewCompra;
-    private ArrayList<Compras> listaCompra;
+    private ArrayList<ComprasComdesconto> listaCompra;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,7 +57,7 @@ public class DescontoFragment extends Fragment {
 
         totalDesconto = (TextView) view.findViewById(R.id.descricao_valor_desconto);
         nomeEmpresa = (TextView) view.findViewById(R.id.nome_empresa_desconto);
-        porcentagemDesconto = (TextView) view.findViewById(R.id.porcentagem_desconto) ;
+        porcentagemDesconto = (TextView) view.findViewById(R.id.porcentagem_desconto);
 
         mRecyclerViewEmpresa = (RecyclerView) view.findViewById(R.id.rv_empresa_desconto);
         mRecyclerViewEmpresa.setHasFixedSize(true);
@@ -84,10 +86,21 @@ public class DescontoFragment extends Fragment {
                 nomeEmpresa.setText(listaEmpresa.get(position).getNomeFantasia());
                 porcentagemDesconto.setText("" + listaEmpresa.get(position).getPorcentagemDesc() + "%");
                 retrofitGetComprasPagas(listaEmpresa.get(position).getId());
-                Log.d("test", listaEmpresa.get(position).getId());
             }
         });
     }
+
+    private String valorDesconto() {
+        Double valor = 0.00;
+        for (ComprasComdesconto compra : listaCompra) {
+            valor += Double.parseDouble(compra.getValor_desconto());
+        }
+
+        DecimalFormat df = new DecimalFormat("0.####");
+
+        return FormataValorEmReal.formataValorEmReal(df.format(valor));
+    }
+
 
     private void setarAdapterCompra() {
         ComprasDescontoAdapter adapter = new ComprasDescontoAdapter(getActivity(), listaCompra);
@@ -101,22 +114,23 @@ public class DescontoFragment extends Fragment {
         });
     }
 
-    private void retrofitGetComprasPagas(String idEmpresa){
+    private void retrofitGetComprasPagas(String idEmpresa) {
         Api httpRequest = RetrofitCliente.getCliente().create(Api.class);
 
-        Call<ArrayList<Compras>> call = httpRequest.getComprasPagas(Usuario.getInsance().getUsuario().getPessoa().getId(), idEmpresa);
+        Call<ArrayList<ComprasComdesconto>> call = httpRequest.getComprasPagas(Usuario.getInsance().getUsuario().getPessoa().getId(), idEmpresa);
 
-        call.enqueue(new Callback<ArrayList<Compras>>() {
+        call.enqueue(new Callback<ArrayList<ComprasComdesconto>>() {
             @Override
-            public void onResponse(Call<ArrayList<Compras>> call, Response<ArrayList<Compras>> response) {
+            public void onResponse(Call<ArrayList<ComprasComdesconto>> call, Response<ArrayList<ComprasComdesconto>> response) {
                 if (response.isSuccessful()) {
-                   listaCompra = response.body();
-                   setarAdapterCompra();
+                    listaCompra = response.body();
+                    totalDesconto.setText("R$ " + valorDesconto());
+                    setarAdapterCompra();
                 } else Log.e("Retrofit get_Empresa", "Falha no Retrofit Code: " + response.code());
             }
 
             @Override
-            public void onFailure(Call<ArrayList<Compras>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<ComprasComdesconto>> call, Throwable t) {
                 Log.e("Retrofit get_Empresa", "Falha no Retrofit: " + t.toString());
             }
         });

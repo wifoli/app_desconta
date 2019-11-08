@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +24,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static com.app_desconta.util.Sair.sair;
 import static com.app_desconta.util.Util.verificaConexao;
 
 
@@ -84,6 +86,14 @@ public class TelaCadastroDadosPessoais extends AppCompatActivity implements View
         setarMascaraTelefone(editTextTelefone2);
         setarCampos();
     }
+
+    @Override
+    protected void onDestroy() {
+        //sair();
+        Log.d("test", "deytroy");
+        super.onDestroy();
+    }
+
 
     @Override
     public void onClick(View view) {

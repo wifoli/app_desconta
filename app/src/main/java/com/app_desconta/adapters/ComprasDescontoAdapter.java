@@ -10,8 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app_desconta.R;
-import com.app_desconta.api.Compras;
-import com.app_desconta.api.Empresa;
+import com.app_desconta.api.ComprasComdesconto;
+import com.app_desconta.util.FormataData;
+import com.app_desconta.util.FormataValorEmReal;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 
@@ -51,12 +52,12 @@ public class ComprasDescontoAdapter extends RecyclerView.Adapter<ComprasDesconto
         }
     }
 
-    private ArrayList<Compras> listaCompra;
+    private ArrayList<ComprasComdesconto> listaCompra;
     private OnItemClickListener mlistener;
     private LayoutInflater mlaLayoutInflater;
     private Context context;
 
-    public ComprasDescontoAdapter(Context context, ArrayList<Compras> listaCompra) {
+    public ComprasDescontoAdapter(Context context, ArrayList<ComprasComdesconto> listaCompra) {
         this.listaCompra = listaCompra;
         this.context = context;
         mlaLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -73,12 +74,12 @@ public class ComprasDescontoAdapter extends RecyclerView.Adapter<ComprasDesconto
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        final Compras itemAtual = listaCompra.get(position);
+        final ComprasComdesconto itemAtual = listaCompra.get(position);
 
-        holder.descricaoCompras.setText(itemAtual.getValorTotal()+ " ainda não sei oque vou por aqui");
+        holder.descricaoCompras.setText(FormataData.formataData(itemAtual.getDataVenda()) + "  -  R$ " + FormataValorEmReal.formataValorEmReal(itemAtual.getValorTotal()));
 
         try {
-            YoYo.with(Techniques.ZoomInDown) // FadeInDown, ZoomInDown, BounceInDown
+            YoYo.with(Techniques.SlideInDown) // FadeInDown, ZoomInDown, BounceInDown
                     .duration(350)
                     .playOn(holder.itemView);
         } catch (Exception e) {

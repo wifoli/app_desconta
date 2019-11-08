@@ -88,7 +88,7 @@ public interface Api {
     Call<Parcela> gerarBoleto(@Path("idParcela") String idParcela);
 
     @GET("get_compras_pagas/{idPessoa}/{idEmpresa}")
-    Call<ArrayList<Compras>> getComprasPagas(@Path("idPessoa") String idPessoa,
+    Call<ArrayList<ComprasComdesconto>> getComprasPagas(@Path("idPessoa") String idPessoa,
                                   @Path("idEmpresa") String idEmpresa);
 
 }
