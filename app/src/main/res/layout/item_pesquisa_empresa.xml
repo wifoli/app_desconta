@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_compras"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:id="@+id/layout_card_pesquisa_empresa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/meu_cards"
+        android:foreground="?attr/selectableItemBackground"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:id="@+id/primeiro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_recycle_razao_social"
+                android:textColor="@color/colorPrimaryText" />
+
+            <TextView
+                android:id="@+id/tv_razao_empresa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colorPrimaryText" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/segundo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/primeiro"
+
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_recycle_nome_fantasia"
+                android:textColor="@color/colorPrimaryText" />
+
+            <TextView
+                android:id="@+id/tv_fantasia_empresa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colorPrimaryText" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/terceiro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/segundo"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_recycle_cnpj"
+                android:textColor="@color/colorPrimaryText" />
+
+            <TextView
+                android:id="@+id/tv_cnpj_empresa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colorPrimaryText" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/quarto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/terceiro"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/porcentagem_de_desconto"
+                android:textColor="@color/colorPrimaryText" />
+
+            <TextView
+                android:id="@+id/tv_porcentagem_cashback_empresa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colorPrimaryText" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/quinto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/quarto"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_recycle_tel"
+                android:textColor="@color/colorPrimaryText" />
+
+            <TextView
+                android:id="@+id/tv_telefone_empresa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colorPrimaryText" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/sexto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/quinto"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_recycle_rua"
+                android:textColor="@color/colorPrimaryText" />
+
+            <TextView
+                android:id="@+id/tv_rua_empresa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colorPrimaryText" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/setimo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sexto"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_recycle_bairro"
+                android:textColor="@color/colorPrimaryText" />
+
+            <TextView
+                android:id="@+id/tv_bairro_empresa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colorPrimaryText" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/oitavo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/setimo"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_recycle_numero"
+                android:textColor="@color/colorPrimaryText" />
+
+            <TextView
+                android:id="@+id/tv_numero_empresa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colorPrimaryText" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/nono"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/oitavo"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_recycle_cep"
+                android:textColor="@color/colorPrimaryText" />
+
+            <TextView
+                android:id="@+id/tv_cep_empresa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colorPrimaryText" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/decimo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nono"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_recycle_complemento"
+                android:textColor="@color/colorPrimaryText" />
+
+            <TextView
+                android:id="@+id/tv_complemento_empresa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colorPrimaryText" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/decimo_primeiro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/decimo"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_recycle_cidade"
+                android:textColor="@color/colorPrimaryText" />
+
+            <TextView
+                android:id="@+id/tv_cidade_empresa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colorPrimaryText" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

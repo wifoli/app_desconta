@@ -167,6 +167,17 @@
     <string name="empresas">Empresas</string>
     <string name="porcentagem_de_desconto">Porcentagem CashBack:</string>
     <string name="data_venda">Data:</string>
+    <string name="filtro_de_pesquisa">Filtro de pesquisa:</string>
+    <string name="tv_recycle_rua">Rua:</string>
+    <string name="tv_recycle_bairro">Bairro:</string>
+    <string name="tv_recycle_numero">Número:</string>
+    <string name="tv_recycle_cep">CEP:</string>
+    <string name="tv_recycle_complemento">Complemento:</string>
+    <string name="tv_recycle_cidade">Cidade:</string>
+    <string name="descri_o">Descrição:</string>
+    <string name="tv_cidade">Cidade:</string>
+    <string name="tv_estado">Estado</string>
+    <string name="selecione_uma_cidade">Selecione uma cidade para pesquisar</string>
 
     <string-array name="estados">
         <item>Selecione</item>
@@ -197,5 +208,12 @@
         <item>São Paulo</item>
         <item>Sergipe</item>
         <item>Tocantins</item>
+    </string-array>
+
+    <string-array name="filtro_pesquisa">
+        <item>Cidade</item>
+        <item>Razão Social</item>
+        <item>Nome Fantasia</item>
+        <item>Porcetagem de desconto</item>
     </string-array>
 </resources>

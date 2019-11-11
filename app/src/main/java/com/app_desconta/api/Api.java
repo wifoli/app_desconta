@@ -91,4 +91,7 @@ public interface Api {
     Call<ArrayList<ComprasComdesconto>> getComprasPagas(@Path("idPessoa") String idPessoa,
                                   @Path("idEmpresa") String idEmpresa);
 
+
+    @GET("get_empresas_filtro/{idFiltro}/{idValor}")
+    Call<ArrayList<Empresa>> getEmpresasFiltro(@Path("idFiltro") int idFiltro, @Path("idValor") String idValor);
 }
