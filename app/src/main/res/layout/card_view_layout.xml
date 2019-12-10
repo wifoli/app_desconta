@@ -78,7 +78,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="Pago"
                 android:textAppearance="?attr/textAppearancePopupMenuHeader"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="#006400" />
 
         </LinearLayout>
 

@@ -18,7 +18,7 @@
             android:layout_width="200dp"
             android:layout_height="190dp"
             android:contentDescription="@string/description_et_login"
-            android:src="@drawable/ic_tema" />
+            android:src="@drawable/ic_launcher" />
 
         <LinearLayout
             android:layout_width="match_parent"
